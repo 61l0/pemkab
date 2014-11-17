@@ -19,7 +19,7 @@
 <div id="box"></div>
 	<script type="text/javascript">		
 		    window.operateEvents = {
-		        'click .like': function (e, value, row, index) {
+		        'click .preview': function (e, value, row, index) {
                     $('#konten-modal').empty();
                     $.ajax({
                         url: "<?php echo base_url(); ?>surat/view/surat_tugas/"+row.no_surat,
@@ -68,6 +68,7 @@
                 minimumCountColumns: 2,
                 clickToSelect: true,
                 showExport: true,
+                showToggle:true,
                 //sidePagination: 'server',
                 columns: [{
                     field: 'no_surat',
@@ -128,13 +129,13 @@
             });
 		function operateFormatter(value, row, index) {
         return [
-            '<a class="like" href="javascript:void(0)" title="Like">',
-                '<i class="glyphicon glyphicon-heart"></i>',
+            '<a class="btn preview" href="javascript:void(0)" title="preview">',
+                '<i class="glyphicon glyphicon-print"></i>',
             '&nbsp;</a>',
-            '<a class="edit ml10" href="javascript:void(0)" title="Edit">&nbsp;',
+            '<a class="btn edit ml10" href="javascript:void(0)" title="Edit">&nbsp;',
                 '<i class="glyphicon glyphicon-edit"></i>',
             '&nbsp;</a>',
-            '<a class="remove ml10" href="javascript:void(0)" title="Remove">',
+            '<a class="btn remove ml10" href="javascript:void(0)" title="Remove">',
                 '<i class="glyphicon glyphicon-remove"></i>',
             '</a>'
         ].join('');

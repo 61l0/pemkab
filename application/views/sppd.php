@@ -73,6 +73,7 @@
                 minimumCountColumns: 2,
                 clickToSelect: true,
                 showExport: true,
+                showToggle:true,
                 //sidePagination: 'server',
                
                 columns: [{

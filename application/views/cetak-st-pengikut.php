@@ -74,7 +74,7 @@
 	} 
  ?>
 <div class="book" id="PrintElem">
-<div class="page" style="font-size:14px;">
+<div class="page" style="font-size:14px; color:#000000;">
         <div class="subpage">
         <table  height="383" border="0" id="table-isi" width="auto" rules="none" style="font-size:16px">
               <tr>
@@ -141,18 +141,21 @@
              <td colspan="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$pembuka_surat.' ,dengan ini:</td>
            </tr>');
 		   }else{
-        echo('<tr>
-      <td align="right" style="height:20px;">&nbsp;</td>
-           <td align="right" style="height:20px;">&nbsp;</td>
-             <td align="right" style="height:20px;"><div align="left">Dasar</div></td>
-             <td><div align="center">:</div></td>
-             <td colspan="6" rowspan="2" align="right"><div align="left">'.$dasar.' ,dengan ini:</div></td>
-           </tr>
-           <tr>
-             <td>&nbsp;</td>
-             <td>&nbsp;</td>
-             <td><div align="center"></div></td>
-            </tr>');
+		echo('
+			 <tr>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>Dasar</td>
+               <td>:</td>
+               <td colspan="8" rowspan="2">'.$dasar.' ,dengan ini:</td>
+             </tr>
+             <tr>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+          </tr>
+		');
 		   }
 		   ?>
            <tr>
@@ -334,6 +337,69 @@
                <td colspan="5"><?php echo  $jabatan_pengikut1.'&nbsp;'.$nama_skpd; ?></td>
              </tr>
              <?php } ?>
+             
+             <?php 
+			 	if($pengikut3!=""){
+						 	//query pengikut 1
+				$sql1=mysql_query("select kd_sdm,nip,nama,nama_jabatan,nama_pangkat,golongan,ruang from tbl_sdm as a inner join tbl_jabatan as b on a.kd_jabatan = b.kd_jabatan inner join tbl_pangkat_gol as c on a.kd_pg = c.kd_pg where kd_sdm = '$pengikut3'");
+				while ($row=mysql_fetch_array($sql1)) {
+					$nama_pengikut1 = $row['nama'];
+					$nip_pengikut1 = $row['nip'];
+					$jabatan_pengikut1 = $row['nama_jabatan'];
+					$pangkat_pengikut1 = $row['nama_pangkat'];
+					$golongan_pengikut1 = $row['golongan'];
+					$ruang_pengikut1 = $row['ruang'];
+				} 
+			 ?>
+             <tr>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>4.</td>
+               <td>Nama</td>
+               <td>:</td>
+               <td colspan="5"><?php echo $nama_pengikut1 ?></td>
+             </tr>
+             <tr>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>Pangkat Golongan</td>
+               <td>:</td>
+               <td colspan="5">
+               <?php 
+			   		if($nip_pengikut1!=""){echo $pangkat_pengikut1." (".$golongan_pengikut1."/".$ruang_pengikut1.")";}else{echo"-";};
+			   ?>               </td>
+             </tr>
+             <tr>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>NIP</td>
+               <td>:</td>
+               <td colspan="5">
+               <?php 
+			   		if($nip_pengikut1!=""){echo $nip_pengikut1;}else{echo"-";};
+			   ?>               </td>
+             </tr>
+             <tr>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>&nbsp;</td>
+               <td>Jabatan</td>
+               <td>:</td>
+               <td colspan="5"><?php echo  $jabatan_pengikut1.'&nbsp;'.$nama_skpd; ?></td>
+             </tr>
+             <?php } ?>
+
+             
            <tr>
              <td align="right" style="height:20px;">&nbsp;</td>
              <td align="right" style="height:20px;">&nbsp;</td>

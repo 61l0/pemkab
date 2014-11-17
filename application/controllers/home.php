@@ -9,7 +9,6 @@ class Home extends CI_Controller {
 	     $this->load->model('m_login');	    
 	     $this->load->database();
        date_default_timezone_set('Asia/Jakarta');     
-	     
 	  }
   
   
@@ -35,7 +34,7 @@ class Home extends CI_Controller {
       //load home index :v 
       //$this->load->view('home_v', $data);
       $data =array('konten' => $this->load->view('home',array(),true) , );	
-	  $this->load->view('index',$data);
+	    $this->load->view('index',$data);
     }
   } 
 }
