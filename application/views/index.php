@@ -108,6 +108,9 @@
         background-color: transparent;
         padding-left: 25px;
       }
+      .panel{
+        border-radius: 0px;
+      }
     </style>
 </head>
 

@@ -76,7 +76,7 @@
 
 					</div>
 					<div class="col-sm-1">
-						<button class="btn btn-primary" id="pilih1" type="button"  onclick="loadModal(1)">...</button>					
+						<button class="btn btn-primary" id="pilih1" type="button"  onclick="loadModal(1)"><span class="glyphicon glyphicon-list"></span></button>					
 					</div>
 				</div>
 			</div>			
@@ -84,8 +84,8 @@
 		<div class="form-group">
 	  		<label  class="col-sm-3 control-label"></label>
 		    <div class="col-sm-8" align="right">
-				<button class="btn btn-primary btn-sm" type="button" id="tambah">tambah pengikut</button>
-				<button class="btn btn-primary btn-sm" type="button" id="hapus" >hapus pengikut</button>
+				<button class="btn btn-primary btn-sm" type="button" id="tambah"><span class="glyphicon glyphicon-plus"></span> tambah pengikut</button>
+				<button class="btn btn-primary btn-sm" type="button" id="hapus" ><span class="glyphicon glyphicon-minus"></span> hapus pengikut</button>
 		    </div>
 		</div>
 	  	<div class="form-group">

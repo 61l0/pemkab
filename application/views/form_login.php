@@ -1,13 +1,15 @@
 <html>
  <head>
-  <title>Form Login</title>
+  <title>PEMKAB MALANG | Login</title>
   <link rel="stylesheet" href="<?php echo base_url();?>assets/jqueryui/jquery-ui.css">
     <script src="<?php echo base_url();?>assets/jqueryui/external/jquery/jquery.js"></script>
     <script src="<?php echo base_url();?>assets/jqueryui/jquery-ui.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css" />     
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/font-awesome.min.css">     
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
     <script src="<?php echo base_url();?>assets/js/pnotify.custom.min.js"></script>
     <link href="<?php echo base_url();?>assets/css/pnotify.custom.min.css" rel="stylesheet" />
+    
   <style>
    .input-group-addon{
     background: white;
@@ -49,7 +51,7 @@
           </div>
           <div class="form-group" align="right">
             <div class="col-sm-12">
-              <button class="btn btn-primary col-sm-12" type="submit" name="login">Login <span align="right" class="glyphicon glyphicon-chevron-right"></span></button>  
+              <button class="btn btn-primary col-sm-12" type="submit" name="login">Login <i class="fa fa-chevron-circle-right"></i></button>  
              
             </div>
           </div>

@@ -82,7 +82,7 @@ class Sdm extends CI_Controller {
 			//jika skpd bawahan sekretariat daerah
 			$kode_skpd=$data;
 			if($kode_skpd>'421.010' && $kode_skpd < '421.050' ){			
-				$data = $this->model_sdm->get_sdm("where kode_skpd='$kode_skpd' or nama_jabatan like'%asisten%'");		
+				$data = $this->model_sdm->get_sdm("where kode_skpd='$kode_skpd'");//or nama_jabatan like'%asisten%'		
 				echo json_encode($data);	
 			}else{
 				$data = $this->model_sdm->get_sdm("where kode_skpd='$kode_skpd'");		
