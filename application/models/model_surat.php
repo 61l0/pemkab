@@ -8,13 +8,13 @@ class Model_surat extends CI_Model {
 				  from tbl_sppd as a inner join 
 				  (tbl_sdm as c inner join tbl_jabatan as d on c.kd_jabatan = d.kd_jabatan inner join tbl_pangkat_gol as e on c.kd_pg = e.kd_pg) 
 				  on a.kd_sdm = c.kd_sdm 
-				  inner join(tbl_sdm as g inner join tbl_jabatan as h on g.kd_jabatan = h.kd_jabatan inner join tbl_pangkat_gol as i on g.kd_pg = i.kd_pg)on a.pejabat = g.kd_sdm '.$where.'');
+				  inner join(tbl_sdm as g inner join tbl_jabatan as h on g.kd_jabatan = h.kd_jabatan inner join tbl_pangkat_gol as i on g.kd_pg = i.kd_pg)on a.pejabat = g.kd_sdm '.$where.' order by tanggal_surat desc');
 			$data = $data->result_array();
 			return $data;
 		}else if($tipe="surat_tugas"){
 			$data = $this->db->query('SELECT c.nama, c.nip,d.nama_jabatan, e.nama_pangkat,e.golongan,e.ruang,g.nip as nip_pejabat,g.nama as nama_pejabat,h.nama_jabatan as jabatan_pejabat, i.nama_pangkat as pangkat_pejabat, i.golongan as golongan_pejabat, i.ruang as ruang_pejabat,
   				a.no_surat,a.pengikut1,a.pengikut2,a.pengikut3,a.pembuka_surat,a.dasar,a.tujuan,a.tanggal_surat from tbl_surat_tugas as a inner join (tbl_sdm as c inner join tbl_jabatan as d on c.kd_jabatan = d.kd_jabatan inner join tbl_pangkat_gol as e on c.kd_pg = e.kd_pg) 
-  				on a.kd_sdm = c.kd_sdm inner join(tbl_sdm as g inner join tbl_jabatan as h on g.kd_jabatan = h.kd_jabatan inner join tbl_pangkat_gol as i on g.kd_pg = i.kd_pg)on a.pejabat = g.kd_sdm '.$where.'
+  				on a.kd_sdm = c.kd_sdm inner join(tbl_sdm as g inner join tbl_jabatan as h on g.kd_jabatan = h.kd_jabatan inner join tbl_pangkat_gol as i on g.kd_pg = i.kd_pg)on a.pejabat = g.kd_sdm '.$where.' order by tanggal_surat desc
 			');
 			$data = $data->result_array();
 			return $data;
@@ -29,7 +29,7 @@ class Model_surat extends CI_Model {
 				from tbl_sppd as a inner join 
 				(tbl_sdm as c inner join tbl_jabatan as d on c.kd_jabatan = d.kd_jabatan inner join tbl_pangkat_gol as e on c.kd_pg = e.kd_pg) 
 				on a.kd_sdm = c.kd_sdm 
-				inner join(tbl_sdm as g inner join tbl_jabatan as h on g.kd_jabatan = h.kd_jabatan inner join tbl_pangkat_gol as i on g.kd_pg = i.kd_pg)on a.pejabat = g.kd_sdm '.$where.'
+				inner join(tbl_sdm as g inner join tbl_jabatan as h on g.kd_jabatan = h.kd_jabatan inner join tbl_pangkat_gol as i on g.kd_pg = i.kd_pg)on a.pejabat = g.kd_sdm '.$where.' order by tanggal_surat desc
 		');
 		$data = $data->result_array();
 		//echo mysql_error();
@@ -43,7 +43,7 @@ class Model_surat extends CI_Model {
 	 	 		from tbl_surat_tugas as a inner join 
 	  			(tbl_sdm as c inner join tbl_jabatan as d on c.kd_jabatan = d.kd_jabatan inner join tbl_pangkat_gol as e on c.kd_pg = e.kd_pg) 
 	  			on a.kd_sdm = c.kd_sdm 
-	  			inner join(tbl_sdm as g inner join tbl_jabatan as h on g.kd_jabatan = h.kd_jabatan inner join tbl_pangkat_gol as i on g.kd_pg = i.kd_pg)on a.pejabat = g.kd_sdm
+	  			inner join(tbl_sdm as g inner join tbl_jabatan as h on g.kd_jabatan = h.kd_jabatan inner join tbl_pangkat_gol as i on g.kd_pg = i.kd_pg)on a.pejabat = g.kd_sdm order by tanggal_surat desc
 		');
 		$data = $data->result_array();
 		return $data;

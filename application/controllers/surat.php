@@ -219,7 +219,7 @@ class Surat extends CI_Controller {
 		$pengikut2 = $_POST['par_pengikut2'];
 		$pengikut3 = $_POST['par_pengikut3'];
 		$no_surat = $_POST['par_nosurat'];
-		$tanggal_surat = date("Y-m-d");
+		$tanggal_surat = date("Y-m-d H:i:s"); 
 		$tujuan = $_POST['par_tujuan'];
 		$dasar = $_POST['par_dasarSurat'];
 		$pembuka_surat = $_POST['par_pembukaSurat'];
