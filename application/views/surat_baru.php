@@ -183,37 +183,24 @@
 				<input class="form-control " type="text" id="inputPasalAnggaran" name="inputPasalAnggaran" placeholder="Pasal anggaran">
 			</div>
 		</div>
-		
 		<div class="form-group">
 		    <label  class="col-sm-3 control-label">Keterangan </label>
 		    <div class="col-sm-8">
 		      	<input type="text" class="form-control" id="inputKet" placeholder="">
 		    </div>
 	  	</div>
-
-		
+	  	<div class="form-group">
+		    <label  class="col-sm-3 control-label">Uang Saku per Pegawai </label>
+		    <div class="col-sm-8">
+		      	<input type="text" class="form-control" id="uang-saku" placeholder="">
+		    </div>
+	  	</div>		
 		<div class="form-group">
 			<div class="col-sm-3"></div>
-				<div class="col-sm-8" align="right">
-					<button type="button" class="btn btn-primary btn-lg" id="btn-simpansuratbaru"><span id="loader-btnsimpansuratbaru"><img width="20px" height="20px" src="<?php echo base_url(); ?>assets/img/ajax-loading.gif"/>&nbsp&nbsp&nbsp</span><span class="glyphicon glyphicon-floppy-disk"></span> Simpan</button>
-					
-				</div>
-
+			<div class="col-sm-8" align="right">
+				<button type="button" class="btn btn-primary btn-lg" id="btn-simpansuratbaru"><span id="loader-btnsimpansuratbaru"><img width="20px" height="20px" src="<?php echo base_url(); ?>assets/img/ajax-loading.gif"/>&nbsp&nbsp&nbsp</span><span class="glyphicon glyphicon-floppy-disk"></span> Simpan</button>			
 			</div>
-
-
-		<div class="form-group">
-	  		<span class="col-sm-3" ></span>
-	  		<div class="col-sm-8">
-		     	<div id="messageSimpan"></div>
-		    </div>
-	  	</div>
-	  	<div class="form-group">
-	  		<span class="col-sm-3" ></span>
-	  		<div class="col-sm-8">
-		     	<div id="message"></div>
-		    </div>
-	  	</div>	  
+		</div>
 	</form>
 	<div class="modal fade" id="modal-sdm" tabindex="-1" role="dialog" aria-labelledby="modal_konfirmLabel" aria-hidden="true">
 	    <div class="modal-dialog modal-lg">
