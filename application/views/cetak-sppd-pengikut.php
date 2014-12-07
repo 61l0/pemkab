@@ -298,48 +298,48 @@
         <?php 
 			 	if($pengikut2!=""){
 						 	//query pengikut 1
-				$sql1=mysql_query("select kd_sdm,nip,nama,nama_jabatan,nama_pangkat,golongan,ruang from tbl_sdm as a inner join tbl_jabatan as b on a.kd_jabatan = b.kd_jabatan inner join tbl_pangkat_gol as c on a.kd_pg = c.kd_pg where kd_sdm = '$pengikut2'");
-				while ($row=mysql_fetch_array($sql1)) {
-					$nama_pengikut1 = $row['nama'];
-					$nip_pengikut1 = $row['nip'];
-					$jabatan_pengikut1 = $row['nama_jabatan'];
-					$pangkat_pengikut1 = $row['nama_pangkat'];
-					$golongan_pengikut1 = $row['golongan'];
-					$ruang_pengikut1 = $row['ruang'];
+				$sql2=mysql_query("select kd_sdm,nip,nama,nama_jabatan,nama_pangkat,golongan,ruang from tbl_sdm as a inner join tbl_jabatan as b on a.kd_jabatan = b.kd_jabatan inner join tbl_pangkat_gol as c on a.kd_pg = c.kd_pg where kd_sdm = '$pengikut2'");
+				while ($row=mysql_fetch_array($sql2)) {
+					$nama_pengikut2 = $row['nama'];
+					$nip_pengikut2 = $row['nip'];
+					$jabatan_pengikut2 = $row['nama_jabatan'];
+					$pangkat_pengikut2 = $row['nama_pangkat'];
+					$golongan_pengikut2 = $row['golongan'];
+					$ruang_pengikut2 = $row['ruang'];
 				} 
 	  ?>
             <tr>
         <td>&nbsp;</td>
-        <td>2. <?php echo $nama_pengikut1 ?></td>
+        <td>2. <?php echo $nama_pengikut2 ?></td>
         <td colspan="7">
         	<?php 
-			   	if($nip_pengikut1!=""){echo $pangkat_pengikut1." (".$golongan_pengikut1."/".$ruang_pengikut1.")";}else{echo"-";};
+			   	if($nip_pengikut2!=""){echo $pangkat_pengikut2." (".$golongan_pengikut2."/".$ruang_pengikut2.")";}else{echo"-";};
 			 ?>        </td>
-        <td colspan="3"><?php echo $jabatan_pengikut1.'&nbsp;'.$nama_skpd; ?></td>
+        <td colspan="3"><?php echo $jabatan_pengikut2.'&nbsp;'.$nama_skpd; ?></td>
       </tr>
       <?php } ?>
 
         <?php 
 			 	if($pengikut3!=""){
 						 	//query pengikut 1
-				$sql1=mysql_query("select kd_sdm,nip,nama,nama_jabatan,nama_pangkat,golongan,ruang from tbl_sdm as a inner join tbl_jabatan as b on a.kd_jabatan = b.kd_jabatan inner join tbl_pangkat_gol as c on a.kd_pg = c.kd_pg where kd_sdm = '$pengikut3'");
-				while ($row=mysql_fetch_array($sql1)) {
-					$nama_pengikut1 = $row['nama'];
-					$nip_pengikut1 = $row['nip'];
-					$jabatan_pengikut1 = $row['nama_jabatan'];
-					$pangkat_pengikut1 = $row['nama_pangkat'];
-					$golongan_pengikut1 = $row['golongan'];
-					$ruang_pengikut1 = $row['ruang'];
+				$sql3=mysql_query("select kd_sdm,nip,nama,nama_jabatan,nama_pangkat,golongan,ruang from tbl_sdm as a inner join tbl_jabatan as b on a.kd_jabatan = b.kd_jabatan inner join tbl_pangkat_gol as c on a.kd_pg = c.kd_pg where kd_sdm = '$pengikut3'");
+				while ($row=mysql_fetch_array($sql3)) {
+					$nama_pengikut3 = $row['nama'];
+					$nip_pengikut3 = $row['nip'];
+					$jabatan_pengikut3 = $row['nama_jabatan'];
+					$pangkat_pengikut3 = $row['nama_pangkat'];
+					$golongan_pengikut3 = $row['golongan'];
+					$ruang_pengikut3 = $row['ruang'];
 				} 
 	  ?>
             <tr>
         <td>&nbsp;</td>
-        <td>3. <?php echo $nama_pengikut1 ?></td>
+        <td>3. <?php echo $nama_pengikut3 ?></td>
         <td colspan="7">
         	<?php 
-			   	if($nip_pengikut1!=""){echo $pangkat_pengikut1." (".$golongan_pengikut1."/".$ruang_pengikut1.")";}else{echo"-";};
+			   	if($nip_pengikut3!=""){echo $pangkat_pengikut3." (".$golongan_pengikut3."/".$ruang_pengikut3.")";}else{echo"-";};
 			 ?>        </td>
-        <td colspan="3"><?php echo $jabatan_pengikut1.'&nbsp;'.$nama_skpd; ?></td>
+        <td colspan="3"><?php echo $jabatan_pengikut3.'&nbsp;'.$nama_skpd; ?></td>
       </tr>
       <?php } ?>
 
@@ -587,6 +587,188 @@
         </table>
       </div>
   </div> 
+  
+  <div class="page" >
+    <div class="subpage">
+     </br>
+      <table width="auto" border="0">
+        <tr>
+          <td width="86">Daftar</td>
+          <td width="14">:</td>
+          <td width="677" rowspan="2"><?php echo($maksud); ?></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>Ke</td>
+          <td>:</td>
+          <td><?php echo($ke); ?></td>
+        </tr>
+        <tr>
+          <td>Tanggal</td>
+          <td>:</td>
+          <td><?php echo($tgl_berangkat); ?></td>
+        </tr>
+      </table>
+      <style>
+      	#keu tr>td{
+			padding:5px;
+		}
+      </style>
+      <table id="keu" width="auto" border="0" rules="cols" style="font-size:14px; border:1px solid #000000;">
+        <tr>
+          <td width="30"><div align="center"><strong>NO</strong></div></td>
+          <td width="276"><div align="center"><strong>NAMA</strong></div></td>
+          <td width="205"><div align="center"><strong>UANG HARIAN</strong></div></td>
+          <td width="261"><div align="center"><strong>TANDA TANGAN</strong></div></td>
+        </tr>
+        <tr class="row-line">
+          <td><div align="center">1.</div></td>
+          <td><div align="left"><strong id="nama_title4"><?php echo $nama ?></strong></div></td>
+          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td><div align="left">NIP.<strong id="nama_title3"><?php echo $nip_pengikut1 ?></strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center">2.</div></td>
+          <td><div align="left"><strong id="nama_title5"><?php echo $nama_pengikut1 ?></strong></div></td>
+          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td><div align="left">NIP.<strong id="nama_title8"><?php echo $nip_pengikut1 ?></strong></div></td>
+        </tr>
+        <?php if($pengikut2!=""){?>
+        <tr>
+          <td><div align="center">3.</div></td>
+          <td><div align="left"><strong id="nama_title6"><?php echo $nama_pengikut2 ?></strong></div></td>
+          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td><div align="left">NIP.<strong id="nama_title9"><?php echo $nip_pengikut2 ?></strong></div></td>
+        </tr>
+        <?php } if($pengikut3!=""){?>
+        <tr>
+          <td><div align="center">4.</div></td>
+          <td><div align="left"><strong id="nama_title7"><?php echo $nama_pengikut3 ?></strong></div></td>
+          <td rowspan="2"><div align="center"></div></td>
+          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td><div align="left">NIP.<strong id="nama_title10"><?php echo $nip_pengikut3 ?></strong></div></td>
+        </tr>
+        <?php } ?>
+        <tr>
+          <td><div align="center"></div></td>
+          <td><div align="left"></div></td>
+          <td><div align="center"></div></td>
+          <td><div align="center"></div></td>
+        </tr>
+      </table>
+      <table width="auto" border="0">
+        <tr>
+          <td width="302">&nbsp;</td>
+          <td width="153">&nbsp;</td>
+          <td width="319">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center">Malang ,<strong><?php echo $tgl_surat; ?></strong></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center">Yang menerima,</div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center"><strong id="nama_title2"><?php echo $nama ?></strong></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center">NIP.<strong><?php echo $NIP?></strong></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center">Mengetahui,</div></td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center">Pejabat Pelaksana Teknis Kegiatan (PPTK)</div></td>
+          <td>&nbsp;</td>
+          <td><div align="center">Bendahara Pengeluaran</div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center">NN</div></td>
+          <td>&nbsp;</td>
+          <td><div align="center">TRIAS WAHYUNINGASTUTI, S.kom</div></td>
+        </tr>
+        <tr>
+          <td><div align="center">Pangkat</div></td>
+          <td>&nbsp;</td>
+          <td><div align="center">Penata Muda</div></td>
+        </tr>
+        <tr>
+          <td><div align="center">NIP.</div></td>
+          <td>&nbsp;</td>
+          <td><div align="center">NIP.123 1321231 1232131</div></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      </div>
+  </div>
 
 </div>
 
