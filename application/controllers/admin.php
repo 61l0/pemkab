@@ -13,18 +13,21 @@ class Admin extends CI_Controller
 
   public function index()
   {
-    $session = $this->session->userdata('isLogin');
+      $session = $this->session->userdata('isLogin');
       if($session == FALSE)
       {
         redirect('admin/login');
       }else
       {
-        redirect('home');
+        redirect('');
       }
   }
 
   public function login()//dologin
   {
+    $session = $this->session->userdata('isLogin');
+      if($session == FALSE)
+      {
     $this->form_validation->set_rules('username', 'Username', 'required|trim|xss_clean');
     $this->form_validation->set_rules('password', 'Password', 'required|trim|xss_clean');
     //$this->form_validation->set_rules('password', 'Password', 'required|md5|xss_clean');
@@ -53,6 +56,8 @@ class Admin extends CI_Controller
           redirect('admin/login');
 
         }
+      }}else{
+        redirect('');
       }
   }
 

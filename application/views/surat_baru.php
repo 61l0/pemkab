@@ -42,7 +42,24 @@
 			 $("#tbl-sdm").bootstrapTable('refresh', {
                     url: '<?php echo base_url() ?>sdm/get_json/'+kondisi
       		});
-			$('#modal-sdm').data({'id':id_kd_sdm,'data':data_sdm}).modal('show'); //ini ninini
+			$('#modal-sdm').data({'id':id_kd_sdm,'data':data_sdm}).modal('show'); //ini nini	
+
+	}
+	//format uang
+	function formatCurrency(num) {
+		num = num.toString().replace(/\$|\,/g,'');
+		if(isNaN(num))
+		num = "0";
+		sign = (num == (num = Math.abs(num)));
+		num = Math.floor(num*100+0.50000000001);
+		cents = num%100;
+		num = Math.floor(num/100).toString();
+		if(cents<10)
+		cents = "0" + cents;
+		for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+		num = num.substring(0,num.length-(4*i+3))+'.'+
+		num.substring(num.length-(4*i+3));
+		return (((sign)?'':'-') + 'Rp' + num + ',' + cents);
 	}			
 </script>
 	<form class="form-horizontal" role="form" id="form-surat-baru">
@@ -168,10 +185,10 @@
 	  	<div class="form-group">
 			<label class="col-sm-3 control-label" for="">Tanggal</label> 
 			<div class="col-sm-4">
-				<input class="form-control" type="text" id="datepickerTglBerangkat" name="datepickerTglBerangkat" placeholder="Berangkat">
+				<input class="form-control" type="text" id="datepickerTglBerangkat" name="datepickerTglBerangkat" placeholder="Berangkat" style="cursor: pointer;background-color:transparent;" readonly="">
 			</div>
 			<div class="col-sm-4">
-				<input class="form-control " type="text" id="datepickerTglKembali" name="datepickerTglKembali" placeholder="Kembali">
+				<input class="form-control " type="text" id="datepickerTglKembali" name="datepickerTglKembali" style="cursor: pointer;background-color:transparent;" placeholder="Kembali" readonly="">
 			</div>
 		</div>	
 	  	<div class="form-group">
@@ -191,8 +208,11 @@
 	  	</div>
 	  	<div class="form-group">
 		    <label  class="col-sm-3 control-label">Uang Saku per Pegawai </label>
-		    <div class="col-sm-8">
-		      	<input type="text" class="form-control" id="uang-saku" placeholder="">
+		    <div class="col-sm-4">
+		      	<input type="number" class="form-control" id="uang-saku" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onchange="$('#uang-review').val(formatCurrency($(this).val()));" onkeyup="$('#uang-review').val(formatCurrency($(this).val()));" placeholder="">
+		    </div>
+		    <div class="col-sm-3" style="margin-left:-30px;">
+		    	<input id="uang-review" style="color:green;" class="form-control" value="Rp.0,00" readonly="" />		    	
 		    </div>
 	  	</div>		
 		<div class="form-group">
@@ -240,9 +260,17 @@
 	  	$(document).ready(function() {
 	  		/////////////
 			$.datepicker.setDefaults( $.datepicker.regional[ "id" ] );
-			$.datepicker.setDefaults( {dateFormat:"dd MM yy",dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]});
-			$( "#datepickerTglBerangkat").datepicker();
+			$.datepicker.setDefaults( {dateFormat:"dd MM yy",minDate: 0,dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]});
 			$( "#datepickerTglKembali").datepicker();
+			$( "#datepickerTglBerangkat").datepicker({
+				onSelect: function (dateText, inst) {
+		            var date = $.datepicker.parseDate($.datepicker._defaults.dateFormat, dateText);
+		            $("#datepickerTglKembali").datepicker("option", "minDate", date)
+		            // the following is optional
+		            //$("#endDate").datepicker("setDate", date);
+		        }
+			});
+			
 		    
 
             //handle auto complete  
@@ -495,7 +523,7 @@
           		}
           	}
 
-        	alert("pegawai :"+pegawai+"||pengikut :"+pengikut[0]+pengikut[1]+pengikut[2]+"dd"); 
+        	//alert("pegawai :"+pegawai+"||pengikut :"+pengikut[0]+pengikut[1]+pengikut[2]+"dd"); 
         	//end get sdm
 
         	try{
@@ -543,8 +571,8 @@
 		        var trimNIP = pegawai.split(' ').join('');
 		       
 		        var status = trimNIP+""+today;
+		        var uang_saku = $("#uang-saku").val();
 		        
-
 
 		        $.ajax({
 		             url:'<?php echo base_url(); ?>surat/insert',
@@ -556,7 +584,8 @@
 		             		'par_dariKota':dariKota,'par_keKota':keKota,
 		             		'par_angkutan':angkutan,'par_tglBerangkat':tanggalBerangkat,'par_tglKembali':tanggalKembali,'par_lama':selisih,
 		             		'par_tujuan':maksudPerjalanan,'par_atasBeban':atasBeban,
-		             		'par_pasalAnggaran':pasalAnggaran,'par_keterangan':keterangan,'par_status':status,'par_kode_skpd':'<?php echo $this->session->userdata("kode_skpd");?>'	
+		             		'par_pasalAnggaran':pasalAnggaran,'par_keterangan':keterangan,'par_status':status,'par_kode_skpd':'<?php echo $this->session->userdata("kode_skpd");?>',
+		             		'par_uang_saku':uang_saku		
 		             	},
 		             beforeSend: function(rs){
 		             	$("#loader-btnsimpansuratbaru").show();

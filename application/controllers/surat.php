@@ -181,6 +181,7 @@ class Surat extends CI_Controller {
 			    'pengikut1'=>$sppd[0]['pengikut1'],
 				'pengikut2'=>$sppd[0]['pengikut2'],
 				'pengikut3'=>$sppd[0]['pengikut3'],
+			    'uang_saku'=>$sppd[0]['uang_saku'],
 			    'ruang' => $sppd[0]['ruang'],
 			    'maksud' => $sppd[0]['untuk'],
 			    'dari' => $sppd[0]['dari'],
@@ -198,7 +199,7 @@ class Surat extends CI_Controller {
 			    'jabatan_pejabat' => $sppd[0]['jabatan_pejabat'],
 			    'pangkat_pejabat' => $sppd[0]['pangkat_pejabat'],
 			    'golongan_pejabat' => $sppd[0]['golongan_pejabat'],
-			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],
+			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],			    
 			);
 			if($sppd[0]['pengikut1']!=""){
 		 		echo $this->load->view('cetak-sppd-pengikut',$data,true);
@@ -237,6 +238,7 @@ class Surat extends CI_Controller {
 		$status = $_POST['par_status'];
 		$pejabat = $_POST['par_pejabat'];
 		$kode_skpd = $_POST['par_kode_skpd'];
+		$uang_saku = $_POST['par_uang_saku'];
 		//echo "sukses";
 
 		$data_st = array(
@@ -259,6 +261,7 @@ class Surat extends CI_Controller {
 			'pengikut1'=>$pengikut1,
 			'pengikut2'=>$pengikut2,
 			'pengikut3'=>$pengikut3,
+			'uang_saku'=>$uang_saku,
 			'tgl_berangkat'=>$tgl_berangkat,
 			'tgl_kembali'=>$tgl_kembali,
 			'lama'=>$lama,
@@ -279,11 +282,11 @@ class Surat extends CI_Controller {
 		$data = $this->model_surat->insert($data_st,$data_sppd);
 		//echo $data;
 		if($data==true){
-						echo "<script>new PNotify({
-			    title: '',
-			    text: 'Berhasil membuat surat.',
-			    type: 'success'
-				});</script>";
+				echo "<script>new PNotify({
+				    title: '',
+				    text: 'Berhasil membuat surat silahkan cek di daftar surat.',
+				    type: 'success'
+					});</script>";
 		}
 	}
 

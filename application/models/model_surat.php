@@ -4,7 +4,7 @@ class Model_surat extends CI_Model {
 	public function get_surat($tipe,$where=""){
 		if ($tipe=="sppd") {
 			$data = $this->db->query('SELECT c.nama, c.nip,d.nama_jabatan, e.nama_pangkat,e.golongan,e.ruang,g.nip as nip_pejabat,g.nama as nama_pejabat,h.nama_jabatan as jabatan_pejabat, i.nama_pangkat as pangkat_pejabat, i.golongan as golongan_pejabat, i.ruang as ruang_pejabat,
-				  a.no_surat,a.pengikut1,a.pengikut2,a.pengikut3,a.untuk,a.dari,a.ke,a.tgl_berangkat,a.tgl_kembali,a.lama,a.transportasi,a.atas_beban,a.pasal_anggaran,a.keterangan,a.tanggal_surat 
+				  a.no_surat,a.pengikut1,a.pengikut2,a.pengikut3,a.untuk,a.dari,a.ke,a.tgl_berangkat,a.tgl_kembali,a.lama,a.transportasi,a.atas_beban,a.pasal_anggaran,a.keterangan,a.tanggal_surat,a.uang_saku 
 				  from tbl_sppd as a inner join 
 				  (tbl_sdm as c inner join tbl_jabatan as d on c.kd_jabatan = d.kd_jabatan inner join tbl_pangkat_gol as e on c.kd_pg = e.kd_pg) 
 				  on a.kd_sdm = c.kd_sdm 
@@ -22,10 +22,11 @@ class Model_surat extends CI_Model {
 		
 	}
 
+	//gak kepake dibawah ini
 	public function get_sppd()
 	{
 		$data = $this->db->query('SELECT c.nama, c.nip,d.nama_jabatan, e.nama_pangkat,e.golongan,e.ruang,g.nip as nip_pejabat,g.nama as nama_pejabat,h.nama_jabatan as jabatan_pejabat, i.nama_pangkat as pangkat_pejabat, i.golongan as golongan_pejabat, i.ruang as ruang_pejabat,
-				a.no_surat,a.untuk,a.dari,a.ke,a.tgl_berangkat,a.tgl_kembali,a.lama,a.transportasi,a.atas_beban,a.pasal_anggaran,a.keterangan,a.tanggal_surat 
+				a.no_surat,a.untuk,a.dari,a.ke,a.tgl_berangkat,a.tgl_kembali,a.lama,a.transportasi,a.atas_beban,a.pasal_anggaran,a.keterangan,a.tanggal_surat,a.uang_saku 
 				from tbl_sppd as a inner join 
 				(tbl_sdm as c inner join tbl_jabatan as d on c.kd_jabatan = d.kd_jabatan inner join tbl_pangkat_gol as e on c.kd_pg = e.kd_pg) 
 				on a.kd_sdm = c.kd_sdm 

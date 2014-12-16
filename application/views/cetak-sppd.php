@@ -9,8 +9,8 @@
         min-height: 33cm;
         padding: 0.5cm;
         margin: 1cm auto;
-        border: 1px #D3D3D3 solid;
-        border-radius: 5px;
+       border: 1px black solid;
+        border-radius: 0px;
         background: white;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
@@ -175,7 +175,7 @@
         <td>&nbsp;</td>
         <td>mengadakan perjalanan Dinas</td>
         <td><div align="center"></div></td>
-        <td colspan="7"><strong><?php echo $NIP?></strong></td>
+        <td colspan="7"><strong><?php if($NIP!=""){echo $NIP;}else{echo '-';}?></strong></td>
         </tr>
       <tr class="row-line">
         <td>3.</td>
@@ -187,7 +187,7 @@
         <td>&nbsp;</td>
         <td>pegawai yang diperintah</td>
         <td>&nbsp;</td>
-        <td colspan="7"><?php echo($pangkat); ?> ( <?php echo($gol); ?> / <?php echo($ruang); ?> )</td>
+        <td colspan="7"><?php if($pangkat!=""){ echo($pangkat); ?> ( <?php echo($gol); ?> / <?php echo($ruang.' )');}else{echo '-';} ?></td>
       </tr>
       <tr class="row-line">
         <td>4.</td>
@@ -504,6 +504,165 @@
         </table>
       </div>
   </div> 
+  
+  <div class="page" >
+    <div class="subpage">
+     </br>
+      <table width="auto" border="0">
+        <tr>
+          <td width="86">Daftar</td>
+          <td width="14">:</td>
+          <td width="677" rowspan="2"><?php echo($maksud); ?></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>Ke</td>
+          <td>:</td>
+          <td><?php echo($ke); ?></td>
+        </tr>
+        <tr>
+          <td>Tanggal</td>
+          <td>:</td>
+          <td><?php echo($tgl_berangkat); ?></td>
+        </tr>
+      </table>
+      <style>
+      	#keu tr>td{
+			padding:5px;
+		}
+      </style>
+      <table id="keu" width="auto" border="0" rules="cols" style="font-size:14px; border:1px solid #000000;">
+        <tr>
+          <td width="30"><div align="center"><strong>NO</strong></div></td>
+          <td width="276"><div align="center"><strong>NAMA</strong></div></td>
+          <td width="205"><div align="center"><strong>UANG HARIAN</strong></div></td>
+          <td width="261"><div align="center"><strong>TANDA TANGAN</strong></div></td>
+        </tr>
+        <tr class="row-line">
+          <td><div align="center">1.</div></td>
+          <td><div align="left"><strong id="nama_title4"><?php echo $nama ?></strong></div></td>
+          <td rowspan="2"><div align="center"><?php echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div>            <div align="center"></div></td>
+          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td><div align="left">NIP.<strong id="nama_title3">
+            <?php if($NIP!=""){echo $NIP;}else{echo ' -';} ?>
+          </strong></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td><div align="left"></div></td>
+          <td rowspan="2"><div align="center"></div>            
+          <div align="center"></div></td>
+          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td><div align="left"></div></td>
+        </tr>
+        <?php if($pengikut2!=""){?>
+        <?php } if($pengikut3!=""){?>
+        <?php } ?>
+      </table>
+      <table width="auto" border="0">
+        <tr>
+          <td width="302">&nbsp;</td>
+          <td width="153">&nbsp;</td>
+          <td width="319">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center">Malang ,<strong><?php echo $tgl_surat; ?></strong></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center">Yang menerima,</div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center"><strong id="nama_title2"><?php echo $nama ?></strong></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center">NIP.<strong><?php echo $NIP?></strong></div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center">Mengetahui,</div></td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center">Pejabat Pelaksana Teknis Kegiatan (PPTK)</div></td>
+          <td>&nbsp;</td>
+          <td><div align="center">Bendahara Pengeluaran</div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center"></div></td>
+          <td>&nbsp;</td>
+          <td><div align="center"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center">NN</div></td>
+          <td>&nbsp;</td>
+          <td><div align="center">TRIAS WAHYUNINGASTUTI, S.kom</div></td>
+        </tr>
+        <tr>
+          <td><div align="center">Pangkat</div></td>
+          <td>&nbsp;</td>
+          <td><div align="center">Penata Muda</div></td>
+        </tr>
+        <tr>
+          <td><div align="center">NIP.</div></td>
+          <td>&nbsp;</td>
+          <td><div align="center">NIP.123 1321231 1232131</div></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+    </div>
+  </div>
 
 </div>
 

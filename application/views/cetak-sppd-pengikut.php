@@ -9,8 +9,8 @@
         min-height: 33cm;
         padding: 0.5cm;
         margin: 1cm auto;
-        border: 1px #D3D3D3 solid;
-        border-radius: 5px;
+        border: 1px black solid;
+        border-radius: 0px;
         background: white;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
@@ -179,7 +179,7 @@
         <td>&nbsp;</td>
         <td colspan="3">mengadakan perjalanan Dinas</td>
         <td><div align="center"></div></td>
-        <td colspan="7"><strong><?php echo $NIP?></strong></td>
+        <td colspan="7"><strong><?php if($NIP!=""){echo $NIP;}else{echo '-';}?></strong></td>
         </tr>
       <tr class="row-line">
         <td>3.</td>
@@ -191,7 +191,7 @@
         <td>&nbsp;</td>
         <td colspan="3">pegawai yang diperintah</td>
         <td>&nbsp;</td>
-        <td colspan="7"><?php echo($pangkat); ?> ( <?php echo($gol); ?> / <?php echo($ruang); ?> )</td>
+        <td colspan="7"><?php if($pangkat!=""){ echo($pangkat); ?> ( <?php echo($gol); ?> / <?php echo($ruang.' )');}else{echo '-';} ?></td>
       </tr>
       <tr class="row-line">
         <td>4.</td>
@@ -627,44 +627,46 @@
         <tr class="row-line">
           <td><div align="center">1.</div></td>
           <td><div align="left"><strong id="nama_title4"><?php echo $nama ?></strong></div></td>
-          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+          <td rowspan="2"><div align="center"><?php echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div>            <div align="center"></div></td>
           <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
         </tr>
         <tr>
           <td><div align="center"></div></td>
-          <td><div align="left">NIP.<strong id="nama_title3"><?php echo $nip_pengikut1 ?></strong></div></td>
+          <td><div align="left">NIP.<strong id="nama_title3"><?php if($NIP!=""){echo $NIP;}else{echo ' -';} ?></strong></div></td>
         </tr>
         <tr>
           <td><div align="center">2.</div></td>
           <td><div align="left"><strong id="nama_title5"><?php echo $nama_pengikut1 ?></strong></div></td>
-          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+          <td rowspan="2"><div align="center"><?php echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div>            
+          <div align="center"></div></td>
           <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
         </tr>
         <tr>
           <td><div align="center"></div></td>
-          <td><div align="left">NIP.<strong id="nama_title8"><?php echo $nip_pengikut1 ?></strong></div></td>
+          <td><div align="left">NIP.<strong id="nama_title8"><?php if($nip_pengikut1!=""){echo $nip_pengikut1;}else{echo ' -';} ?></strong></div></td>
         </tr>
         <?php if($pengikut2!=""){?>
         <tr>
           <td><div align="center">3.</div></td>
           <td><div align="left"><strong id="nama_title6"><?php echo $nama_pengikut2 ?></strong></div></td>
-          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+          <td rowspan="2"><div align="center"><?php echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div>            
+          <div align="center"></div></td>
           <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
         </tr>
         <tr>
           <td><div align="center"></div></td>
-          <td><div align="left">NIP.<strong id="nama_title9"><?php echo $nip_pengikut2 ?></strong></div></td>
+          <td><div align="left">NIP.<strong id="nama_title9"><?php if($nip_pengikut2!=""){ echo $nip_pengikut2;}else{echo ' -';} ?></strong></div></td>
         </tr>
         <?php } if($pengikut3!=""){?>
         <tr>
           <td><div align="center">4.</div></td>
           <td><div align="left"><strong id="nama_title7"><?php echo $nama_pengikut3 ?></strong></div></td>
-          <td rowspan="2"><div align="center"></div></td>
+          <td rowspan="2"><div align="center"><?php echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div></td>
           <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
         </tr>
         <tr>
           <td><div align="center"></div></td>
-          <td><div align="left">NIP.<strong id="nama_title10"><?php echo $nip_pengikut3 ?></strong></div></td>
+          <td><div align="left">NIP.<strong id="nama_title10"><?php if($nip_pengikut3!=""){echo $nip_pengikut3;}else{echo ' -';} ?></strong></div></td>
         </tr>
         <?php } ?>
         <tr>

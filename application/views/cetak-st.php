@@ -7,8 +7,8 @@
         min-height: 33cm;
         padding: 0.5cm;
         margin: 1cm auto;
-        border: 1px #D3D3D3 solid;
-        border-radius: 5px;
+        border: 1px black solid;
+        border-radius: 0px;
         background: white;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
