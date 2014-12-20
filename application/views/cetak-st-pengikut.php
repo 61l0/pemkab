@@ -74,7 +74,7 @@
 	} 
  ?>
 <div class="book" id="PrintElem">
-<div class="page" style="font-size:14px; color:#000000;">
+<div class="page" style="font-size:14px padding-bottom:0px; color:#000000;">
         <div class="subpage">
         <table  height="383" border="0" id="table-isi" width="auto" rules="none" style="font-size:16px">
               <tr>

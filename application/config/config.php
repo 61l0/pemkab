@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/pemkab-malang/';
+$config['base_url']	= 'http://localhost/malangkab/';
 
 /*
 |--------------------------------------------------------------------------

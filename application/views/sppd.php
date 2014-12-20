@@ -20,7 +20,8 @@
 
 	<?php echo $del_confirm_surat.$modal_view_surat; ?>
 	<div id="box"></div>
-	<script type="text/javascript">		
+	<script type="text/javascript">
+            $("#load-surat").hide();		
 		    window.operateEvents = {
 		        'click .like': function (e, value, row, index) {
 		        	//alert(row.no_surat);
@@ -32,14 +33,19 @@
                             $('#modal_view_surat').modal({
                                 backdrop: 'static',
                                 keyboard: false
-                            });
-                            $("#konten-modal").html('Memuat surat...');
+                            });                            
+                            $("#loader-surat1").show();
+                            //$("#konten-modal").html('Memuat surat...');
                         },
                         success: function(data) {
+                            
                             $("#konten-modal").html(data);
+                            $("#loader-surat1").hide();
+                            //$("#load-surat").empty();
                         },
                         error: function(){
-                            $("#konten-modal").html('Gagal memuat surat, cek koneksi ...');                        
+                            $("#konten-modal").html('Gagal memuat surat, cek koneksi ...'); 
+                            $("#loader-surat1").hide();                       
                         }
                     });             
 		        },

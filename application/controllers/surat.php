@@ -10,7 +10,7 @@ class Surat extends CI_Controller {
       	{
         	redirect('admin/login');
       	}
-      	//$this->load->library('pdf');
+         $this->load->library('pdf');
 		//$this->mpdf->WriteHTML($html);
 	}
 
@@ -131,8 +131,11 @@ class Surat extends CI_Controller {
 		};
 	}
 
-	public function view($tipe,$ns1,$ns2,$ns3,$ns4){
+	
+	public function cetak($tipe,$ns1,$ns2,$ns3,$ns4)
+	{
 		$no_surat=$ns1."/".$ns2."/".$ns3."/".$ns4;
+		//$html = "<h2>test trests</h2>";
 		if($tipe=="surat_tugas"){
 			$st = $this->model_surat->get_surat("surat_tugas","where no_surat = '".$no_surat."'");
 			/*$pengikut1=$this->db->query("SELECT * from tbl_sdm where kd_sdm ='$st[0]['pengikut1']'");
@@ -140,7 +143,7 @@ class Surat extends CI_Controller {
 				$nama_pengikut1=$key['nama'];
 			}
 			echo $nama_pengikut1;
-			*/
+			*/			
 			$data = array(
 				'no_surat'=>$st[0]['no_surat'],
 				'nama'=>$st[0]['nama'],
@@ -165,9 +168,16 @@ class Surat extends CI_Controller {
 //				);
 			);
 			if($st[0]['pengikut1']!=""){
-		 		echo $this->load->view('cetak-st-pengikut',$data,true);
+
+		 		$html = $this->load->view('cetak-st-pengikut-pdf',$data,true);
+				//render pdf st pengikut
+				$this->pdf->pdf_create($html,$st[0]['nama']." ".$tipe.$this->date_id->generate($st[0]['tanggal_surat']),'folio','potrait');
+
 			}else{
-			 echo $this->load->view('cetak-st',$data,true);
+			 	$html = $this->load->view('cetak-st-pdf',$data,true);
+				//render pdf st pengikut
+				$this->pdf->pdf_create($html,$st[0]['nama']." ".$tipe.$this->date_id->generate($st[0]['tanggal_surat']),'folio','potrait');	
+	
 			}
 		}else if($tipe=="sppd"){
 			$sppd = $this->model_surat->get_surat("sppd","where no_surat = '".$no_surat."'");
@@ -202,12 +212,31 @@ class Surat extends CI_Controller {
 			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],			    
 			);
 			if($sppd[0]['pengikut1']!=""){
-		 		echo $this->load->view('cetak-sppd-pengikut',$data,true);
+				$html = $this->load->view('cetak-sppd-pengikut-pdf',$data,true);
+				//render pdf st pengikut
+				$this->pdf->pdf_create($html,$sppd[0]['nama']." ".$tipe.$this->date_id->generate($sppd[0]['tanggal_surat']),'folio','potrait');
+
 			}else{
-			 	echo $this->load->view('cetak-sppd',$data,true);
+			 	$html = $this->load->view('cetak-sppd-pdf',$data,true);
+				//render pdf st pengikut
+				$this->pdf->pdf_create($html,$sppd[0]['nama']." ".$tipe.$this->date_id->generate($sppd[0]['tanggal_surat']),'folio','potrait');
+
 			}
 			//echo $this->load->view('cetak-sppd',$data,true);
 		}
+
+		//$this->pdf->pdf_create($html,"Main Mining report",'F4','potrait');
+	}
+
+	public function view($tipe,$ns1,$ns2,$ns3,$ns4){
+		$no_surat=$ns1."/".$ns2."/".$ns3."/".$ns4;
+		echo "
+		<!-- 16:9 aspect ratio -->
+<div class=\"embed-responsive embed-responsive-16by9\">
+  
+  <iframe class=\"embed-responsive-item\" src=\"".base_url()."surat/cetak/".$tipe."/".$no_surat."\"></iframe>
+</div>
+  ";
 		//$modal = array('konten'=>$this->load->view('modal_surat',array(),true) ,);
 		//$this->load->view('index',$data);
 	}
@@ -369,7 +398,7 @@ class Surat extends CI_Controller {
 
 	/*ob_end_clean();
 	$this->load->library('mpdf');
-	$mpdf=new mPDF('utf-8', 'legal');
+	$mpdf=new mPDF('utf-8', 'F4');
 	ob_start();
 	$mpdf->WriteHTML(utf8_encode('<P>HELLO</P>FFFFFFFFFFFFFFFF DFBSJHG AJHFVGA <table rules="all"><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr></table>'));
 	$mpdf->Output("SS.pdf" ,'I');
