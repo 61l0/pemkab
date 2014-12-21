@@ -111,6 +111,9 @@
       .panel{
         border-radius: 0px;
       }
+      .modal-content{
+        border-radius: 0px; 
+      }
     </style>
 </head>
 

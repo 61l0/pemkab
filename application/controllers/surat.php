@@ -20,7 +20,8 @@ class Surat extends CI_Controller {
 	}
 	public function baru()
 	{
-		$data =array('konten' => $this->load->view('surat_baru',array(),true) , );
+		$modal = array('modal_view_surat'=>$this->load->view('modal_surat',array(),true),);
+		$data =array('konten' => $this->load->view('surat_baru',$modal,true) , );
 		$this->load->view('index',$data);
 	}
 
@@ -132,7 +133,7 @@ class Surat extends CI_Controller {
 	}
 
 	
-	public function cetak($tipe,$ns1,$ns2,$ns3,$ns4)
+	public function cetak($ns1,$ns2,$ns3,$ns4,$tipe='')
 	{
 		$no_surat=$ns1."/".$ns2."/".$ns3."/".$ns4;
 		//$html = "<h2>test trests</h2>";
@@ -223,20 +224,67 @@ class Surat extends CI_Controller {
 
 			}
 			//echo $this->load->view('cetak-sppd',$data,true);
+		}else if($tipe==""){
+			$sppd = $this->model_surat->get_surat("sppd","where no_surat = '".$no_surat."'");
+			$st = $this->model_surat->get_surat("surat_tugas","where no_surat = '".$no_surat."'");
+			$data = array(
+				'no_surat' => $sppd[0]['no_surat'],
+				'nama' => $sppd[0]['nama'],
+			    'NIP' => $sppd[0]['nip'],
+			    'pangkat' => $sppd[0]['nama_pangkat'],
+			    'jabatan' => $sppd[0]['nama_jabatan'],
+			    'gol' => $sppd[0]['golongan'],
+			    'pengikut1'=>$sppd[0]['pengikut1'],
+				'pengikut2'=>$sppd[0]['pengikut2'],
+				'pengikut3'=>$sppd[0]['pengikut3'],
+			    'uang_saku'=>$sppd[0]['uang_saku'],
+			    'ruang' => $sppd[0]['ruang'],
+			    'dasar'=>$st[0]['dasar'],
+				'pembuka_surat'=>$st[0]['pembuka_surat'],
+			    'maksud' => $sppd[0]['untuk'],
+			    'dari' => $sppd[0]['dari'],
+			    'ke' => $sppd[0]['ke'],
+			    'tgl_berangkat' => $this->date_id->generate($sppd[0]['tgl_berangkat']),
+			    'tgl_kembali' =>  $this->date_id->generate($sppd[0]['tgl_kembali']),
+			    'lama' => $sppd[0]['lama'],
+			    'transportasi' => $sppd[0]['transportasi'],
+			    'atas_beban' => $sppd[0]['atas_beban'],
+			    'pasal_anggaran' => $sppd[0]['pasal_anggaran'],
+			    'ket' => $sppd[0]['keterangan'],
+			    'tgl_surat' =>$this->date_id->generate($sppd[0]['tanggal_surat']),
+			    'nama_pejabat' => $sppd[0]['nama_pejabat'],
+			    'nip_pejabat' => $sppd[0]['nip_pejabat'],
+			    'jabatan_pejabat' => $sppd[0]['jabatan_pejabat'],
+			    'pangkat_pejabat' => $sppd[0]['pangkat_pejabat'],
+			    'golongan_pejabat' => $sppd[0]['golongan_pejabat'],
+			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],			    
+			);
+			if($sppd[0]['pengikut1']!=""){
+				$html = $this->load->view('cetak-all-pengikut-pdf',$data,true);
+				//render pdf st pengikut
+				$this->pdf->pdf_create($html,$sppd[0]['nama']." ".$tipe.$this->date_id->generate($sppd[0]['tanggal_surat']),'folio','potrait');
+
+			}else{
+			 	$html = $this->load->view('cetak-all-pdf',$data,true);
+				//render pdf st pengikut
+				$this->pdf->pdf_create($html,$sppd[0]['nama']." ".$tipe.$this->date_id->generate($sppd[0]['tanggal_surat']),'folio','potrait');
+
+			}
+			//echo $this->load->view('cetak-sppd',$data,true);
 		}
 
 		//$this->pdf->pdf_create($html,"Main Mining report",'F4','potrait');
 	}
 
-	public function view($tipe,$ns1,$ns2,$ns3,$ns4){
+	public function view($tipe='',$ns1,$ns2,$ns3,$ns4){
 		$no_surat=$ns1."/".$ns2."/".$ns3."/".$ns4;
 		echo "
-		<!-- 16:9 aspect ratio -->
-<div class=\"embed-responsive embed-responsive-16by9\">
-  
-  <iframe class=\"embed-responsive-item\" src=\"".base_url()."surat/cetak/".$tipe."/".$no_surat."\"></iframe>
-</div>
-  ";
+				<!-- 16:9 aspect ratio -->
+		<div class=\"embed-responsive embed-responsive-16by9\">
+		  
+		  <iframe class=\"embed-responsive-item\" src=\"".base_url()."surat/cetak/".$no_surat."/".$tipe."\"></iframe>
+		</div>
+		  ";
 		//$modal = array('konten'=>$this->load->view('modal_surat',array(),true) ,);
 		//$this->load->view('index',$data);
 	}
@@ -310,90 +358,32 @@ class Surat extends CI_Controller {
 		//echo print_r($data_st).print_r($data_sppd) ;
 		$data = $this->model_surat->insert($data_st,$data_sppd);
 		//echo $data;
-		if($data==true){
+		/*if($data==true){
 				echo "<script>new PNotify({
 				    title: '',
 				    text: 'Berhasil membuat surat silahkan cek di daftar surat.',
 				    type: 'success'
 					});</script>";
+		}*/
+	
+		if($data==true){
+			echo "<script>new PNotify({
+				    title: '',
+				    text: 'Berhasil membuat surat silahkan cek di daftar surat.',
+				    type: 'success'
+					});</script>";
+			
+			echo "
+				<!-- 16:9 aspect ratio -->
+				<div class=\"embed-responsive embed-responsive-16by9\">
+		  
+		  		<iframe class=\"embed-responsive-item\" src=\"".base_url()."surat/cetak/".$no_surat."\"></iframe>
+				</div>
+		  ";
 		}
 	}
 
-	public function cetakpdf($tipe,$ns1,$ns2,$ns3,$ns4){
-		//$this->load->library('mpdf');
-		$no_surat=$ns1."/".$ns2."/".$ns3."/".$ns4;
-		if($tipe=="surat_tugas"){
-			$st = $this->model_surat->get_surat("surat_tugas","where no_surat = '".$no_surat."'");
-			//$data = array($data);
-			$data = array(
-				'no_surat'=>$st[0]['no_surat'],
-				'nama'=>$st[0]['nama'],
-				'nip'=>$st[0]['nip'],
-				'pangkat'=>$st[0]['nama_pangkat'],
-				'gol'=>$st[0]['golongan'],
-				'ruang'=>$st[0]['ruang'],
-				'jabatan'=>$st[0]['nama_jabatan'],
-				'dasar'=>$st[0]['dasar'],
-				'pembuka_surat'=>$st[0]['pembuka_surat'],
-				'maksud'=>$st[0]['tujuan'],
-				'nama_pejabat' => $st[0]['nama_pejabat'],
-			    'nip_pejabat' => $st[0]['nip_pejabat'],
-			    'jabatan_pejabat' => $st[0]['jabatan_pejabat'],
-			    'pangkat_pejabat' => $st[0]['pangkat_pejabat'],
-			    'golongan_pejabat' => $st[0]['golongan_pejabat'],
-			    'ruang_pejabat' => $st[0]['ruang_pejabat'],
-				'tgl_surat' =>$this->date_id->generate($st[0]['tanggal_surat']),
-			);
-			$html = $this->load->view('cetak-st-pdf',$data,true);
-				  $this->load->helper('mediatutorialpdf');
-			generate_pdf($html,"name",false);
 
-		}else if($tipe=="sppd"){
-			$sppd = $this->model_surat->get_surat("sppd","where no_surat = '".$no_surat."'");
-			$data = array(
-				'no_surat' => $sppd[0]['no_surat'],
-				'nama' => $sppd[0]['nama'],
-			    'NIP' => $sppd[0]['nip'],
-			    'pangkat' => $sppd[0]['nama_pangkat'],
-			    'jabatan' => $sppd[0]['nama_jabatan'],
-			    'gol' => $sppd[0]['golongan'],
-			    'ruang' => $sppd[0]['ruang'],
-			    'maksud' => $sppd[0]['untuk'],
-			    'dari' => $sppd[0]['dari'],
-			    'ke' => $sppd[0]['ke'],
-			    'tgl_berangkat' => $this->date_id->generate($sppd[0]['tgl_berangkat']),
-			    'tgl_kembali' =>  $this->date_id->generate($sppd[0]['tgl_kembali']),
-			    'lama' => $sppd[0]['lama'],
-			    'transportasi' => $sppd[0]['transportasi'],
-			    'atas_beban' => $sppd[0]['atas_beban'],
-			    'pasal_anggaran' => $sppd[0]['pasal_anggaran'],
-			    'ket' => $sppd[0]['keterangan'],
-			    'tgl_surat' =>$this->date_id->generate($sppd[0]['tanggal_surat']),
-			    'nama_pejabat' => $sppd[0]['nama_pejabat'],
-			    'nip_pejabat' => $sppd[0]['nip_pejabat'],
-			    'jabatan_pejabat' => $sppd[0]['jabatan_pejabat'],
-			    'pangkat_pejabat' => $sppd[0]['pangkat_pejabat'],
-			    'golongan_pejabat' => $sppd[0]['golongan_pejabat'],
-			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],
-			);
-			$html=$this->load->view('cetak-sppd-pdf',$data,true);
-			//echo($html);
-			$this->load->helper('mediatutorialpdf');
-			generate_pdf($html,"name",false);
-			//	ob_end_clean();
-	/*$this->load->library('mpdf');
-	$mpdf=new mPDF('utf-8', 'folio');
-	ob_start();
-	$mpdf->WriteHTML(utf8_encode($html));
-	ob_end_clean();
-	$mpdf->Output("SS.pdf" ,'I');
-
-	exit;
-
-*/
-
-		}
-	}
 	public function test(){
 
 	/*ob_end_clean();

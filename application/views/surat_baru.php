@@ -75,7 +75,7 @@
 		      	<input align="right" type="text" class="form-control" id="nosurat1" value="094/" placeholder="" style="border-top-right-radius:0px;border-bottom-right-radius:0px;"readonly>
 		    </div>
 		    <div class="col-sm-1" style="margin-left:-30px;">
-		      	<input type="number" class="form-control" id="nosurat2" placeholder="" style="border-top-right-radius:0px;border-bottom-right-radius:0px;border-left:none;border-top-left-radius:0px;border-bottom-left-radius:0px;">
+		      	<input type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" id="nosurat2" placeholder="" style="border-top-right-radius:0px;border-bottom-right-radius:0px;border-left:none;border-top-left-radius:0px;border-bottom-left-radius:0px;">
 		    </div>
 		    <div class="col-sm-2" style="margin-left:-30px;">
 		      	<input type="text" class="form-control" id="nosurat3" value=<?php echo "/".$this->session->userdata('kode_skpd')."/".date('Y'); ?> placeholder="" style="border-left:none;border-top-left-radius:0px;border-bottom-left-radius:0px;"readonly>
@@ -249,6 +249,8 @@
 	        </div>
 	    </div>
 	</div>
+	<?php echo $modal_view_surat; ?>
+	<div id="box"></div>
 	<script type="text/javascript">
 		var maxPengikut = 3;
 		var i=2;
@@ -589,11 +591,17 @@
 		             	},
 		             beforeSend: function(rs){
 		             	$("#loader-btnsimpansuratbaru").show();
+
 		             },
 		             success:function(rs){
-		                $("#message-box-public").html(rs);
+		                $('#modal_view_surat').modal({
+                                backdrop: 'static',
+                                keyboard: false
+                            });
+		                $("#konten-modal").html(rs);
 		                $("#loader-btnsimpansuratbaru").hide();
 		                $(".input-pegawai").val("");
+		                $("#loader-surat1").hide();
 		             },
 		             error: function(rs){
 		             	//alert("GAGAL");
@@ -603,6 +611,7 @@
 						    text: 'Gagal membuat surat.',
 						    type: 'error'
 						});
+						$("#loader-surat1").hide();
 		             }
 		            
 		            });
