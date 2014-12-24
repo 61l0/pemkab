@@ -13,7 +13,7 @@
 </div>
 <hr></BR>
 <div class="col-sm-12">
-	<a href="<?php echo base_url(); ?>surat/baru" class="btn btn-primary" id="btn-tambah-sppd"><span class="glyphicon glyphicon-plus-sign glyphicon-th-large"></span>&nbsp Tambah Data</a>
+	<a href="<?php echo base_url(); ?>surat/baru" class="btn btn-primary" id="btn-tambah-sppd"><i class="fa fa-plus-square-o"></i>&nbsp Tambah Data</a>
 </div>
 	
     <table id="table-sppd"></table>
@@ -23,7 +23,7 @@
 	<script type="text/javascript">
             $("#load-surat").hide();		
 		    window.operateEvents = {
-		        'click .like': function (e, value, row, index) {
+		        'click .print': function (e, value, row, index) {
 		        	//alert(row.no_surat);
 		           	$('#konten-modal').empty();
 		            $.ajax({
@@ -169,14 +169,11 @@
             });
 		function operateFormatter(value, row, index) {
         return [
-            '<a class="like" href="javascript:void(0)" title="Like">',
+            '<a class="btn print" href="javascript:void(0)" title="print preview">',
                 '<i class="glyphicon glyphicon-print"></i>',
             '&nbsp;</a>',
-            '<a class="edit ml10" href="javascript:void(0)" title="Edit">&nbsp;',
-                '<i class="glyphicon glyphicon-edit"></i>',
-            '&nbsp;</a>',
-            '<a class="remove ml10" href="javascript:void(0)" title="Remove">',
-                '<i class="glyphicon glyphicon-remove"></i>',
+            '<a class=" btn remove ml10" href="javascript:void(0)" title="Remove">',
+                '<i class="glyphicon glyphicon-trash"></i>',
             '</a>'
         ].join('');
     }

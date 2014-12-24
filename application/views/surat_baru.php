@@ -20,7 +20,9 @@
 		    -moz-user-select: none;
 		    -ms-user-select: none;
 		    user-select: none;
+		    title
 		}
+
 	</style>
 	<script type="text/javascript">
 		var index=1;
@@ -218,18 +220,18 @@
 		<div class="form-group">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-8" align="right">
-				<button type="button" class="btn btn-primary btn-lg" id="btn-simpansuratbaru"><span id="loader-btnsimpansuratbaru"><img width="20px" height="20px" src="<?php echo base_url(); ?>assets/img/ajax-loading.gif"/>&nbsp&nbsp&nbsp</span><span class="glyphicon glyphicon-floppy-disk"></span> Simpan</button>			
+				<button type="button" class="btn btn-primary btn-lg" id="btn-simpansuratbaru"><span id="loader-btnsimpansuratbaru"><img width="20px" height="20px" src="<?php echo base_url(); ?>assets/img/ajax-loading.gif"/>&nbsp&nbsp&nbsp</span><span class="fa fa-floppy-o"></span> Simpan</button>			
 			</div>
 		</div>
 	</form>
 	<div class="modal fade" id="modal-sdm" tabindex="-1" role="dialog" aria-labelledby="modal_konfirmLabel" aria-hidden="true">
 	    <div class="modal-dialog modal-lg">
-	        <div class="modal-content">
+	        <div class="modal-content" >
 	            <div class="modal-header">
 	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="empty();">&times;</button>
-	                 <h3 class="modal-title" id=""></h3>
 	            </div>
 	            <div class="modal-body">
+	            		<p>Data pegawai <?php echo $this->session->userdata('nama_skpd'); ?> yang bisa membuat surat SPPD hari ini :</p>
 	                	<table data-toggle="table" id="tbl-sdm" data-cache="false" data-height="299">
 						    <thead>
 						        <tr>

@@ -12,14 +12,15 @@
 </div>
 <hr></BR>
 <div class="col-sm-12">
-	<a href="<?php echo base_url(); ?>surat/baru" class="btn btn-primary" id="btn-tambah-sppd"><span class="glyphicon glyphicon-plus-sign glyphicon-th-large"></span>&nbsp Tambah Data</a>
+	<a href="<?php echo base_url(); ?>surat/baru" class="btn btn-primary" id="btn-tambah-sppd"><i class="fa fa-plus-square-o"></i>&nbsp Tambah Data</a>
 </div>
 <table id="table-surat-tugas"></table>
 <?php echo $del_confirm_surat.$modal_view_surat;?>
 <div id="box"></div>
-	<script type="text/javascript">		
+	<script type="text/javascript">
+            $('#loader-surat1').hide();		
 		    window.operateEvents = {
-		        'click .preview': function (e, value, row, index) {
+		        'click .print': function (e, value, row, index) {
                     $('#konten-modal').empty();
                     $.ajax({
                         url: "<?php echo base_url(); ?>surat/view/surat_tugas/"+row.no_surat,
@@ -29,12 +30,15 @@
                                 backdrop: 'static',
                                 keyboard: false
                             });
+                            $('#loader-surat1').show();
                             $("#konten-modal").html('Memuat surat...');
                         },
                         success: function(data) {
                             $("#konten-modal").html(data);
+                            $('#loader-surat1').hide();
                         },
                         error: function(){
+                            $('#loader-surat1').hide();
                             $("#konten-modal").html('Gagal memuat surat, cek koneksi ...');                        
                         }
                     });                    
@@ -129,14 +133,11 @@
             });
 		function operateFormatter(value, row, index) {
         return [
-            '<a class="btn preview" href="javascript:void(0)" title="preview">',
+            '<a class="btn print" href="javascript:void(0)" title="preview">',
                 '<i class="glyphicon glyphicon-print"></i>',
             '&nbsp;</a>',
-            '<a class="btn edit ml10" href="javascript:void(0)" title="Edit">&nbsp;',
-                '<i class="glyphicon glyphicon-edit"></i>',
-            '&nbsp;</a>',
             '<a class="btn remove ml10" href="javascript:void(0)" title="Remove">',
-                '<i class="glyphicon glyphicon-remove"></i>',
+                '<i class="glyphicon glyphicon-trash"></i>',
             '</a>'
         ].join('');
     }

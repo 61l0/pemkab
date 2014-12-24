@@ -1,4 +1,62 @@
-   
+<?php
+function terbilang($angka) {
+    $angka = (float)$angka;
+    $bilangan = array(
+            '',
+            'Satu',
+            'Dua',
+            'Tiga',
+            'Empat',
+            'Lima',
+            'Enam',
+            'Tujuh',
+            'Delapan',
+            'Sembilan',
+            'Sepuluh',
+            'Sebelas'
+    );
+ 
+    if ($angka < 12) {
+        return $bilangan[$angka];
+    } else if ($angka < 20) {
+        return $bilangan[$angka - 10] . ' Belas';
+    } else if ($angka < 100) {
+        $hasil_bagi = (int)($angka / 10);
+        $hasil_mod = $angka % 10;
+        return trim(sprintf('%s puluh %s', $bilangan[$hasil_bagi], $bilangan[$hasil_mod]));
+    } else if ($angka < 200) {
+        return sprintf('seratus %s', terbilang($angka - 100));
+    } else if ($angka < 1000) {
+        $hasil_bagi = (int)($angka / 100);
+        $hasil_mod = $angka % 100;
+        return trim(sprintf('%s Ratus %s', $bilangan[$hasil_bagi], terbilang($hasil_mod)));
+    } else if ($angka < 2000) {
+        return trim(sprintf('Seribu %s', terbilang($angka - 1000)));
+    } else if ($angka < 1000000) {
+        $hasil_bagi = (int)($angka / 1000); // karena hasilnya bisa ratusan jadi langsung digunakan rekursif
+        $hasil_mod = $angka % 1000;
+        return sprintf('%s Ribu %s', terbilang($hasil_bagi), terbilang($hasil_mod));
+    } else if ($angka < 1000000000) {
+ 
+        // hasil bagi bisa satuan, belasan, ratusan jadi langsung kita gunakan rekursif
+        $hasil_bagi = (int)($angka / 1000000);
+        $hasil_mod = $angka % 1000000;
+        return trim(sprintf('%s Juta %s', terbilang($hasil_bagi), terbilang($hasil_mod)));
+    } else if ($angka < 1000000000000) {
+        // bilangan 'milyaran'
+        $hasil_bagi = (int)($angka / 1000000000);
+        $hasil_mod = fmod($angka, 1000000000);
+        return trim(sprintf('%s Milyar %s', terbilang($hasil_bagi), terbilang($hasil_mod)));
+    } else if ($angka < 1000000000000000) {                          
+    // bilangan 'triliun'                           
+         $hasil_bagi = $angka / 1000000000000;                           
+         $hasil_mod = fmod($angka, 1000000000000);                           
+         return trim(sprintf('%s Triliun %s', terbilang($hasil_bagi), terbilang($hasil_mod)));                       
+    } else {         
+    	return 'Wow...';                        
+    }                   
+    }
+    ?>   
   <style type="text/css">
 	td[rowspan] {
 	  vertical-align: top;
@@ -376,7 +434,7 @@
 				echo('a.n. Bupati');		
 			}else if(stristr($jabatan_pejabat,'Asisten')){
 				echo('a.n. SEKRETARIS DAERAH');
-			}else if(stristr($jabatan_pejabat,'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
+			}else if(stristr($jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd'),'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
 				echo('a.n. Asisten Pemerintahan');
 			}else if(stristr($jabatan_pejabat,'Kepala Bagian Perekonomian') or stristr($jabatan_pejabat,'Kepala Bagian Administrasi Pembangunan ')or stristr($jabatan_pejabat,'Kepala Bagian Kerjasama ') or stristr($jabatan_pejabat,'Kepala Bagian Pengelola Data Elektronik')){
 				echo('a.n. Asisten Perekonomian dan Pembangunan');
@@ -618,11 +676,15 @@
           <td width="105"><div align="center"><strong>UANG HARIAN</strong></div></td>
           <td width=""><div align="center"><strong>TANDA TANGAN</strong></div></td>
         </tr>
+        <?php 		$uangsaku1=0;
+					$uangsaku2=0;
+					$uangsaku3=0;
+					$uangsaku4=0; ?>
         <tr class="row-line">
           <td><div align="center">1.</div></td>
           <td><div align="left"><strong id="nama_title4"><?php echo $nama ?></strong></div></td>
-          <td rowspan="2"><div align="center"><?php echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div>            <div align="center"></div></td>
-          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+          <td rowspan="2" style="vertical-align:initial;"><div align="center"><?php $uangsaku1=$uang_saku; echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div>            <div align="center"></div></td>
+          <td rowspan="2" style="vertical-align:initial;"><div align="center" >1. ...........</div>            <div align="center"></div></td>
         </tr>
         <tr>
           <td><div align="center"></div></td>
@@ -631,9 +693,9 @@
         <tr>
           <td><div align="center">2.</div></td>
           <td><div align="left"><strong id="nama_title5"><?php echo $nama_pengikut1 ?></strong></div></td>
-          <td rowspan="2"><div align="center"><?php echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div>            
+          <td rowspan="2" style="vertical-align:initial;"><div align="center"><?php $uangsaku2=$uang_saku; echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div>            
           <div align="center"></div></td>
-          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+          <td rowspan="2" style="vertical-align:initial;"><div align="center">2. ...........</div>            <div align="center"></div></td>
         </tr>
         <tr>
           <td><div align="center"></div></td>
@@ -643,9 +705,9 @@
         <tr>
           <td><div align="center">3.</div></td>
           <td><div align="left"><strong id="nama_title6"><?php echo $nama_pengikut2 ?></strong></div></td>
-          <td rowspan="2"><div align="center"><?php echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div>            
+          <td rowspan="2" style="vertical-align:initial;"><div align="center"><?php $uangsaku3=$uang_saku; echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div>            
           <div align="center"></div></td>
-          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+          <td rowspan="2" style="vertical-align:initial;"><div align="center">3. ...........</div>            <div align="center"></div></td>
         </tr>
         <tr>
           <td><div align="center"></div></td>
@@ -655,18 +717,23 @@
         <tr>
           <td><div align="center">4.</div></td>
           <td><div align="left"><strong id="nama_title7"><?php echo $nama_pengikut3 ?></strong></div></td>
-          <td rowspan="2"><div align="center"><?php echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div></td>
-          <td rowspan="2"><div align="center"></div>            <div align="center"></div></td>
+          <td rowspan="2" style="vertical-align:initial;"><div align="center"><?php $uangsaku4=$uang_saku; echo 'Rp. '.number_format($uang_saku,'2',',','.');?></div></td>
+          <td rowspan="2" style="vertical-align:initial;"><div align="center">4. ...........</div>            <div align="center"></div></td>
         </tr>
         <tr>
           <td><div align="center"></div></td>
           <td><div align="left">NIP.<strong id="nama_title10"><?php if($nip_pengikut3!=""){echo $nip_pengikut3;}else{echo ' -';} ?></strong></div></td>
         </tr>
         <?php } ?>
+        
+        <tr class="row-line" id="kec">
+          <td>&nbsp;</td>
+          <td rowspan="2" style="vertical-align:initial;"><div align="center">Jumlah</div></td>
+          <td rowspan="2" style="vertical-align:initial;"><div align="center"><?php $tot = $uangsaku1+$uangsaku2+$uangsaku3+$uangsaku4; echo 'Rp. '.number_format($tot,'2',',','.');?></div></td>
+          <td rowspan="2" style="vertical-align:initial;"><div align="center"><?php echo '( '.terbilang($tot).' Rupiah )';?></div>
+          <div align="center"></div></td>
+        </tr>
         <tr>
-          <td><div align="center"></div></td>
-          <td><div align="left"></div></td>
-          <td><div align="center"></div></td>
           <td><div align="center"></div></td>
         </tr>
       </table>
@@ -747,17 +814,17 @@
           <td><div align="center"></div></td>
         </tr>
         <tr>
-          <td><div align="center">NN</div></td>
+          <td><div align="center">LINDEN SURYAWAN, ST.,M.Eng</div></td>
           <td>&nbsp;</td>
           <td><div align="center">TRIAS WAHYUNINGASTUTI, S.kom</div></td>
         </tr>
         <tr>
-          <td><div align="center">Pangkat</div></td>
+          <td><div align="center">Penata Muda TK. 1</div></td>
           <td>&nbsp;</td>
           <td><div align="center">Penata Muda</div></td>
         </tr>
         <tr>
-          <td><div align="center">NIP.</div></td>
+          <td><div align="center">NIP.197901012006041045</div></td>
           <td>&nbsp;</td>
           <td><div align="center">NIP.123 1321231 1232131</div></td>
         </tr>

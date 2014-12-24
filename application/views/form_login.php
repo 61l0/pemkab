@@ -51,7 +51,7 @@
           </div>
           <div class="form-group" align="right">
             <div class="col-sm-12">
-              <button class="btn btn-primary col-sm-12" type="submit" name="login">Login <i class="fa fa-chevron-circle-right"></i></button>  
+              <button class="btn btn-primary col-sm-12" type="submit" name="login">Login <i class="fa fa-sign-in"></i></button>  
              
             </div>
           </div>

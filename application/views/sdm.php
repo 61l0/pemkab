@@ -20,7 +20,7 @@
 </div>
 <hr></BR>
 <div class="col-sm-1">
-	<a href="javascript:void(0)" class="btn btn-success" id="btn-tambah-sdm" onclick="load_tambah_sdm();"><span class="glyphicon glyphicon-plus-sign glyphicon-th-large"></span>&nbsp Tambah Data</a>
+	<a href="javascript:void(0)" class="btn btn-primary" id="btn-tambah-sdm" onclick="load_tambah_sdm();"><i class="fa fa-plus-square-o"></i>&nbsp Tambah Data</a>
 </div>
 <table id="table-sdm"></table>
 <?php echo $tambah_sdm.$edit_sdm.$del_confirm_sdm; ?>

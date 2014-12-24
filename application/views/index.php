@@ -17,9 +17,13 @@
   	<script src="<?php echo base_url();?>assets/jqueryui/jquery-ui.js"></script>
     <script src="<?php echo base_url();?>assets/jqueryui/jquery.ui.datepicker-id.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css" />			
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/font-awesome.min.css">   			
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script> 
-    
+    <!--[if lt IE 9]>
+      <script src="<?php echo base_url();?>assets/js/html5shiv.min.js" type="text/javascript"></script>
+      <script src="<?php echo base_url();?>assets/js/respond.min.js" type="text/javascript"></script>
+    <![endif]-->
    
     <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
@@ -29,11 +33,11 @@
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
 
     <script src="<?php echo base_url();?>assets/js/bootstrap-table.min.js"></script>
-	  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-table.min.css" />
     <script src="<?php echo base_url();?>assets/js/bootstrap-table-export.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap-table-id-ID.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/print-element.js"></script>
-        <script src="<?php echo base_url();?>assets/js/jspdf.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/jspdf.min.js"></script>
 
     <style>
 		.ui-autocomplete-loading { background: white url('<?php echo base_url(); ?>assets/img/auto-complete.gif') right center no-repeat;}
@@ -46,6 +50,7 @@
     	body{
     		background-color: #EEEEEE;
     		padding-top: 70px;
+    		color: #4C4C4C;
     	}
     	hr{
     		border-color: #DDDDDD;
@@ -58,61 +63,112 @@
 		   height:60px;   /* tinggi dari footer */
 		   background:#CCCCCC;
 		}
-	    .nav-stacked>li>a{
-	    	color: black;
-	    	background: none;
-	    	background-color: #CCCCCC; 
-	    }
-	    .nav-stacked>li>a:hover{
-	    	color: black;
-	    	background-color: #BBBBBB; 
-	    }
-	    .nav-stacked>li.active>a{
-	    	background-color: #444444;  	
-	    }
-	    .nav-stacked>li.active>a:hover{
-	    	background-color: #555555;  	
-	    }
+	    
 		.ui-autocomplete.ui-widget{font-size: 12px;}
 		
-			
+		.navbar{
+
+      background:#285e8e;
+      border: none;
+    }	
 		.navbar-inverse .navbar-nav > li > a,.navbar-inverse .navbar-brand {
 		  color: #FFFFFF;
 		}
-		.navbar-inverse .navbar-nav > li > a:hover,.navbar-inverse .navbar-brand:hover {
-		  color: #DDDDDD;
+		.navbar-inverse .navbar-nav > li > a:hover{
+        background-color: transparent;
+        -moz-box-shadow: inset 0px -4px 0px #428bca;
+        -webkit-box-shadow: inset 0px -4px 0px #428bca;
+        box-shadow: inset 0px -4px 0px #428bca;
+        -moz-transition: 0.6s;
+        -wor: #DDebkit-transition: 0.6s;
+        transition: 0.6s; 
 
 		}		  
 	  	.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
 	    	color: #FFFFFF;
 	  	}
 	  	.navbar-inverse .navbar-nav .open .dropdown-menu{
-	    	background-color: #080808;
+	    	background-color: #285e8e;
+	    	border: none;
 	    	border-bottom-right-radius: 5px;
   			border-bottom-left-radius: 5px;
-
-		 	content: ' ';
-  			 
+		 	  content: ' ';  			 
 	  	}
 	  	.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
 	  	.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
 	    	color: #DDDDDD;
-	    	background-color: transparent;
+        background-color: transparent;
+        
 	  	}
+      .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus {
+        color: #DDDDDD;
+        background-color: transparent;
+        -moz-box-shadow: inset 0px -4px 0px #428bca;
+        -webkit-box-shadow: inset 0px -4px 0px #428bca;
+        box-shadow: inset 0px -4px 0px #428bca;
+        -moz-transition: 0.6s;
+        -webkit-transition: 0.6s;
+        transition: 0.6s; 
+      }
+
+      .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {
+        color: #fff;
+        background-color: transparent;
+        -moz-box-shadow: inset 0px -4px 0px #428bca;
+        -webkit-box-shadow: inset 0px -4px 0px #428bca;
+        box-shadow: inset 0px -4px 0px #428bca;
+        -moz-transition: 0.6s;
+        -webkit-transition: 0.6s;
+        transition: 0.6s;  
+      }
      .form-control,.btn{
       border-radius: 0px;
       
       }
+      .dropdown-menu>li.active{
+        font-style: oblique;
+        background-color: transparent;
+        padding-left: 10px;
+      }
       .dropdown-menu>li.active>a{
         font-style: oblique;
         background-color: transparent;
-        padding-left: 25px;
+       padding-left: 10px;
       }
       .panel{
         border-radius: 0px;
       }
       .modal-content{
         border-radius: 0px; 
+      }
+      .modal-header{
+        border:none;
+      }
+      .goto-top:hover {
+          background-color: #285e8e;
+          
+      }
+      .goto-top {
+          cursor: pointer;
+          position: fixed;
+          bottom: 26px;
+          right: 2px;
+          width: 48px;
+          height: 48px;
+          line-height: 48px;
+          text-align: center;
+          z-index: 1001;
+          border-radius: 48px;
+          font-size: 20px;
+          opacity: 0.8;
+          color: #fff;
+          background: #428bca;
+      }
+      a.remove{
+      	color: red;
+      }
+      a.remove,a.print{
+      	font-size: 16px;
       }
     </style>
 </head>
@@ -128,7 +184,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand">SPPD dan Surat Tugas</a>
+      <span class="navbar-brand"><i class="fa fa-file-text-o"></i> SPPD dan Surat Tugas</span>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -154,21 +210,28 @@
         </li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">        
+      <ul class="nav navbar-nav navbar-right">  
+        <?php 
+           if ($this->session->userdata('isLogin')==false){
+              echo '<li ><a href="'.base_url().'admin/login">&nbsp Login &nbsp<span class="fa fa-user"></span></a></li>';
+           }else{
+        ?>      
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->session->userdata('nama_skpd'); ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->session->userdata('nama_skpd'); ?>&nbsp;&nbsp;<span class="fa fa-user"></span><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="<?php echo base_url(); ?>admin/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;Logout</a></li>
           </ul>
         </li>
+        <?php } ?>
       </ul>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 <div id="boxxx"></div>
 
 	<div class="container panel panel-default" style="">
-        <div class="page-header" style="padding:10px;margin-top:10px;border-bottom:solid 4px black;">
+        <div class="page-header" style="padding:10px;margin-top:10px;border-bottom:solid 4px #4C4C4C;">
         	<div class="row">
         		        	<div class="col-sm-2" style="padding-left:40px;"><img src="<?php echo base_url();?>assets/img/Logo-Pemkab-Malang.png" style="width:120px;height:140px;"></div>
             <div  class="col-sm-10">
@@ -178,8 +241,6 @@
             </div>	
         	</div>            
         </div>
-
-
         <div id="message-box-public"></div>
         <div class="row" style="margin-top:-5px;">
         <hr/ style="border:4px;">     
@@ -194,20 +255,51 @@
         </div>
         
         <div class="form-group">
-        	<div class="col-md-6" style="margin-top:-10px;">      		
-    			<p style="color:#999999">&copy; Copyright 2014</p>		
-      		</div>
-      		<div class="col-md-6" style="margin-top:-10px;">      		
-    			<p style="color:#999999;text-align:right">Created by <a href="https://www.facebook.com/gandhix.pw">Andik Setyawan</a> 
-    			and <a href="https://www.facebook.com/ahmad.isrofi.3">Ahmad Isrofi</a></p>		
-      		</div>	
+        	<div class="col-md-6" style="margin-top:-10px;"> 
+            <style type="text/css">
+            #fb :hover{
+              color: blue;
+            }
+            #yt :hover{
+              color: red;
+            }
+            </style>     		
+      			<p style="color:#999999">Visit us &nbsp 
+              <a id="fb" href="http://www.facebook.com/Pemkabmalang" style="font-size:20px;color:#999999;"><span class="fa fa-facebook-square"></span></a>
+              <a id="yt" href="http://www.youtube.com/user/humaskabmalang" style="font-size:20px;color:#999999;"><span class="fa fa-youtube-square"></span></a>
+            </p>		
+        	</div>
+        		<div class="col-md-6" style="margin-top:-10px;">      		
+      			 <p style="color:#999999;text-align:right">&copy; Copyright 2014  Pemerintah Kabupaten Malang</a></p>		
+      		  </div>	
         </div>
-      	
+      	<div class="goto-top" title="ke atas">
+            <i class="glyphicon glyphicon-plane"></i>
+            <img src="">
+        </div>
       	
     </div>
 <script type="text/javascript">
 $(function() {
   $('.nav a[href~="' + location.href + '"]').parents('li').addClass('active');
+});
+$(function () {
+  $('.goto-top').hide();
+  $(window).scroll(function () {
+  if ($(this).scrollTop() > 100) {
+  $('.goto-top').fadeIn();
+  } else {
+  $('.goto-top').fadeOut();
+  }
+  });
+    
+  // scroll halaman ke 0px (ke body) ketika diklik
+  $('.goto-top').click(function () {
+    $('body,html').animate({
+    scrollTop: 0
+    }, 800);
+    return false;
+  });
 });
 </script>
 </body>
