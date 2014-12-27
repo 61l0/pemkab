@@ -5,16 +5,15 @@
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	                 <h3 class="modal-title" id="modal_konfirmLabel">Warning!</h3>
-
+	                <h5 class="modal-title" id="modal_konfirmLabel">Penting !</h5>
 	            </div>
 	            <div class="modal-body">
 	                 <p>Yakin ingin menghapus pegawai <span id="mod_no_surat"></span> ??<br />Ini akan menghapus surat SPPD dan surat tugas<p/>
 	            </div>
 	            <!--/modal-body-collapse -->
 	            <div class="modal-footer">
-	                <button type="button" class="btn btn-danger" id="btnDeleteSdmYes" href="#">Yes</button>
-	                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+	                <button type="button" class="btn btn-danger" id="btnDeleteSdmYes" href="#">Ya</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
 	            </div>
 	            <!--/modal-footer-collapse -->
 	        </div>

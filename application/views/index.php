@@ -164,9 +164,6 @@
           color: #fff;
           background: #428bca;
       }
-      a.remove{
-      	color: red;
-      }
       a.remove,a.print{
       	font-size: 16px;
       }

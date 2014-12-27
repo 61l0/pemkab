@@ -145,15 +145,13 @@ function terbilang($angka) {
  ?>
 
 <div class="book" id="PrintElem">
-   <div class="page" style="font-size:14px;padding:0px;margin-right: -12px;">
+   <div class="page" style="font-size:14px;padding:0px;margin-right: -28px;">
         <div class="subpage">
-      
-  <table width="100%" border="0" rules="none" style="border-collapse:collapse;margin-right:20px;">
-  <tr>
-    <td width="11">
-    <img id="" align="center" style="padding-left:5px;padding-top:0px" src="<?php echo base_url(); ?>assets/img/Logo-Pemkab-Malang-header.png" width="77" height="90" />    </td>
-    <td colspan="4" align="center">
-    	
+            <table  height="383" border="0" id="table-isi" width="100%" rules="all" style="border-collapse:collapse">
+        <tr>
+        
+        <td height="106" colspan="14" align="center"><img id="" align="left" style="position:absolute;padding-left:10px;" src="<?php echo base_url(); ?>assets/img/Logo-Pemkab-Malang-header.png" width="77" height="90" />
+          <span  style="font-size:22px;">PEMERINTAH KABUPATEN MALANG</span><br/>
           	<?php 
 				$kd_skpd = $this->session->userdata('kode_skpd');
 				//echo $kd_skpd;
@@ -162,83 +160,56 @@ function terbilang($angka) {
 				$filter = $filter[1]; // piece1
 				//echo $filter;
 				//$query="";
-if ($filter > 000 && $filter < 100) {
+				if ($filter > 000 && $filter < 100) {
 				
 			?> 
-            <span  style="font-size:22px;">PEMERINTAH KABUPATEN MALANG</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-            <strong style="font-size:32px;">S E K R E T A R I A T &nbsp; D A E R A H </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/> 
-            <span style="font-size:14px; padding:0px; margin-top:-10px;">Jalan Merdeka Timur No. 3 Malang Telepon ( 0341 ) 326791 - 326793 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/> 
-              <em >Website:http:// www.malangkab.go.id  Email: sekda@malangkab.go.id</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><?php } else{ ?>
-              
+            <strong style="font-size:32px;">S E K R E T A R I A T &nbsp; D A E R A H </strong><br/> 
+            <span style="font-size:14px; padding:0px; margin-top:-10px;">Jalan Merdeka Timur No. 3 Malang Telepon ( 0341 ) 326791 - 326793 <br/> 
+              <em >Website:http:// www.malangkab.go.id  Email: sekda@malangkab.go.id</em></span><?php } else{ ?>
+              <strong style="font-size:32px;">
               
               <?php
                     $nama_skpd1 = strtoupper($nama_skpd);
 					$length = strlen($nama_skpd1);
 					if($length>22){
-						echo ('<span  style="font-size:22px;">PEMERINTAH KABUPATEN MALANG</span><br/><strong style="font-size:32px;">');
 						echo($nama_skpd1.'');
-						echo ('
-							</strong><br/> 
-              <span style="font-size:14px; padding:0px; margin-top:-10px;">'.$alamat_skpd.' Telepon <?php echo $telepon_skpd?></span><br/> 
-              <em >Website :'.$website_skpd.'  Email: '.$email_skpd.'</em>
-			  
-			  <br/>
-            <strong style="font-size:18px;"><u>M A L A N G   65119 </u></span></strong>
-						');
 					}else{
-						$char = str_split($nama_skpd1);
-						echo ('<span  style="font-size:22px;">PEMERINTAH KABUPATEN MALANG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/><strong style="font-size:32px;">');	
+						$char = str_split($nama_skpd1);	
 						foreach($char as $key=>$value){
 							echo ($value."&nbsp;");
 						}
-						echo ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><br/>');
-						echo (' 
-              <span style="font-size:14px; padding:0px; margin-top:-10px;">'.$alamat_skpd.' Telepon <?php echo $telepon_skpd?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/> 
-              <em >Website :'.$website_skpd.'  Email: '.$email_skpd.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</em>
-			  
-			  <br/>
-            <strong style="font-size:18px;"><u>M A L A N G   65119</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong>
-						');
-					}	
+					}
 				?>
+              </strong><br/> 
+            <span style="font-size:14px; padding:0px; margin-top:-10px;"><?php echo $alamat_skpd?> Telepon <?php echo $telepon_skpd?> <br/> 
+              <em >Website:<?php echo $website_skpd?>  Email: <?php echo $email_skpd?></em></span><?php } ?>
               
-			  <?php //} ?>
-              
-                       
-	<?php } ?>    </td>
-    </tr>
-  <tr>
-    <td colspan="5">&nbsp;</td>
-  </tr>
-  <tr>
-    <td colspan="5">&nbsp;</td>
-    </tr>
-  <tr>
-    <td colspan="3">&nbsp;</td>
-    <td width="40">Nomor</td>
-    <td width="">:&nbsp;<?php echo $no_surat; ?></td>
-  </tr>
-  <tr>
-    <td colspan="3">&nbsp;</td>
-    <td >Lembar</td>
-    <td>:&nbsp;</td>
-  </tr>
-
-      
-      
+             <br/>
+            <strong style="font-size:18px;"><u>M A L A N G   65119 </u></strong>          </td>
+      </tr>
            <tr>
-             <td colspan="5">&nbsp;</td>
+             <td colspan="11">&nbsp;</td>
+             <td>&nbsp;</td>
+             <td colspan="2">&nbsp;</td>
            </tr>
            <tr>
-        <td height="39" colspan="5"><div align="center" style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u><strong>SURAT PERINTAH PERJALANAN DINAS</strong></u><br/>
+             <td colspan="11">&nbsp;</td>
+             <td>Nomor</td>
+             <td colspan="2">:&nbsp;&nbsp;<?php echo $no_surat ?></td>
+           </tr>
+           <tr>
+        <td colspan="11"><div align="center"></div></td>
+        <td width="68">Lembar ke</td>
+        <td colspan="2">:&nbsp;&nbsp;</td>
+      </tr>
+           <tr>
+             <td colspan="14">&nbsp;</td>
+           </tr>
+           <tr>
+        <td height="39" colspan="14"><div align="center" style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u><strong>SURAT PERINTAH PERJALANAN DINAS</strong></u><br/>
           <strong>&nbsp;&nbsp;&nbsp;<u>( S P P D )</u></strong><br/></div></td>
       </tr>
-      <tr class="row-line-double">
-             <td colspan="5">&nbsp;</td>
-      </tr>
-	</table>      
-      <table  height="383" border="0" id="table-isi" width="100%" rules="none" style="border-collapse:collapse;margin-right:0px;;margin-top:-20px;">
-           <tr >
+           <tr class="row-line-double">
              <td width="14" rowspan="23" >&nbsp;</td>
              <td >&nbsp;</td>
              <td width="140">&nbsp;</td>
@@ -252,9 +223,7 @@ if ($filter > 000 && $filter < 100) {
              <td width="11" >1.</td>
         <td colspan="3">Pejabat yang memberi perintah</td>
         <td width="11"><div align="center">:</div></td>
-        <td colspan="8"><strong>
-			<?php if ($filter > 000 && $filter < 100) {echo 'SEKRETARIS DAERAH';}else{echo'Kepala '.$this->session->userdata('nama_skpd');} ?>
-        </strong></td>
+        <td colspan="8"><strong>SEKRETARIS DAERAH</strong></td>
         </tr>
       <tr class="row-line">
         <td>2.</td>
@@ -434,10 +403,10 @@ if ($filter > 000 && $filter < 100) {
        
       
       
-      <tr class="row-line row-line-bottom">
+      <tr class="row-line">
         <td>9.</td>
         <td colspan="3">Keterangan</td>
-        <td><div align="center">:</div></td>
+        <td><div align="center"></div></td>
         <td colspan="8"><?php echo($ket); ?></td>
       </tr>
       

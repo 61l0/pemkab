@@ -5,7 +5,7 @@
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	                 <h3 class="modal-title" id="modal_konfirmLabel">Warning!</h3>
+	                 <h5 class="modal-title" id="modal_konfirmLabel">Penting !</h5>
 
 	            </div>
 	            <div class="modal-body">
@@ -13,8 +13,8 @@
 	            </div>
 	            <!--/modal-body-collapse -->
 	            <div class="modal-footer">
-	                <button type="button" class="btn btn-danger" id="btnDeleteYes" href="#">Yes</button>
-	                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+	                <button type="button" class="btn btn-danger" id="btnDeleteYes" href="#">Ya</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
 	            </div>
 	            <!--/modal-footer-collapse -->
 	        </div>

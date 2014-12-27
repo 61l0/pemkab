@@ -401,7 +401,7 @@
                 var id =$("#modal-sdm").data('id');
                 var data =$("#modal-sdm").data('data');
                 $(id).val(row.kodepegawai);
-                $(data).val(row.nama+' | '+row.golongan+' '+row.ruang+' | '+row.jabatan+'<?php echo $this->session->userdata("nama_skpd"); ?>');
+                $(data).val(row.nama+' | '+row.golongan+' '+row.ruang+' | '+row.jabatan+' <?php echo $this->session->userdata("nama_skpd"); ?>');
                 $("#modal-sdm").modal('hide');
                 ///////
                 if (id=="#input-sel-kd_sdm1") {
@@ -411,7 +411,27 @@
 				   	$("#selectPejabatPerintah").empty();
 	                if (par_jabatan!=-1) {
 	                	//alert("kepala"+kode_skpd);
-		                	if (kode_skpd=="421.011"||kode_skpd=="421.012"||kode_skpd=="421.013"||kode_skpd=="421.014") {
+	                	if(kode_skpd>="421.011" && kode_skpd<="421.042"){//menampilkan semua assiten sekda,karena kalo sdm kepala skpd bagian yg tanda tangan bisa semua asisten 
+	                		//alert('iya');
+	                		$.ajax({
+		                			type:"post",
+		                			url:"<?php echo base_url(); ?>sdm/get_ttd/asisten",
+		                			dataType:"json",
+		                			success:function(rs){
+		                				//clear combo jabatan + load
+		                				//alert(rs);
+		                				$('#selectPejabatPerintah').append("<option value='-'>--pilih asisten--</option>");
+		                				$.each(rs, function(i, row){
+						             		$('#selectPejabatPerintah')
+									         .append($("<option></option>")
+									         .attr("value",row.kd_sdm)
+									         .text(row.nama_jabatan+", "+row.nama)); 
+										});	             
+						                
+		                			}
+		                		});
+	                	}
+		                /*	if (kode_skpd=="421.011"||kode_skpd=="421.012"||kode_skpd=="421.013"||kode_skpd=="421.014") {
 		                		//asisten pemerintah
 		                		//alert("pemerinta");
 		                		$.ajax({
@@ -481,34 +501,34 @@
 						                
 		                			}
 		                		});
-		                	}
+		                	}*/
 	                }else{
-			                	alert("else");
-			                	$.ajax({
-		                			type:"post",
-		                			url:"<?php echo base_url(); ?>sdm/get_ttd/kepala/"+kode_skpd,
-		                			dataType:"json",
-		                			success:function(rs){
-		                				//clear combo jabatan + load
-		                				$.each(rs, function(i, row){
-						             		$('#selectPejabatPerintah')
-									         .append($("<option></option>")
-									         .attr("value",row.kd_sdm)
-									         .text(row.nama_jabatan+" "+"<?php echo $this->session->userdata('nama_skpd'); ?>"+", "+row.nama)); 
-										});	             
-						                
-		                			}
-		                		});
-			                }
+			            //alert("else");
+	                	$.ajax({
+                			type:"post",
+                			url:"<?php echo base_url(); ?>sdm/get_ttd/kepala/"+kode_skpd,
+                			dataType:"json",
+                			success:function(rs){
+                				//clear combo jabatan + load
+                				$.each(rs, function(i, row){
+				             		$('#selectPejabatPerintah')
+							         .append($("<option></option>")
+							         .attr("value",row.kd_sdm)
+							         .text(row.nama_jabatan+" "+"<?php echo $this->session->userdata('nama_skpd'); ?>"+", "+row.nama)); 
+								});	             
+				                
+                			}
+                		});
+			        }
 					            
         }
         });
 
 //SIMPAN SURAT BARU
 	$("body").on("click","#btn-simpansuratbaru",function(){
-		alert(kondisi);
+			//alert(kondisi);
         	var nosurat = $("#nosurat1").val()+$("#nosurat2").val()+$("#nosurat3").val(); 
-        	alert(nosurat);
+        	//alert(nosurat);
         	//COBA Get sdm
         	var pegawai = $("#input-sel-kd_sdm1").val();//kodesdm
         	//var jumPengikut=0;

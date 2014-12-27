@@ -284,7 +284,7 @@
 				echo('a.n. Bupati');		
 			}else if(stristr($jabatan_pejabat,'Asisten')){
 				echo('a.n. SEKRETARIS DAERAH');
-			}else if(stristr($jabatan_pejabat,'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
+			}else if(stristr($jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd'),'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
 				echo('a.n. Asisten Pemerintahan');
 			}else if(stristr($jabatan_pejabat,'Kepala Bagian Perekonomian') or stristr($jabatan_pejabat,'Kepala Bagian Administrasi Pembangunan ')or stristr($jabatan_pejabat,'Kepala Bagian Kerjasama ') or stristr($jabatan_pejabat,'Kepala Bagian Pengelola Data Elektronik')){
 				echo('a.n. Asisten Perekonomian dan Pembangunan');

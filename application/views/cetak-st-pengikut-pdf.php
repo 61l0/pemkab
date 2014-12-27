@@ -63,13 +63,17 @@
 <div class="book" id="PrintElem">
 <div class="page" style="font-size:14px padding-bottom:0px; color:#000000;">
         <div class="subpage">
-        <table  height="383" border="0" id="table-isi" width="100%" rules="none" style="font-size:16px">
-              <tr>
-                <td height="106" colspan="13" align="center"><img style="position:absolute;padding-left:20px;" src="<?php echo base_url(); ?>assets/img/Logo-Pemkab-Malang-header.png" alt="kop" width="77" height="90" align="left" id="img" style="" /> <div align="center"><span  style="font-size:22px;">PEMERINTAH KABUPATEN MALANG</span><br/>
-                  <?php 
-				//$kd_skpd = $_SESSION['kode_skpd'];
+<table style="" width="100%" border="0" rules="none" style="border-collapse:collapse">
+  <tr>
+    <td width="10">&nbsp;</td>
+    <td width="11">
+    <img id="" align="center" style="padding-top:5px;padding-left:10px" src="<?php echo base_url(); ?>assets/img/Logo-Pemkab-Malang-header.png" width="77" height="90" />    </td>
+    <td colspan="4" align="center">
+    	
+          	<?php 
+				$kd_skpd = $this->session->userdata('kode_skpd');
 				//echo $kd_skpd;
-				$filter = explode(".", $kode_skpd);
+				$filter = explode(".", $kd_skpd);
 				//echo $filter;
 				$filter = $filter[1]; // piece1
 				//echo $filter;
@@ -77,44 +81,56 @@
 				if ($filter > 000 && $filter < 100) {
 				
 			?> 
-                          <strong style="font-size:32px;">S E K R E T A R I A T &nbsp; D A E R A H </strong><br/> 
-                          <span style="font-size:14px; padding:0px; margin-top:-10px;">Jalan Merdeka Timur No. 3 Malang Telepon ( 0341 ) 326791 - 326793 <br/> 
-                                  <em >Website:http:// www.malangkab.go.id  Email: sekda@malangkab.go.id</em></span>
-                  <?php } else{ ?>
-                        <strong style="font-size:32px;">
-                          
-                        <?php
-              $nama_skpd1 = strtoupper($nama_skpd);
+            
+            <span  style="font-size:22px;">PEMERINTAH KABUPATEN MALANG</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+            <strong style="font-size:32px;">S E K R E T A R I A T &nbsp; D A E R A H </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/> 
+            <span style="font-size:14px; padding:0px; margin-top:-10px;">Jalan Merdeka Timur No. 3 Malang Telepon ( 0341 ) 326791 - 326793 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/> 
+              <em >Website:http:// www.malangkab.go.id  Email: sekda@malangkab.go.id</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><?php } else{ ?>
+              
+              <?php
+                    $nama_skpd1 = strtoupper($nama_skpd);
 					$length = strlen($nama_skpd1);
 					if($length>22){
-						echo($nama_skpd1);
+						echo ('<span  style="font-size:22px;">PEMERINTAH KABUPATEN MALANG</span><br/><strong style="font-size:32px;">');
+						echo($nama_skpd1.'');
+						echo ('
+							</strong><br/> 
+              <span style="font-size:14px; padding:0px; margin-top:-10px;">'.$alamat_skpd.' Telepon <?php echo $telepon_skpd?></span><br/> 
+              <em >Website :'.$website_skpd.'  Email: '.$email_skpd.'</em>
+			  
+			  <br/>
+            <strong style="font-size:18px;"><u>M A L A N G   65119 </u></span></strong>
+						');
 					}else{
 						$char = str_split($nama_skpd1);
-						
+						echo ('<span  style="font-size:22px;">PEMERINTAH KABUPATEN MALANG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/><strong style="font-size:32px;">');	
 						foreach($char as $key=>$value){
 							echo ($value."&nbsp;");
 						}
-					}
-				?>
-                              </strong><br/> 
-                          <span style="font-size:14px; padding:0px; margin-top:-10px;"><?php echo $alamat_skpd?> Telepon <?php echo $telepon_skpd?> <br/> 
-                                  <em >Website:<?php echo $website_skpd?>  Email: <?php echo $email_skpd?></em></span>
-                  <?php } ?>
-                  
-                  
-                  <br/>
-                  <strong style="font-size:18px;">&nbsp;&nbsp;&nbsp;<u>M A L A N G   65119</u></strong></div></td>
-              </tr>
+						echo ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><br/>');
+						echo (' 
+              <span style="font-size:14px; padding:0px; margin-top:-10px;">'.$alamat_skpd.' Telepon <?php echo $telepon_skpd?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br/> 
+              <em >Website :'.$website_skpd.'  Email: '.$email_skpd.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</em>
+			  
+			  <br/>
+            <strong style="font-size:18px;"><u>M A L A N G   65119</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong>
+						');
+					}	
+				?>          
+	<?php } ?>    </td>
+    </tr>
+</table>      
+     <table  height="383" border="0" id="table-isi" width="100%" rules="none" style="font-size:16px;margin-right:30px;">
            <tr>
              <td height="39" colspan="13">&nbsp;</td>
            </tr>
            <tr>
              <td width="17">&nbsp;&nbsp;&nbsp;</td>
-             <td colspan="12"><div align="center"><u><strong>SURAT TUGAS</strong></u></div></td>
+             <td colspan="12"><div align="center">&nbsp;&nbsp;&nbsp;&nbsp;<strong><u>SURAT TUGAS</u></strong></div></td>
              </tr>
            <tr>
              <td>&nbsp;</td>
-             <td colspan="12"><div align="center">Nomor : <?php echo $no_surat?></div></td>
+             <td colspan="12"><div align="center">&nbsp;&nbsp;&nbsp;&nbsp;Nomor : <?php echo $no_surat?></div></td>
              </tr>
            
       
@@ -423,7 +439,7 @@
              <td width="11">&nbsp;</td>
              <td colspan="2">Di keluarkan di</td>
              <td width="13"><div align="center">:</div></td>
-             <td width="0">Malang</td>
+             <td colspan="2"width="0">Malang</td>
            </tr>
            <tr>
              <td>&nbsp;</td>
@@ -436,7 +452,7 @@
              <td>&nbsp;</td>
              <td colspan="2">Pada tanggal</td>
              <td><div align="center">:</div></td>
-             <td><span id="tgl_surat_title2"><?php echo $tgl_surat; ?></span></td>
+             <td colspan="2"><span id="tgl_surat_title2"><?php echo $tgl_surat; ?></span></td>
            </tr>
            <tr>
              <td>&nbsp;</td>

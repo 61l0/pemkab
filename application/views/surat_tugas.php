@@ -133,10 +133,10 @@
             });
 		function operateFormatter(value, row, index) {
         return [
-            '<a class="btn print" href="javascript:void(0)" title="preview">',
+            '<a class="btn btn-primary print" style="width:60px;" href="javascript:void(0)" title="preview">',
                 '<i class="glyphicon glyphicon-print"></i>',
             '&nbsp;</a>',
-            '<a class="btn remove ml10" href="javascript:void(0)" title="Remove">',
+            '<a class="btn btn-danger remove" style="width:60px;" href="javascript:void(0)" title="Remove">',
                 '<i class="glyphicon glyphicon-trash"></i>',
             '</a>'
         ].join('');
@@ -144,7 +144,7 @@
    	$(function () {
 	    $('#btnDeleteYes').click(function () {	    	
 	        var no_surat = $('#modal_konfirm').data('no_surat');
-	        alert("deleteing"+no_surat);
+	        //alert("deleteing"+no_surat);
 	        $.ajax({
             	type:"POST",
             	data:{"par_no_surat":no_surat},
