@@ -142,6 +142,7 @@
         ].join('');
     }
    	$(function () {
+        $("#loader-btnsimpansuratbaru").hide();
 	    $('#btnDeleteYes').click(function () {	    	
 	        var no_surat = $('#modal_konfirm').data('no_surat');
 	        //alert("deleteing"+no_surat);
@@ -150,15 +151,25 @@
             	data:{"par_no_surat":no_surat},
             	url:"<?php echo base_url(); ?>surat/delete",
             	beforeSend:function(){
-
+                    $("#loader-btnsimpansuratbaru").show();
+                     $('#btnDeleteYes').attr("disabled",true);
             	},
             	success:function(rs){
+                    $("#loader-btnsimpansuratbaru").hide();
             		$('#modal_konfirm').modal('hide');
             		$('#table-surat-tugas').bootstrapTable('refresh');
             		$('#box').html(rs);            		
             	},
             	error:function(){
-            		alert('GAGAL');
+            		//alert('GAGAL');
+                    $("#loader-btnsimpansuratbaru").hide();
+                    new PNotify({
+                    title: '',
+                    text: '<i class=\"fa fa-frown-o\"></i> Gagal menghapuus surat.',
+                    type: 'error',
+                    shadow: false,
+                    icon: false
+                    });
             	}
             });
 	    });

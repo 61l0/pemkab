@@ -178,6 +178,7 @@
         ].join('');
     }
    	$(function () {
+        $("#loader-btnsimpansuratbaru").hide();
 	    $('#btnDeleteYes').click(function () {	    	
 	        var no_surat = $('#modal_konfirm').data('no_surat');
 	        //alert("deleteing"+no_surat);
@@ -186,20 +187,27 @@
             	data:{"par_no_surat":no_surat},
             	url:"<?php echo base_url(); ?>surat/delete",
             	beforeSend:function(){
-
+                    $("#btnDeleteYes").prop("disabled",true); 
+                    $("#loader-btnsimpansuratbaru").show();
             	},
             	success:function(rs){
+                    $("#btnDeleteYes").prop("disabled",false);
+                    $("#loader-btnsimpansuratbaru").hide();
             		$('#modal_konfirm').modal('hide');
             		$('#table-sppd').bootstrapTable('refresh');
             		$('#box').html(rs);
             		
             	},
             	error:function(){
-            		$('#modal_konfirm').modal('hide');
+            		//$('#modal_konfirm').modal('hide');
+                    $("#btnDeleteYes").prop("disabled",false);
+                    $("#loader-btnsimpansuratbaru").hide();
             		new PNotify({
 				    title: '',
-				    text: 'Gagal menghapuus surat.',
-				    type: 'error'
+				    text: '<i class=\"fa fa-frown-o\"></i> Gagal menghapuus surat.',
+				    type: 'error',
+                    shadow: false,
+                    icon: false
 					});
             	}
             });

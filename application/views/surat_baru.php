@@ -136,8 +136,8 @@
 	    	<div class="col-sm-8">
 	    		<input name="inputPejabatPerintah"  type="text" class="form-control" id="inputPejabatPerintah" placeholder="" readonly="" value="<?php
 	    			$kode_skpd = $this->session->userdata('kode_skpd');
-	    			if ($kode_skpd>'421.010'&&$kode_skpd<'421.050') {
-	    				echo "SEKRETARIS DAERAH";
+	    			if ($kode_skpd>='421.010'&&$kode_skpd<='421.060') {
+	    				echo 'SEKRETARIS DAERAH';
 	    			}else{
 	    				echo 'Kepala '.$this->session->userdata('nama_skpd');
 	    			}
@@ -407,31 +407,95 @@
                 if (id=="#input-sel-kd_sdm1") {
 				    var jabatan = row.jabatan;
 				    	jabatan = jabatan.trim();
-				    	par_jabatan = jabatan.search("Kepala");
+				    	
 				   	$("#selectPejabatPerintah").empty();
-	                if (par_jabatan!=-1) {
+	                
 	                	//alert("kepala"+kode_skpd);
 	                	if(kode_skpd>="421.011" && kode_skpd<="421.042"){//menampilkan semua assiten sekda,karena kalo sdm kepala skpd bagian yg tanda tangan bisa semua asisten 
 	                		//alert('iya');
-	                		$.ajax({
+	                		par_jabatan = jabatan.search("Kepala");
+	                		if (par_jabatan!=-1) {
+		                		$.ajax({
+			                			type:"post",
+			                			url:"<?php echo base_url(); ?>sdm/get_ttd/asisten",
+			                			dataType:"json",
+			                			success:function(rs){
+			                				//clear combo jabatan + load
+			                				//alert(rs);
+			                				$('#selectPejabatPerintah').append("<option value='-'>--pilih asisten--</option>");
+			                				$.each(rs, function(i, row){
+							             		$('#selectPejabatPerintah')
+										         .append($("<option></option>")
+										         .attr("value",row.kd_sdm)
+										         .text(row.nama_jabatan+", "+row.nama)); 
+											});	             
+							                
+			                			}
+			                		});
+	                		}else{
+			            //alert("else");
+			            		$("#inputPejabatPerintah").val("<?php echo 'Kepala '.$this->session->userdata('nama_skpd'); ?>");
+			                	$.ajax({
 		                			type:"post",
-		                			url:"<?php echo base_url(); ?>sdm/get_ttd/asisten",
+		                			url:"<?php echo base_url(); ?>sdm/get_ttd/kepala/"+kode_skpd,
 		                			dataType:"json",
 		                			success:function(rs){
 		                				//clear combo jabatan + load
-		                				//alert(rs);
-		                				$('#selectPejabatPerintah').append("<option value='-'>--pilih asisten--</option>");
 		                				$.each(rs, function(i, row){
 						             		$('#selectPejabatPerintah')
 									         .append($("<option></option>")
 									         .attr("value",row.kd_sdm)
-									         .text(row.nama_jabatan+", "+row.nama)); 
+									         .text(row.nama_jabatan+" "+"<?php echo $this->session->userdata('nama_skpd'); ?>"+", "+row.nama)); 
 										});	             
 						                
 		                			}
 		                		});
-	                	}
-		                /*	if (kode_skpd=="421.011"||kode_skpd=="421.012"||kode_skpd=="421.013"||kode_skpd=="421.014") {
+			        		}
+			        }else if (kode_skpd='421.060') {
+			        	//alert('hahaskere');
+			        	par_jabatan = jabatan.search("Sekretaris");
+			        	if (par_jabatan!=-1) {//jika jabatan sekretaris
+			        		$.ajax({
+		            			type:"post",
+		            			url:"<?php echo base_url(); ?>sdm/get_ttd/bupati/",
+		            			dataType:"json",
+		            			success:function(rs){
+		            				//clear combo jabatan + load
+		            				$.each(rs, function(i, row){
+					             		$('#selectPejabatPerintah')
+								         .append($("<option></option>")
+								         .attr("value",row.kd_sdm)
+								         .text(row.nama_jabatan+", "+row.nama)); 
+									});	             
+					                
+		            			}
+			                });
+			        	}else{
+			        		$.ajax({
+		            			type:"post",
+		            			url:"<?php echo base_url(); ?>sdm/get_ttd/Sekretaris/"+kode_skpd,
+		            			dataType:"json",
+		            			success:function(rs){
+		            				//clear combo jabatan + load
+		            				$.each(rs, function(i, row){
+					             		$('#selectPejabatPerintah')
+								         .append($("<option></option>")
+								         .attr("value",row.kd_sdm)
+								         .text(row.nama_jabatan+" "+"<?php echo $this->session->userdata('nama_skpd'); ?>"+", "+row.nama)); 
+									});	             
+					                
+		            			}
+			                });
+
+			        	}
+			        	
+			        }
+			    
+					            
+        }
+
+
+                /*	backupan if (kode_skpd=="421.011"||kode_skpd=="421.012"||kode_skpd=="421.013"||kode_skpd=="421.014") {
 		                		//asisten pemerintah
 		                		//alert("pemerinta");
 		                		$.ajax({
@@ -502,26 +566,6 @@
 		                			}
 		                		});
 		                	}*/
-	                }else{
-			            //alert("else");
-	                	$.ajax({
-                			type:"post",
-                			url:"<?php echo base_url(); ?>sdm/get_ttd/kepala/"+kode_skpd,
-                			dataType:"json",
-                			success:function(rs){
-                				//clear combo jabatan + load
-                				$.each(rs, function(i, row){
-				             		$('#selectPejabatPerintah')
-							         .append($("<option></option>")
-							         .attr("value",row.kd_sdm)
-							         .text(row.nama_jabatan+" "+"<?php echo $this->session->userdata('nama_skpd'); ?>"+", "+row.nama)); 
-								});	             
-				                
-                			}
-                		});
-			        }
-					            
-        }
         });
 
 //SIMPAN SURAT BARU
@@ -613,9 +657,11 @@
 		             	},
 		             beforeSend: function(rs){
 		             	$("#loader-btnsimpansuratbaru").show();
+		             	$("#btn-simpansuratbaru").prop("disabled",true); 
 
 		             },
 		             success:function(rs){
+		             	$("#btn-simpansuratbaru").prop("disabled",false); 
 		                $('#modal_view_surat').modal({
                                 backdrop: 'static',
                                 keyboard: false
@@ -627,11 +673,14 @@
 		             },
 		             error: function(rs){
 		             	//alert("GAGAL");
+		             	$("#btn-simpansuratbaru").prop("disabled",false); 
 		             	$("#loader-btnsimpansuratbaru").hide();
 		             	new PNotify({
 						    title: '',
-						    text: 'Gagal membuat surat.',
-						    type: 'error'
+						    text: '<i class=\"fa fa-frown-o\"></i> Gagal membuat surat.',
+						    type: 'error',
+						    icon: false,
+						    shadow: false
 						});
 						$("#loader-surat1").hide();
 		             }
@@ -642,8 +691,10 @@
 	    		$("#loader-btnsimpansuratbaru").hide();
 	    		new PNotify({
 		            title: 'Error',
-		            text: '<strong>MAAF!</strong>&nbsp&nbsp Data gagal tersimpan.'+err,
-		            type: 'error'
+		            text: '<i class=\"fa fa-frown-o\"></i> <strong>MAAF!</strong>&nbsp&nbsp Data gagal tersimpan.'+err,
+		            type: 'error',
+		            icon: false,
+				    shadow: false
 	    		});
 	    	}
 	    });

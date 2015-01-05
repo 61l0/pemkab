@@ -45,7 +45,7 @@
                     </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-default modal-close1">Close</button>
-                      <button type="button" class="btn btn-primary" id="btn-simpan-jabatan"><span id="loader-btnaddjabatan"><img width="20px" height="20px" src="img/ajax-loading.gif"/>&nbsp&nbsp&nbsp</span>Simpan</button>
+                      <button type="button" class="btn btn-primary" id="btn-simpan-jabatan"><span id="loader-btnaddjabatan"><img width="20px" height="20px" src="<?php echo base_url(); ?>assets/img/ajax-loading.gif"/>&nbsp&nbsp&nbsp</span>Simpan</button>
                   </div>
                 </div>
               </div>
@@ -182,4 +182,72 @@
            // $('#konten').load('hal-sdm.php');
           });
       }); 
+      $('body').on("click","#btn-simpan-jabatan",function(){
+          alert('f');
+          var jab = $("#input-jabatan").val();
+          $.ajax({      
+            url:"<?php echo base_url(); ?>sdm/insert_jabatan",
+            type:"POST",//jenis menghandle tipe pegawai kontrak atau pns
+            data:{'par_jabatan':jab},
+            chace:false,
+            beforeSend: function(rs){
+              $("#loader-btnaddjabatan").show();
+              $("#btn-simpan-jabatan").addClass("disabled");
+            },
+            success: function(rs){
+               $("#loader-btnaddjabatan").hide();
+              if(rs==1){
+                new PNotify({
+                  title: '',
+                  text: 'Berhasil menyimpan Jabatan baru.',
+                  type: 'success',
+                  shadow: false,
+                  icon: false
+                });
+                select_jabatan1.clearOptions();
+                select_jabatan1.load(function(callback) {
+                    xhr && xhr.abort();
+                    xhr = $.ajax({
+                     url:"<?php echo base_url(); ?>sdm/get_jabatan",
+                    // url:"localhost/pkl4/jsonjabatan.php",
+                      //data:{'par_input':'getJabatan'},
+                      //:"POST",
+                      dataType:"json",
+                      success: function(results) {
+                            //alert(results);
+                          callback(results);
+                          //alert(kode_jabatan);
+                          //select_jabatan1.setValue(kode_jabatan);      
+                    },
+                      error: function(rs) {
+                          //alert(rs);
+                          callback();
+                      }
+                    });
+                });
+                //$('#table-sdm').bootstrapTable('refresh');
+                //$('#form-tambah-sdm').trigger("reset");
+                //document.getElementById("form-tambah-sdm").reset();
+              }
+              //$("#loader-btnsdm").hide();
+              $("#btn-simpan-jabatan").removeClass("disabled");
+
+              //$('#konten').load('hal-sdm.php');
+            },
+            error: function(){
+              //manggil pnotify aja
+              $("#loader-btnaddjabatan").hide();
+
+              $("#btn-simpan-jabatan").removeClass("disabled");
+              new PNotify({
+              title: '',
+              text: 'Operasi gagal.',
+              type: 'error',
+              shadow: false,
+                  icon: false
+          });
+            }
+           // $('#konten').load('hal-sdm.php');
+          });
+      });
 </script>

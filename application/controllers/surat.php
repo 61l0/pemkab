@@ -112,21 +112,26 @@ class Surat extends CI_Controller {
 		if(!$data){
 			echo "<script>new PNotify({
 				    title: '',
-				    text: 'Gagal menghapuus surat.',
-				    type: 'error'
+				    text: '<i class=\"fa fa-frown-o\"></i> Gagal menghapuus surat.',
+				    type: 'error',
+				    shadow: false
 					});</script>";
 		}else{
 			if ($data>=1) {
-			echo "<script>new PNotify({
-			    title: '',
-			    text: 'Berhasil menghapus surat.',
-			    type: 'success'
-				});</script>";
+				echo "<script>new PNotify({
+				    title: '',
+				    text: '<i class=\"fa fa-check-circle-o\"></i> Berhasil menghapus surat.',
+				    type: 'success',
+				    shadow: false,
+				    icon: false
+					});</script>";
 			}else{
 				echo "<script>new PNotify({
 				    title: '',
-				    text: 'Gagal menghapuus surat.',
-				    type: 'error'
+				    text: '<i class=\"fa fa-frown-o\"></i> Gagal menghapuus surat.',
+				    type: 'error',
+				    shadow: false,
+				    icon: false
 					});</script>";
 			}
 		};
@@ -365,12 +370,13 @@ class Surat extends CI_Controller {
 				    type: 'success'
 					});</script>";
 		}*/
-	
 		if($data==true){
 			echo "<script>new PNotify({
 				    title: '',
-				    text: 'Berhasil membuat surat silahkan cek di daftar surat.',
-				    type: 'success'
+				    text: '<i class=\"fa fa-check-circle-o\"></i> Berhasil membuat surat .',
+				    type: 'success',
+				    shadow: false,
+				    icon: false
 					});</script>";
 			
 			echo "
@@ -381,56 +387,5 @@ class Surat extends CI_Controller {
 				</div>
 		  ";
 		}
-	}
-
-
-	public function test(){
-
-	/*ob_end_clean();
-	$this->load->library('mpdf');
-	$mpdf=new mPDF('utf-8', 'F4');
-	ob_start();
-	$mpdf->WriteHTML(utf8_encode('<P>HELLO</P>FFFFFFFFFFFFFFFF DFBSJHG AJHFVGA <table rules="all"><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr></table>'));
-	$mpdf->Output("SS.pdf" ,'I');
-	exit;*/
-	$html='
-	<table width="auto" rules="all">
-	<tr>
-	<td width="100px">11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	</tr>
-	<tr>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	</tr>
-	<tr>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	</tr>
-	<tr>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	<td>11</td>
-	</tr>
-	</table>
-
-	';
-	$this->load->helper('mediatutorialpdf');
-	generate_pdf($html,"name");
 	}
 }

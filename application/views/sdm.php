@@ -180,11 +180,11 @@
             });
 		function operateFormatter(value, row, index) {
         return [
-            '<a class="edit ml10" href="javascript:void(0)" title="Edit">&nbsp;',
-                '<i class="glyphicon glyphicon-edit"></i>',
+            '<a class="btn btn-primary edit" style="font-size:12px;padding-top:3px;padding-bottom:3px;" href="javascript:void(0)" title="Edit">&nbsp;',
+                '<i class="fa fa-pencil-square-o"></i>',
             '&nbsp;</a>',
-            '<a class="remove ml10" href="javascript:void(0)" title="Remove">',
-                '<i class="glyphicon glyphicon-remove"></i>',
+            '<a class="btn btn-danger remove" style="font-size:12px;padding-top:3px;padding-bottom:3px;" href="javascript:void(0)" title="Remove">',
+                '<i class="glyphicon glyphicon-trash"></i>',
             '</a>'
         ].join('');
     }
@@ -232,7 +232,8 @@
                         new PNotify({
                           title: '',
                           text: 'Berhasil menghapus data pegawai.',
-                          type: 'success'
+                          type: 'success',
+                          shadow: false
                         });
                         $('#table-sdm').bootstrapTable('refresh');   
                     }
@@ -242,7 +243,8 @@
                     new PNotify({
                           title: '',
                           text: 'Gagal menghapus data pegawai.',
-                          type: 'error'
+                          type: 'error',
+                          shadow: false
                     });
                 }
             });

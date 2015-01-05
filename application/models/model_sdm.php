@@ -61,4 +61,14 @@ class Model_sdm extends CI_Model {
 			return 0;
 		}
 	}
+	
+	public function insert_jabatan($data)
+	{
+		$query=$this->db->insert('tbl_jabatan',$data);
+		if ($query) {
+			return 1;
+		}else{
+			return 0;
+		}
+	}
 }

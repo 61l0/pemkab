@@ -126,7 +126,7 @@ function terbilang($angka) {
   		
   	}
 	.style2 {font-weight: bold}
-</style>
+  </style>
 <?php
  
  // $temp_no_surat = $no_surat;
@@ -381,19 +381,30 @@ function terbilang($angka) {
              <td>&nbsp;</td>
              <td colspan="7"><div align="center"><strong>
              <?php   	
-			if(stristr($jabatan_pejabat,'Sekretaris')){
-				echo('a.n. Bupati');		
-			}else if(stristr($jabatan_pejabat,'Asisten')){
-				echo('a.n. SEKRETARIS DAERAH');
-			}else if(stristr($jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd'),'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
-				echo('a.n. Asisten Pemerintahan');
-			}else if(stristr($jabatan_pejabat,'Kepala Bagian Perekonomian') or stristr($jabatan_pejabat,'Kepala Bagian Administrasi Pembangunan ')or stristr($jabatan_pejabat,'Kepala Bagian Kerjasama ') or stristr($jabatan_pejabat,'Kepala Bagian Pengelola Data Elektronik')){
-				echo('a.n. Asisten Perekonomian dan Pembangunan');
-			}else if(stristr($jabatan_pejabat,'Kepala Bagian Umum dan Protokol') or stristr($jabatan_pejabat,'Kepala Bagian Tata Usaha ')or stristr($jabatan_pejabat,'Kepala Hubungan Masyarakat') or stristr($jabatan_pejabat,'Kepala Bagian Organisasi')){
-				echo('a.n. Asisten Administrasi');
-			}else if(stristr($jabatan_pejabat,'Kepala Bagian Kesejahteraan Rakyat') or stristr($jabatan_pejabat,'Kepala Bagian Bina Mental dan Kerohanian')){
-				echo('a.n. Kesejahteraan Rakyat');
+			if($kd_skpd>="421.011" && $kd_skpd<="421.060"){
+			//echo $jabatan_pejabat.$kd_skpd;
+				if(stristr($jabatan_pejabat,'Sekretaris')){
+					echo('a.n. Bupati');		
+				}else if(stristr($jabatan_pejabat,'Asisten')){
+					echo('a.n. SEKRETARIS DAERAH');
+				}else if(stristr($jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd'),'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
+					echo('a.n. Asisten Pemerintahan');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Perekonomian') or stristr($jabatan_pejabat,'Kepala Bagian Administrasi Pembangunan ')or stristr($jabatan_pejabat,'Kepala Bagian Kerjasama ') or stristr($jabatan_pejabat,'Kepala Bagian Pengelola Data Elektronik')){
+					echo('a.n. Asisten Perekonomian dan Pembangunan');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Umum dan Protokol') or stristr($jabatan_pejabat,'Kepala Bagian Tata Usaha ')or stristr($jabatan_pejabat,'Kepala Hubungan Masyarakat') or stristr($jabatan_pejabat,'Kepala Bagian Organisasi')){
+					echo('a.n. Asisten Administrasi');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Kesejahteraan Rakyat') or stristr($jabatan_pejabat,'Kepala Bagian Bina Mental dan Kerohanian')){
+					echo('a.n. Kesejahteraan Rakyat');
+				}
+			}else{
+				//echo $jabatan_pejabat;
+				$jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd');
+				if(stristr($jabatan_pejabat,'Kepala')){
+					echo('a.n. Bupati');		
+				}
 			}
+			
+			
 			
 		?>
              </strong></div></td>
@@ -407,7 +418,8 @@ function terbilang($angka) {
              <td>&nbsp;</td>
              <td colspan="7"><div align="center"><strong>
 			 	<?php
-					
+					echo $jabatan_pejabat;
+					/*
 					if($kd_skpd>="421.011" && $kd_skpd<="421.042"){
 						//jika jabatan pejabat asisten cetak tanpa nama skpd soalnya gk ada skpd
 						if (stristr($jabatan_pejabat,'Asisten')){
@@ -415,7 +427,7 @@ function terbilang($angka) {
 						}else{
 							echo $jabatan_pejabat.' '.$this->session->userdata('nama_skpd');
 						}
-					}
+					}*/
 					 
 				?>
              </strong></div></td>
@@ -607,7 +619,20 @@ if ($filter > 000 && $filter < 100) {
              <td width="11" >1.</td>
         <td colspan="3">Pejabat yang memberi perintah</td>
         <td width="11"><div align="center">:</div></td>
-        <td colspan="8"><strong><?php if ($filter > 000 && $filter < 100) {echo 'SEKRETARIS DAERAH';}else{echo'Kepala '.$this->session->userdata('nama_skpd');} ?></strong></td>
+        <td colspan="8"><strong>
+          <?php 
+				if ($filter > 000 && $filter < 100) {
+					if(stristr($jabatan_pejabat,'Kepala')){
+						
+						echo'Kepala '.$this->session->userdata('nama_skpd');
+					}else{
+						echo 'SEKRETARIS DAERAH';
+					}
+						
+				}else{
+					echo'Kepala '.$this->session->userdata('nama_skpd');
+				} ?>
+        </strong></td>
         </tr>
       <tr class="row-line">
         <td>2.</td>
@@ -734,18 +759,27 @@ if ($filter > 000 && $filter < 100) {
         <td colspan="9">&nbsp;</td>
         <td colspan="5"><div align="center"><strong>
         <?php 
-			if(stristr($jabatan_pejabat,'Sekretaris')){
-				echo('a.n. Bupati');		
-			}else if(stristr($jabatan_pejabat,'Asisten')){
-				echo('a.n. SEKRETARIS DAERAH');
-			}else if(stristr($jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd'),'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
-				echo('a.n. Asisten Pemerintahan');
-			}else if(stristr($jabatan_pejabat,'Kepala Bagian Perekonomian') or stristr($jabatan_pejabat,'Kepala Bagian Administrasi Pembangunan ')or stristr($jabatan_pejabat,'Kepala Bagian Kerjasama ') or stristr($jabatan_pejabat,'Kepala Bagian Pengelola Data Elektronik')){
-				echo('a.n. Asisten Perekonomian dan Pembangunan');
-			}else if(stristr($jabatan_pejabat,'Kepala Bagian Umum dan Protokol') or stristr($jabatan_pejabat,'Kepala Bagian Tata Usaha ')or stristr($jabatan_pejabat,'Kepala Hubungan Masyarakat') or stristr($jabatan_pejabat,'Kepala Bagian Organisasi')){
-				echo('a.n. Asisten Administrasi');
-			}else if(stristr($jabatan_pejabat,'Kepala Bagian Kesejahteraan Rakyat') or stristr($jabatan_pejabat,'Kepala Bagian Bina Mental dan Kerohanian')){
-				echo('a.n. Kesejahteraan Rakyat');
+			if($kd_skpd>="421.011" && $kd_skpd<="421.060"){
+			//echo $jabatan_pejabat.$kd_skpd;
+				if(stristr($jabatan_pejabat,'Sekretaris')){
+					echo('a.n. Bupati');		
+				}else if(stristr($jabatan_pejabat,'Asisten')){
+					echo('a.n. SEKRETARIS DAERAH');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
+					echo('a.n. Asisten Pemerintahan');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Perekonomian') or stristr($jabatan_pejabat,'Kepala Bagian Administrasi Pembangunan ')or stristr($jabatan_pejabat,'Kepala Bagian Kerjasama ') or stristr($jabatan_pejabat,'Kepala Bagian Pengelola Data Elektronik')){
+					echo('a.n. Asisten Perekonomian dan Pembangunan');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Umum dan Protokol') or stristr($jabatan_pejabat,'Kepala Bagian Tata Usaha ')or stristr($jabatan_pejabat,'Kepala Hubungan Masyarakat') or stristr($jabatan_pejabat,'Kepala Bagian Organisasi')){
+					echo('a.n. Asisten Administrasi');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Kesejahteraan Rakyat') or stristr($jabatan_pejabat,'Kepala Bagian Bina Mental dan Kerohanian')){
+					echo('a.n. Kesejahteraan Rakyat');
+				}
+			}else{
+				//echo $jabatan_pejabat;
+				//$jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd');
+				if(stristr($jabatan_pejabat,'Kepala')){
+					echo('a.n. Bupati');		
+				}
 			}
 			
 		?>
@@ -806,9 +840,61 @@ if ($filter > 000 && $filter < 100) {
   <tr class="row-line">
     <td><div align="center"><?php echo $dari?></div></td>
     <td><div align="center"><?php echo $tgl_berangkat ?></div></td>
-    <td><p align="center" class="style2"style="font-size:10px;">a.n. SEKRETARIS DAERAH</p>    </td>
+    <td><p align="center" class="style2"style="font-size:10px;"><span class="style2" style="font-size:10px;">
+      <?php 
+			if($kd_skpd>="421.011" && $kd_skpd<="421.060"){
+			//echo $jabatan_pejabat.$kd_skpd;
+				if(stristr($jabatan_pejabat,'Sekretaris')){
+					echo('a.n. Bupati');		
+				}else if(stristr($jabatan_pejabat,'Asisten')){
+					echo('a.n. SEKRETARIS DAERAH');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
+					echo('a.n. Asisten Pemerintahan');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Perekonomian') or stristr($jabatan_pejabat,'Kepala Bagian Administrasi Pembangunan ')or stristr($jabatan_pejabat,'Kepala Bagian Kerjasama ') or stristr($jabatan_pejabat,'Kepala Bagian Pengelola Data Elektronik')){
+					echo('a.n. Asisten Perekonomian dan Pembangunan');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Umum dan Protokol') or stristr($jabatan_pejabat,'Kepala Bagian Tata Usaha ')or stristr($jabatan_pejabat,'Kepala Hubungan Masyarakat') or stristr($jabatan_pejabat,'Kepala Bagian Organisasi')){
+					echo('a.n. Asisten Administrasi');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Kesejahteraan Rakyat') or stristr($jabatan_pejabat,'Kepala Bagian Bina Mental dan Kerohanian')){
+					echo('a.n. Kesejahteraan Rakyat');
+				}
+			}else{
+				//echo $jabatan_pejabat;
+				//$jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd');
+				if(stristr($jabatan_pejabat,'Kepala')){
+					echo('a.n. Bupati');		
+				}
+			}
+			
+		?>
+    </span></p>    </td>
     <td><div align="center"><?php echo $tgl_kembali ?></div></td>
-    <td><p align="center" class="style2"style="font-size:10px;">a.n. SEKRETARIS DAERAH</p></td>
+    <td><p align="center" class="style2"style="font-size:10px;"><span class="style2" style="font-size:10px;">
+      <?php 
+			if($kd_skpd>="421.011" && $kd_skpd<="421.060"){
+			//echo $jabatan_pejabat.$kd_skpd;
+				if(stristr($jabatan_pejabat,'Sekretaris')){
+					echo('a.n. Bupati');		
+				}else if(stristr($jabatan_pejabat,'Asisten')){
+					echo('a.n. SEKRETARIS DAERAH');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
+					echo('a.n. Asisten Pemerintahan');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Perekonomian') or stristr($jabatan_pejabat,'Kepala Bagian Administrasi Pembangunan ')or stristr($jabatan_pejabat,'Kepala Bagian Kerjasama ') or stristr($jabatan_pejabat,'Kepala Bagian Pengelola Data Elektronik')){
+					echo('a.n. Asisten Perekonomian dan Pembangunan');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Umum dan Protokol') or stristr($jabatan_pejabat,'Kepala Bagian Tata Usaha ')or stristr($jabatan_pejabat,'Kepala Hubungan Masyarakat') or stristr($jabatan_pejabat,'Kepala Bagian Organisasi')){
+					echo('a.n. Asisten Administrasi');
+				}else if(stristr($jabatan_pejabat,'Kepala Bagian Kesejahteraan Rakyat') or stristr($jabatan_pejabat,'Kepala Bagian Bina Mental dan Kerohanian')){
+					echo('a.n. Kesejahteraan Rakyat');
+				}
+			}else{
+				//echo $jabatan_pejabat;
+				//$jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd');
+				if(stristr($jabatan_pejabat,'Kepala')){
+					echo('a.n. Bupati');		
+				}
+			}
+			
+		?>
+    </span></p></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -923,6 +1009,111 @@ if ($filter > 000 && $filter < 100) {
             <td><span class="style2"></span></td>
             <td>&nbsp;</td>
             <td><span class="style2"></span></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
           </tr>
           <tr>
             <td>&nbsp;</td>
@@ -1061,9 +1252,9 @@ if ($filter > 000 && $filter < 100) {
           <td><div align="center"></div></td>
         </tr>
         <tr>
-          <td><div align="center">Pejabat Pelaksana Teknis Kegiatan (PPTK)</div></td>
+          <td><div align="center"><strong>Pejabat Pelaksana Teknis Kegiatan (PPTK)</strong></div></td>
           <td>&nbsp;</td>
-          <td><div align="center">Bendahara Pengeluaran</div></td>
+          <td><div align="center"><strong>Bendahara Pengeluaran</strong></div></td>
         </tr>
         <tr>
           <td><div align="center"></div></td>
@@ -1081,19 +1272,19 @@ if ($filter > 000 && $filter < 100) {
           <td><div align="center"></div></td>
         </tr>
         <tr>
-          <td><div align="center">LINDEN SURYAWAN, ST.,M.Eng</div></td>
+          <td><div align="center"><strong>LINDEN SURYAWAN, ST.,M.Eng</strong></div></td>
           <td>&nbsp;</td>
-          <td><div align="center">TRIAS WAHYUNINGASTUTI, S.kom</div></td>
+          <td><div align="center"><strong>TRIAS WAHYUNINGASTUTI, S.kom</strong></div></td>
         </tr>
         <tr>
-          <td><div align="center">Penata Muda TK. 1</div></td>
+          <td><div align="center"><strong>Penata Muda TK. 1</strong></div></td>
           <td>&nbsp;</td>
-          <td><div align="center">Penata Muda</div></td>
+          <td><div align="center"><strong>Penata Muda</strong></div></td>
         </tr>
         <tr>
-          <td><div align="center">NIP.197901012006041045</div></td>
+          <td><div align="center"><strong>NIP.197901012006041045</strong></div></td>
           <td>&nbsp;</td>
-          <td><div align="center">NIP.123 1321231 1232131</div></td>
+          <td><div align="center"><strong>NIP.123 1321231 1232131</strong></div></td>
         </tr>
       </table>
       <p>&nbsp;</p>

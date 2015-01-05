@@ -13,7 +13,7 @@
 	            </div>
 	            <!--/modal-body-collapse -->
 	            <div class="modal-footer">
-	                <button type="button" class="btn btn-danger" id="btnDeleteYes" href="#">Ya</button>
+	                <button type="button" class="btn btn-danger" id="btnDeleteYes" href="#"><span id="loader-btnsimpansuratbaru"><img width="17px" height="17px" src="<?php echo base_url(); ?>assets/img/ajax-loading.gif"/>&nbsp&nbsp&nbsp</span> Ya</button>
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
 	            </div>
 	            <!--/modal-footer-collapse -->

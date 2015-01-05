@@ -44,7 +44,7 @@
                     </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-default modal-close1">Close</button>
-                      <button type="button" class="btn btn-primary" id="btn-edit-simpan-jabatan"><span id="loader-btnaddjabatan"><img width="20px" height="20px" src="img/ajax-loading.gif"/>&nbsp&nbsp&nbsp</span>Simpan</button>
+                      <button type="button" class="btn btn-primary" id="btn-edit-simpan-jabatan"><span id="loader-btneditaddjabatan"><img width="20px" height="20px" src="<?php echo base_url(); ?>assets/img/ajax-loading.gif"/>&nbsp&nbsp&nbsp</span>Simpan</button>
                   </div>
                 </div>
               </div>
@@ -72,7 +72,7 @@
                         <div class="col-sm-4" style="padding-left:0px;">
                           <input class="form-control" value="<?php echo $this->session->userdata('nama_skpd'); ?>" title="<?php echo $this->session->userdata('nama_skpd'); ?>" style="border-left:none;" readonly/>
                         </div>
-                        <div class="col-sm-1"><a class="btn btn-default" id="btn-tambahd-jabatan"><span class="glyphicon glyphicon-plus-sign" title="tambah jabatan"></span></a></div>  
+                        <div class="col-sm-1"><a class="btn btn-default" id="btn-tambah-jabatan"><span class="glyphicon glyphicon-plus-sign" title="tambah jabatan"></span></a></div>  
                   </div>
                   <div class="form-group">
                     <label for="pilih-edit-pangkat-gol" class="col-sm-3 control-label">Pangkat Golongan</label>
@@ -129,7 +129,7 @@
 </div>
 <script type="text/javascript">
   $("#loader-btnupdatesdm").hide();
-  $("#loader-btnaddjabatan").hide();
+  $("#loader-btneditaddjabatan").hide();
 
   $("body").on("click","#btn-update-sdm",function(){
   	alert("klik");
@@ -176,4 +176,77 @@
            // $('#konten').load('hal-sdm.php');
           });
       }); 
+
+
+      $('body').on("click","#btn-edit-simpan-jabatan",function(){
+        alert("CLICK");
+        //$('body').on("click","#btn-simpan-jabatan",function(){
+          alert('f');
+          var jab = $("#edit-jabatan").val();
+          $.ajax({      
+            url:"<?php echo base_url(); ?>sdm/insert_jabatan",
+            type:"POST",//jenis menghandle tipe pegawai kontrak atau pns
+            data:{'par_jabatan':jab},
+            chace:false,
+            beforeSend: function(rs){
+              $("#loader-btneditaddjabatan").show();
+              $("#btn-edit-simpan-jabatan").addClass("disabled");
+            },
+            success: function(rs){
+              $("#loader-btneditaddjabatan").hide();
+              if(rs==1){
+                new PNotify({
+                  title: '',
+                  text: 'Berhasil menyimpan Jabatan baru.',
+                  type: 'success',
+                  shadow: false,
+                  icon: false
+                });
+                select_jabatan1.clearOptions();
+                select_jabatan1.load(function(callback) {
+                    xhr && xhr.abort();
+                    xhr = $.ajax({
+                     url:"<?php echo base_url(); ?>sdm/get_jabatan",
+                    // url:"localhost/pkl4/jsonjabatan.php",
+                      //data:{'par_input':'getJabatan'},
+                      //:"POST",
+                      dataType:"json",
+                      success: function(results) {
+                            //alert(results);
+                          callback(results);
+                          //alert(kode_jabatan);
+                          //select_jabatan1.setValue(kode_jabatan);      
+                    },
+                      error: function(rs) {
+                          //alert(rs);
+                          callback();
+                      }
+                    });
+                });
+                //$('#table-sdm').bootstrapTable('refresh');
+                //$('#form-tambah-sdm').trigger("reset");
+                //document.getElementById("form-tambah-sdm").reset();
+              }
+              //$("#loader-btnsdm").hide();
+              $("#btn-edit-simpan-jabatan").removeClass("disabled");
+
+              //$('#konten').load('hal-sdm.php');
+            },
+            error: function(){
+              //manggil pnotify aja
+              $("#loader-btneditaddjabatan").hide();
+
+              $("#btn-edit-simpan-jabatan").removeClass("disabled");
+              new PNotify({
+              title: '',
+              text: 'Operasi gagal.',
+              type: 'error',
+              shadow: false,
+                  icon: false
+          });
+            }
+           // $('#konten').load('hal-sdm.php');
+          });
+    
+      });
 </script>

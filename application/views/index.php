@@ -230,11 +230,14 @@
 	<div class="container panel panel-default" style="">
         <div class="page-header" style="padding:10px;margin-top:10px;border-bottom:solid 4px #4C4C4C;">
         	<div class="row">
-        		        	<div class="col-sm-2" style="padding-left:40px;"><img src="<?php echo base_url();?>assets/img/Logo-Pemkab-Malang.png" style="width:120px;height:140px;"></div>
-            <div  class="col-sm-10">
+        		<div class="col-sm-2" style="padding-left:40px;"><img src="<?php echo base_url();?>assets/img/Logo-Pemkab-Malang.png" style="width:120px;height:140px;"></div>
+            <div  class="col-sm-8">
             	<h1 style="font-weight:bold; margin-top:5px;">PEMERINTAH KABUPATEN MALANG</h1>
 	            <h3><?php echo $this->session->userdata('nama_skpd'); ?></h3>
 	            <H4>SPPD dan Surat Tugas</H4>	
+            </div>
+            <div  class="col-sm-2">
+              <img src="<?php echo base_url();?>assets/img/logo-right.jpg" style="width:120px;height:140px;">  
             </div>	
         	</div>            
         </div>

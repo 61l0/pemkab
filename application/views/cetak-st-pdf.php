@@ -297,19 +297,28 @@
              <td>&nbsp;</td>
              <td colspan="7"><div align="center"><strong>
              <?php   	
-			if(stristr($jabatan_pejabat,'Sekretaris')){
-				echo('a.n. Bupati');		
-			}else if(stristr($jabatan_pejabat,'Asisten')){
-				echo('a.n. SEKRETARIS DAERAH');
-			}else if(stristr($jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd'),'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
-				echo('a.n. Asisten Pemerintahan');
-			}else if(stristr($jabatan_pejabat,'Kepala Bagian Perekonomian') or stristr($jabatan_pejabat,'Kepala Bagian Administrasi Pembangunan ')or stristr($jabatan_pejabat,'Kepala Bagian Kerjasama ') or stristr($jabatan_pejabat,'Kepala Bagian Pengelola Data Elektronik')){
-				echo('a.n. Asisten Perekonomian dan Pembangunan');
-			}else if(stristr($jabatan_pejabat,'Kepala Bagian Umum dan Protokol') or stristr($jabatan_pejabat,'Kepala Bagian Tata Usaha ')or stristr($jabatan_pejabat,'Kepala Hubungan Masyarakat') or stristr($jabatan_pejabat,'Kepala Bagian Organisasi')){
-				echo('a.n. Asisten Administrasi');
-			}else if(stristr($jabatan_pejabat,'Kepala Bagian Kesejahteraan Rakyat') or stristr($jabatan_pejabat,'Kepala Bagian Bina Mental dan Kerohanian')){
-				echo('a.n. Kesejahteraan Rakyat');
-			}
+				if($kd_skpd>="421.011" && $kd_skpd<="421.060"){
+				//echo $jabatan_pejabat.$kd_skpd;
+					if(stristr($jabatan_pejabat,'Sekretaris')){
+						echo('a.n. Bupati');		
+					}else if(stristr($jabatan_pejabat,'Asisten')){
+						echo('a.n. SEKRETARIS DAERAH');
+					}else if(stristr($jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd'),'Kepala Bagian Tata Pemerintahan') or stristr($jabatan_pejabat,'Kepala Bagian Hukum ')or stristr($jabatan_pejabat,'Kepala Bagian Pertanahan')){
+						echo('a.n. Asisten Pemerintahan');
+					}else if(stristr($jabatan_pejabat,'Kepala Bagian Perekonomian') or stristr($jabatan_pejabat,'Kepala Bagian Administrasi Pembangunan ')or stristr($jabatan_pejabat,'Kepala Bagian Kerjasama ') or stristr($jabatan_pejabat,'Kepala Bagian Pengelola Data Elektronik')){
+						echo('a.n. Asisten Perekonomian dan Pembangunan');
+					}else if(stristr($jabatan_pejabat,'Kepala Bagian Umum dan Protokol') or stristr($jabatan_pejabat,'Kepala Bagian Tata Usaha ')or stristr($jabatan_pejabat,'Kepala Hubungan Masyarakat') or stristr($jabatan_pejabat,'Kepala Bagian Organisasi')){
+						echo('a.n. Asisten Administrasi');
+					}else if(stristr($jabatan_pejabat,'Kepala Bagian Kesejahteraan Rakyat') or stristr($jabatan_pejabat,'Kepala Bagian Bina Mental dan Kerohanian')){
+						echo('a.n. Kesejahteraan Rakyat');
+					}
+				}else{
+					//echo $jabatan_pejabat;
+					$jabatan_pejabat = $jabatan_pejabat.' '.$this->session->userdata('nama_skpd');
+					if(stristr($jabatan_pejabat,'Kepala')){
+						echo('a.n. Bupati');		
+					}
+				}
 			
 		?>
              </strong></div></td>
@@ -323,15 +332,15 @@
              <td>&nbsp;</td>
              <td colspan="7"><div align="center"><strong>
 			 	<?php
-					
-					if($kd_skpd>="421.011" && $kd_skpd<="421.042"){
+					echo $jabatan_pejabat;
+					/*if($kd_skpd>="421.011" && $kd_skpd<="421.042"){
 						//jika jabatan pejabat asisten cetak tanpa nama skpd soalnya gk ada skpd
 						if (stristr($jabatan_pejabat,'Asisten')){
 							echo $jabatan_pejabat;
 						}else{
 							echo $jabatan_pejabat.' '.$this->session->userdata('nama_skpd');
 						}
-					}
+					}*/
 					 
 				?>
              </strong></div></td>

@@ -63,7 +63,6 @@ class Sdm extends CI_Controller {
 		if ($kode_skpd!="") {
 			$kode_skpd=" kode_skpd='".$kode_skpd."' and";
 		}
-
 		$data = $this->model_sdm->get_sdm("where ".$kode_skpd." nama_jabatan like '%".$jabatan."%'");
 		   //print_r($data);
 		    foreach ($data as $key) {
@@ -85,17 +84,20 @@ class Sdm extends CI_Controller {
 				$data = $this->model_sdm->get_sdm("where kode_skpd='$kode_skpd'");		
 				echo json_encode($data);
 			}	
-		}elseif ($filter="kd_sdm") {
+		}else if ($filter="kd_sdm") {
 			$kd_sdm = $data;
 			$data = $this->model_sdm->get_sdm(" where kd_sdm='$kd_sdm'");
 			echo json_encode($data);
 		}
 	}
+	
 	public function get_jabatan()
 	{
-		$data = $this->model_sdm->get_jabatan(" where nama_jabatan NOT LIKE '%asisten%'");
+		//$data = $this->model_sdm->get_jabatan(" where nama_jabatan NOT LIKE '%asisten%'");
+		$data = $this->model_sdm->get_jabatan(" ");
 		echo json_encode($data);
 	}
+	
 	public function baru()
 	{
 		//echo print_r($_POST);
@@ -118,9 +120,11 @@ class Sdm extends CI_Controller {
 				'kd_pg' => $_POST['par_kdpg'],
 				'kode_skpd'=>$this->session->userdata('kode_skpd'),					
 		);
+
 		$respon=$this->model_sdm->insert($data_insert);
 		echo $respon;		
 	}
+	
 	public function update($value='')
 	{
 		//POST 
@@ -134,9 +138,17 @@ class Sdm extends CI_Controller {
 		$respon=$this->model_sdm->update($data_update,$value);
 		echo $respon;		
 	}
+	
 	public function delete($kd_sdm='')
 	{		
 		$respon=$this->model_sdm->delete(array('kd_sdm' => $kd_sdm));
 		echo $respon;
+	}
+	public function insert_jabatan($value='')
+	{
+		$jab = $_POST['par_jabatan'];
+		$respon=$this->model_sdm->insert_jabatan(array('nama_jabatan' => $jab));
+		echo $respon;
+
 	}
 }
