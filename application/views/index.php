@@ -2,12 +2,6 @@
 
 <html>
 <head>
-     <?php 
-     //	include(base_url()."assets/dateID.php");
-     	//session_start();
-     	
-     	
-     ?>
 	<title>SPPD & Surat Tugas || Pemkab Malang</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
@@ -36,8 +30,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap-table.min.css" />
     <script src="<?php echo base_url();?>assets/js/bootstrap-table-export.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap-table-id-ID.min.js"></script>
-    <script src="<?php echo base_url();?>assets/js/print-element.js"></script>
-    <script src="<?php echo base_url();?>assets/js/jspdf.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/bootstrapValidator.min.js"></script>
+    
 
     <style>
 		.ui-autocomplete-loading { background: white url('<?php echo base_url(); ?>assets/img/auto-complete.gif') right center no-repeat;}

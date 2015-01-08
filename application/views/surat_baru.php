@@ -77,7 +77,7 @@
 		      	<input align="right" type="text" class="form-control" id="nosurat1" value="094/" placeholder="" style="border-top-right-radius:0px;border-bottom-right-radius:0px;"readonly>
 		    </div>
 		    <div class="col-sm-1" style="margin-left:-30px;">
-		      	<input type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" id="nosurat2" placeholder="" style="border-top-right-radius:0px;border-bottom-right-radius:0px;border-left:none;border-top-left-radius:0px;border-bottom-left-radius:0px;">
+		      	<input type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" id="nosurat2" name="nosurat2" placeholder="" style="border-top-right-radius:0px;border-bottom-right-radius:0px;border-left:none;border-top-left-radius:0px;border-bottom-left-radius:0px;">
 		    </div>
 		    <div class="col-sm-2" style="margin-left:-30px;">
 		      	<input type="text" class="form-control" id="nosurat3" value=<?php echo "/".$this->session->userdata('kode_skpd')."/".date('Y'); ?> placeholder="" style="border-left:none;border-top-left-radius:0px;border-bottom-left-radius:0px;"readonly>
@@ -195,23 +195,28 @@
 		</div>	
 	  	<div class="form-group">
 			<label class="col-sm-3 control-label" for="">Perhitungan biaya perjalanan</label> 
-			<div class="col-sm-4">
-				<input class="form-control" type="text" id="inputAtasBeban" name="inputAtasBeban" placeholder="Atas beban">
+			<p class="col-sm-2" for="">Atas Beban</p> 
+			<div class="col-sm-6">
+				<input class="form-control" value="-" type="text" id="inputAtasBeban" name="inputAtasBeban" placeholder="Atas beban">
 			</div>
-			<div class="col-sm-4">
-				<input class="form-control " type="text" id="inputPasalAnggaran" name="inputPasalAnggaran" placeholder="Pasal anggaran">
+		</div>
+		<div class="form-group">
+			<span class="col-sm-3" for=""></span> 
+			<p class="col-sm-2" for="">Pasal Anggaran</p> 
+			<div class="col-sm-6">
+				<input class="form-control " value="-" type="text" id="inputPasalAnggaran" name="inputPasalAnggaran" placeholder="Pasal anggaran">
 			</div>
 		</div>
 		<div class="form-group">
 		    <label  class="col-sm-3 control-label">Keterangan </label>
 		    <div class="col-sm-8">
-		      	<input type="text" class="form-control" id="inputKet" placeholder="">
+		      	<input type="text" class="form-control" id="inputKet" value="-" placeholder="">
 		    </div>
 	  	</div>
 	  	<div class="form-group">
 		    <label  class="col-sm-3 control-label">Uang Saku per Pegawai </label>
 		    <div class="col-sm-4">
-		      	<input type="number" class="form-control" id="uang-saku" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onchange="$('#uang-review').val(formatCurrency($(this).val()));" onkeyup="$('#uang-review').val(formatCurrency($(this).val()));" placeholder="">
+		      	<input type="number" class="form-control" id="uang-saku" name="uang_saku" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onchange="$('#uang-review').val(formatCurrency($(this).val()));" onkeyup="$('#uang-review').val(formatCurrency($(this).val()));" placeholder="">
 		    </div>
 		    <div class="col-sm-3" style="margin-left:-30px;">
 		    	<input id="uang-review" style="color:green;" class="form-control" value="Rp.0,00" readonly="" />		    	
@@ -594,7 +599,7 @@
         	//alert("pegawai :"+pegawai+"||pengikut :"+pengikut[0]+pengikut[1]+pengikut[2]+"dd"); 
         	//end get sdm
 
-        	try{
+        	
         		$("#loader-btnsimpansuratbaru").show();       			        
 
         		
@@ -615,6 +620,7 @@
 		        	//
 		        }
 		        //var pejabatPerintah = $("#inputPejabatPerintah").val();
+		        try{
 		        var pejabatPerintah = $("#selectPejabatPerintah").find('option:selected').val();
 		        var dariKota =$("#inputDariKota").val();
 		        var keKota =$("#inputKeKota").val();
@@ -641,8 +647,8 @@
 		        var status = trimNIP+""+today;
 		        var uang_saku = $("#uang-saku").val();
 		        
-
-		        $.ajax({
+		        if (nosurat!="" && pegawai!="" && pejabatPerintah!="" && dariKota!="" && keKota!="" && angkutan!="" && tanggalBerangkat!="" && tanggalKembali!="" && maksudPerjalanan!=""&&uang_saku!="") {
+		        	$.ajax({
 		             url:'<?php echo base_url(); ?>surat/insert',
 		             type:'POST',
 		             data:{'par_nosurat':nosurat,'par_pegawai':pegawai,
@@ -686,12 +692,23 @@
 		             }
 		            
 		            });
+
+				}else{
+					new PNotify({
+		            title: 'Error',
+		            text: '<i class=\"fa fa-frown-o\"></i> <strong>MAAF!</strong>&nbsp&nbsp Lengkapi inputan dengan benar.'+err,
+		            type: 'error',
+		            icon: false,
+				    shadow: false
+	    			});
+				}
+		        
 	    	}catch(err){
 	    		///alert('aa');
 	    		$("#loader-btnsimpansuratbaru").hide();
 	    		new PNotify({
 		            title: 'Error',
-		            text: '<i class=\"fa fa-frown-o\"></i> <strong>MAAF!</strong>&nbsp&nbsp Data gagal tersimpan.'+err,
+		            text: '<i class=\"fa fa-frown-o\"></i> <strong>MAAF!</strong>&nbsp&nbsp Data gagal tersimpan.',
 		            type: 'error',
 		            icon: false,
 				    shadow: false
@@ -699,5 +716,141 @@
 	    	}
 	    });
 		//END SIMPAN SURAT BARU
+		
+		$('#form-surat-baru').bootstrapValidator({
+        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+        live: 'enabled',
+        submitButtons: 'button[type="button"]',
+        
+        fields: {
+        	optionsRadios: {
+                message: 'Silahkan pilih',
+                validators: {
+                    notEmpty: {
+                       
+                    },
+                   
+                    regexp: {
+                       // regexp: /^[a-zA]+$/,
+                     //   message: 'The username can only consist of alphabetical '
+                    }
+                    
+                }
+            },
+            inputdasar: {
+                
+                validators: {
+                    notEmpty: {
+                       
+                    },
+                   
+                    regexp: {
+                       // regexp: /^[a-zA]+$/,
+                     //   message: 'The username can only consist of alphabetical '
+                    }
+                    
+                }
+            },//pejabat
+            inputMaksud: {  
+                validators: {
+                    notEmpty: {
+                       
+                    },
+                   
+                    regexp: {
+                       // regexp: /^[a-zA]+$/,
+                     //   message: 'The username can only consist of alphabetical '
+                    }
+                    
+                }
+            },       	
+            inputKeKota: {
+                
+                validators: {
+                    notEmpty: {
+                       
+                    },
+                   
+                    regexp: {
+                       // regexp: /^[a-zA]+$/,
+                     //   message: 'The username can only consist of alphabetical '
+                    }
+                    
+                }
+            },
+            inputDariKota: {
+                
+                validators: {
+                    notEmpty: {
+                       
+                    },
+                   
+                    regexp: {
+                       // regexp: /^[a-zA]+$/,
+                     //   message: 'The username can only consist of alphabetical '
+                    }
+                    
+                }
+            },
+            inputAngkutan: {
+                
+                validators: {
+                    notEmpty: {
+                       
+                    },
+                   
+                    regexp: {
+                       // regexp: /^[a-zA]+$/,
+                     //   message: 'The username can only consist of alphabetical '
+                    }
+                    
+                }
+            },inputPejabatPerintah: {
+                
+                validators: {
+                    notEmpty: {
+                       
+                    },
+                   
+                    regexp: {
+                       // regexp: /^[a-zA]+$/,
+                     //   message: 'The username can only consist of alphabetical '
+                    }
+                    
+                }
+            },nosurat2: {
+                
+                validators: {
+                    notEmpty: {
+                       
+                    },
+                   
+                    regexp: {
+                       // regexp: /^[a-zA]+$/,
+                     //   message: 'The username can only consist of alphabetical '
+                    }
+                    
+                }
+            },selectPejabatPerintah: {
+                
+                validators: {
+                    notEmpty: {
+                     message: 'The username can only consist of alphabetical'  
+                    }
+                    
+                }
+            },uang_saku: {
+                
+                validators: {
+                    notEmpty: {
+                     message: 'The username can only consist of alphabetical'  
+                    }
+                    
+                }
+            }            
+            
+        }
+        //}
+        });
 
   </script>

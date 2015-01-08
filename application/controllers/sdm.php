@@ -35,7 +35,8 @@ class Sdm extends CI_Controller {
 			    $kondisii=$kondisii." and a.kd_sdm <> '".$j."'";
 			}
 			//echo $kondisii;
-		 }
+		}
+		
 		$kondisii=$kondisii." and a.kode_skpd = '".$this->session->userdata('kode_skpd')."' ";
 		$data = $this->model_sdm->get_filter_sdm($kondisii);
 		if($data!=null){

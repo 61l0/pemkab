@@ -919,7 +919,7 @@ if ($filter > 000 && $filter < 100) {
         <tr>
           <td><div align="center"><strong>NIP.197901012006041045</strong></div></td>
           <td>&nbsp;</td>
-          <td><div align="center"><strong>NIP.123 1321231 1232131</strong></div></td>
+          <td><div align="center"><strong>NIP.198110232010012003</strong></div></td>
         </tr>
       </table>
       <p>&nbsp;</p>
