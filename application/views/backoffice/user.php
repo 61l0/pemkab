@@ -18,6 +18,7 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
+<?php echo $del_confirm_user.$tambah_user.$edit_user; ?>
 <script type="text/javascript">
 window.operateEvents = {
         'click .edit': function (e, value, row, index) {
@@ -67,8 +68,8 @@ window.operateEvents = {
             });
         },
         'click .remove': function (e, value, row, index) {
-            $('#mod_no_surat').html(row.kd_sdm);
-            $('#modal_konfirm_sdm').data('kd_sdm', row.kd_sdm).modal('show');
+            $('#mod').html(row.username);
+            $('#modal_konfirm_user').data('no_user', row.no_user).modal('show');
         }
     };    
 $('#table-user').bootstrapTable({
@@ -90,11 +91,19 @@ $('#table-user').bootstrapTable({
                 showToggle:true,
                 //sidePagination: 'server',
                 onDblClickRow: function (row) {
-                    alert(row.kode_skpd);
+                    alert(row.no_user);
                     //alert('Event: onDblClickRow, data: ' + JSON.stringify(row));
                     window.location("<?php echo base_url(); ?>")
                 },
                 columns: [{
+                    visible:false,
+                    field: 'no_user',
+                    title: 'No',
+                    align: 'left',
+                    valign: 'top',
+                    sortable: true,
+                    class: 'b'
+                },{
                     visible:false,
                     field: 'kode_skpd',
                     title: 'Kode Pegawai',
@@ -145,5 +154,40 @@ $('#table-user').bootstrapTable({
             '</a>'
         ].join('');
     }
+    $(function () {
+        $('#btnDelete').click(function () {          
+        var no_user = $('#modal_konfirm_user').data('no_user');
+           alert("deleteing"+no_user);
+            $.ajax({
+                type:"POST",
+                data:{'par_no_user':no_user},
+                url:"<?php echo base_url(); ?>admin/user/delete/",
+                beforeSend:function(){
+
+                },
+                success:function(rs){
+                    if(rs==1){
+                        $('#modal_konfirm_user').modal('hide');
+                        new PNotify({
+                          title: '',
+                          text: 'Berhasil menghapus data user.',
+                          type: 'success',
+                          shadow: false
+                        });
+                        $('#table-user').bootstrapTable('refresh');   
+                    }
+                    //$('#box').html(rs);                 
+                },
+                error:function(){
+                    new PNotify({
+                          title: '',
+                          text: 'Gagal menghapus data user.',
+                          type: 'error',
+                          shadow: false
+                    });
+                }
+            });
+        });
+    });
 </script>  
 <!-- /CONTENT -->

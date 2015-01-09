@@ -39,8 +39,10 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
     <![endif]-->
-<script src="<?php echo base_url();?>assets/jqueryui/external/jquery/jquery.js"></script>
-
+    
+    <link href="<?php echo base_url();?>assets/css/pnotify.custom.min.css" rel="stylesheet" />
+    <script src="<?php echo base_url();?>assets/jqueryui/external/jquery/jquery.js"></script>
+    
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 
@@ -49,7 +51,7 @@
     <script src="<?php echo base_url();?>assets/js/bootstrap-table.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap-table-export.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap-table-id-ID.min.js"></script>
-
+    <script src="<?php echo base_url();?>assets/js/pnotify.custom.min.js"></script>
     <!-- Morris Charts JavaScript 
     <script src="<?php echo base_url(); ?>assets/js/raphael-min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/morris.min.js"></script>
