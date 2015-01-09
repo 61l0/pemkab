@@ -5,10 +5,10 @@ class Surat extends CI_Controller {
 	{
 	    parent::__construct();
 	    date_default_timezone_set('Asia/Jakarta');     
-	    $session = $this->session->userdata('isLogin');
+	    $session = $this->session->userdata('isUserLogin');
       	if($session == FALSE)
       	{
-        	redirect('admin/login');
+        	redirect('user/login');
       	}
          $this->load->library('pdf');
 		//$this->mpdf->WriteHTML($html);

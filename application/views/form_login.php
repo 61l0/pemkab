@@ -14,12 +14,15 @@
    .input-group-addon{
     background: white;
    } 
-   .form-control,.btn,.input-group-addon{
+   .form-control,.btn,.input-group-addon,.alert{
       border-radius: 0px;
       
       }
+    .alert{
+      padding: 10px;
+    }
     .error{
-      color: red;
+      color: #a94442;
       font-size: 10px;
     }
   </style>
@@ -29,7 +32,7 @@
     <div class="panel panel-default">
     <div class="panel-heading" style="background-color:transparent;">Silahkan login</div>
     <div class="panel-body">
-      <form class="form-horizontal" action="<?php echo base_url();?>admin/login" method="post" name="login">
+      <form class="form-horizontal" action="<?php echo base_url();?>user/login" method="post" name="login">
           <div class="form-group">
             <p style="color:red;font-size:12px;" class="col-sm-12"><?php echo $this->session->flashdata('pesan');?></p>
             <div class="col-sm-12" align="right">

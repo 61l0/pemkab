@@ -203,14 +203,14 @@
 
       <ul class="nav navbar-nav navbar-right">  
         <?php 
-           if ($this->session->userdata('isLogin')==false){
-              echo '<li ><a href="'.base_url().'admin/login">&nbsp Login &nbsp<span class="fa fa-user"></span></a></li>';
+           if ($this->session->userdata('isUserLogin')==false){
+              echo '<li ><a href="'.base_url().'user/login">&nbsp Login &nbsp<span class="fa fa-user"></span></a></li>';
            }else{
         ?>      
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->session->userdata('nama_skpd'); ?>&nbsp;&nbsp;<span class="fa fa-user"></span><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="<?php echo base_url(); ?>admin/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;Logout</a></li>
+            <li><a href="<?php echo base_url(); ?>user/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;Logout</a></li>
           </ul>
         </li>
         <?php } ?>
@@ -261,6 +261,7 @@
       			<p style="color:#999999">Visit us &nbsp 
               <a id="fb" href="http://www.facebook.com/Pemkabmalang" style="font-size:20px;color:#999999;"><span class="fa fa-facebook-square"></span></a>
               <a id="yt" href="http://www.youtube.com/user/humaskabmalang" style="font-size:20px;color:#999999;"><span class="fa fa-youtube-square"></span></a>
+               || Masuk sebagai <a href="<?php echo base_url() ?>admin">admin</a>
             </p>		
         	</div>
         		<div class="col-md-6" style="margin-top:-10px;">      		

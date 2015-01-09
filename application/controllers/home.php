@@ -14,9 +14,9 @@ class Home extends CI_Controller {
   
   public function index()
   {
-    if($this->session->userdata('isLogin') == FALSE)
+    if($this->session->userdata('isUserLogin') == FALSE)
     {
-      redirect('admin/login');
+      redirect('user/login');
     }else
     {
     
@@ -28,7 +28,7 @@ class Home extends CI_Controller {
       
       //echo("=======".$data['user']->nama_admin);
       $this->session->set_userdata('kode_skpd',$data['user']->kode_skpd);
-      $this->session->set_userdata('nama_skpd',$data['user']->nama_admin);
+      $this->session->set_userdata('nama_skpd',$data['user']->nama_skpd);
       //echo $this->session->userdata('kode_skpd');
       
       //load home index :v 

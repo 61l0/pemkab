@@ -5,10 +5,10 @@ class Sdm extends CI_Controller {
 	{
 	    parent::__construct();
 	    $this->load->model('model_sdm');
-	    $session = $this->session->userdata('isLogin');
+	    $session = $this->session->userdata('isUserLogin');
       	if($session == FALSE)
       	{
-        	redirect('admin/login');
+        	redirect('user/login');
       	}
       	date_default_timezone_set('Asia/Jakarta');
 	}
