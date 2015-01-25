@@ -171,7 +171,7 @@ $('#table-skpd').bootstrapTable({
     $(function () {
         $('#btnDelete').click(function () {          
         var kode_skpd = $('#modal_konfirm_skpd').data('kode_skpd');
-           alert("deleteing"+kode_skpd);
+          // alert("deleteing"+kode_skpd);
             $.ajax({
                 type:"POST",
                 data:{'par_kode_skpd':kode_skpd},

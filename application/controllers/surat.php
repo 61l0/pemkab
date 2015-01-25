@@ -388,4 +388,14 @@ class Surat extends CI_Controller {
 		  ";
 		}
 	}
+	public function getcountweek($value='')
+	{
+		$data=$this->model_surat->getcountweek();
+		echo json_encode($data);
+	}
+	public function getcountmonth($value='')
+	{
+		$data=$this->model_surat->getcountmonth();
+		echo json_encode($data);
+	}
 }

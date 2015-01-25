@@ -115,10 +115,7 @@
         -webkit-transition: 0.6s;
         transition: 0.6s;  
       }
-     .form-control,.btn{
-      border-radius: 0px;
-      
-      }
+     
       .dropdown-menu>li.active{
         font-style: oblique;
         background-color: transparent;
@@ -128,6 +125,10 @@
         font-style: oblique;
         background-color: transparent;
        padding-left: 10px;
+      }
+      .form-control,.btn{
+      border-radius: 0px;
+      
       }
       .panel{
         border-radius: 0px;
@@ -210,7 +211,10 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->session->userdata('nama_skpd'); ?>&nbsp;&nbsp;<span class="fa fa-user"></span><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="<?php echo base_url(); ?>user/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;Logout</a></li>
+            <li><a href="<?php echo base_url(); ?>user/profil/<?php echo $this->session->userdata('kode_skpd'); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+            </li>
+            <li class="divider"></li>
+            <li><a href="<?php echo base_url(); ?>logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;Logout</a></li>
           </ul>
         </li>
         <?php } ?>

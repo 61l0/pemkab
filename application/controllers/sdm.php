@@ -94,6 +94,7 @@ class Sdm extends CI_Controller {
 	
 	public function get_jabatan()
 	{
+		
 		//$data = $this->model_sdm->get_jabatan(" where nama_jabatan NOT LIKE '%asisten%'");
 		$data = $this->model_sdm->get_jabatan(" ");
 		echo json_encode($data);

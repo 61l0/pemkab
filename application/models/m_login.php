@@ -8,13 +8,14 @@ class M_login extends CI_Model
   }
   
   
-  public function ambilPengguna($username, $password)
+  public function ambilPengguna($username, $password,$level=0)
   {
     //$sql = mysql_query("SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'");
     $this->db->select('*');
     $this->db->from('tbl_admin');
     $this->db->where('username', $username);
     $this->db->where('password', $password);
+    $this->db->where('level', $level);
     $query = $this->db->get();    
     return $query->num_rows();
   }

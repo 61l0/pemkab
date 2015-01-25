@@ -416,7 +416,7 @@
 				   	$("#selectPejabatPerintah").empty();
 	                
 	                	//alert("kepala"+kode_skpd);
-	                	if(kode_skpd>="421.011" && kode_skpd<="421.042"){//menampilkan semua assiten sekda,karena kalo sdm kepala skpd bagian yg tanda tangan bisa semua asisten 
+	                if(kode_skpd>="421.011" && kode_skpd<="421.042"){//menampilkan semua assiten sekda,karena kalo sdm kepala skpd bagian yg tanda tangan bisa semua asisten 
 	                		//alert('iya');
 	                		par_jabatan = jabatan.search("Kepala");
 	                		if (par_jabatan!=-1) {
@@ -456,7 +456,7 @@
 		                			}
 		                		});
 			        		}
-			        }else if (kode_skpd='421.060') {
+			        }else if (kode_skpd=='421.060') {
 			        	//alert('hahaskere');
 			        	par_jabatan = jabatan.search("Sekretaris");
 			        	if (par_jabatan!=-1) {//jika jabatan sekretaris
@@ -476,6 +476,7 @@
 		            			}
 			                });
 			        	}else{
+			        		alert('hahaskere');
 			        		$.ajax({
 		            			type:"post",
 		            			url:"<?php echo base_url(); ?>sdm/get_ttd/Sekretaris/"+kode_skpd,
@@ -494,6 +495,43 @@
 
 			        	}
 			        	
+			        }else{
+			        	par_jabatan = jabatan.search("Kepala");
+			        	if (par_jabatan!=-1) {//jika jabatan sekretaris
+			        		$.ajax({
+		            			type:"post",
+		            			url:"<?php echo base_url(); ?>sdm/get_ttd/bupati/",
+		            			dataType:"json",
+		            			success:function(rs){
+		            				//clear combo jabatan + load
+		            				$.each(rs, function(i, row){
+					             		$('#selectPejabatPerintah')
+								         .append($("<option></option>")
+								         .attr("value",row.kd_sdm)
+								         .text(row.nama_jabatan+", "+row.nama)); 
+									});	             
+					                
+		            			}
+			                });
+			        	}else{
+			        		//alert('aaa');
+			        		$.ajax({
+		            			type:"post",
+		            			url:"<?php echo base_url(); ?>sdm/get_ttd/kepala/"+kode_skpd,
+		            			dataType:"json",
+		            			success:function(rs){
+		            				//clear combo jabatan + load
+		            				$.each(rs, function(i, row){
+					             		$('#selectPejabatPerintah')
+								         .append($("<option></option>")
+								         .attr("value",row.kd_sdm)
+								         .text(row.nama_jabatan+" "+"<?php echo $this->session->userdata('nama_skpd'); ?>"+", "+row.nama)); 
+									});	             
+					                
+		            			}
+			                });
+
+			        	}
 			        }
 			    
 					            
@@ -720,7 +758,7 @@
 		$('#form-surat-baru').bootstrapValidator({
         // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
         live: 'enabled',
-        submitButtons: 'button[type="button"]',
+        submitButtons: 'button[id="btn-simpansuratbaru"]',
         
         fields: {
         	optionsRadios: {

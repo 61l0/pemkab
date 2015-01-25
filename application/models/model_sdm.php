@@ -19,7 +19,7 @@ class Model_sdm extends CI_Model {
 	}
 
 	public function get_sdm($kondisi=""){
-		$data = $this->db->query("select * from tbl_sdm as a inner join tbl_jabatan as b on a.kd_jabatan = b.kd_jabatan inner join tbl_pangkat_gol as c on a.kd_pg = c.kd_pg ".$kondisi." order by kd_sdm asc");
+		$data = $this->db->query("select * from tbl_sdm as a inner join tbl_jabatan as b on a.kd_jabatan = b.kd_jabatan inner join tbl_pangkat_gol as c on a.kd_pg = c.kd_pg inner join tbl_skpd as d on a.kode_skpd = d.kode_skpd ".$kondisi."");
 		return $data->result_array();
 	}
 	public function get_pangkat($value='')
@@ -70,5 +70,10 @@ class Model_sdm extends CI_Model {
 		}else{
 			return 0;
 		}
+	}
+	public function getcountall($value='')
+	{
+		$data=$this->db->query("SELECT * FROM tbl_sdm");
+		return $data->num_rows();
 	}
 }

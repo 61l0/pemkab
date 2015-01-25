@@ -3,7 +3,7 @@
 class Model_skpd extends CI_Model {
 	public function get_all($value='')
 	{
-		$data =$this->db->query("select * from tbl_skpd");
+		$data =$this->db->query("select * from tbl_skpd where kode_skpd <> '-'");
 		return $data->result_array();
 	}
 	public function delete($kode)
@@ -42,6 +42,11 @@ class Model_skpd extends CI_Model {
 		}else{
 			return 0;
 		}
+	}
+	public function getcountall($value='')
+	{
+		$data=$this->db->query("SELECT * FROM tbl_skpd");
+		return $data->num_rows()-1;
 	}
 }
 ?>

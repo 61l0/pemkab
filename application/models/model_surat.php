@@ -68,5 +68,24 @@ class Model_surat extends CI_Model {
 		}else{
 			return $data=TRUE;
 		} 
-	}	
+	}
+
+	public function getcountweek($value='')
+	{
+		$data=$this->db->query('SELECT YEARWEEK(tanggal_surat) AS tahun_minggu,COUNT(*) AS jumlah_mingguan FROM tbl_sppd GROUP BY YEARWEEK(tanggal_surat)');
+		return $data->result_array();
+	}
+
+	public function getcountmonth($value='')
+	{
+		$data=$this->db->query("SELECT CONCAT(YEAR(tanggal_surat),'-',MONTH(tanggal_surat)) AS tahun_bulan, COUNT(*) AS jumlah_bulanan
+								FROM tbl_sppd GROUP BY YEAR(tanggal_surat),MONTH(tanggal_surat);");
+		return $data->result_array();
+	}
+
+	public function getcountall($value='')
+	{
+		$data=$this->db->query("SELECT * FROM tbl_sppd");
+		return $data->num_rows();
+	}
 }

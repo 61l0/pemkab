@@ -11,7 +11,7 @@
       	<div class="panel panel-default">
           <div class="panel-heading"></div>
           <div class="panel-body">
-            <button type="button" class="btn btn-primary">Tambah Data</button>
+            <button type="button" data-toggle="modal" onclick="load_skpd()" data-target="#modal-tambah-user" class="btn btn-primary">Tambah Data</button>
             <table id="table-user"></table>
           </div> 
         </div>
@@ -20,36 +20,29 @@
 </div>
 <?php echo $del_confirm_user.$tambah_user.$edit_user; ?>
 <script type="text/javascript">
-window.operateEvents = {
-        'click .edit': function (e, value, row, index) {
-            var kode_jabatan;
-            $.ajax({
-                type:"GET",
-                url:"<?php echo base_url(); ?>sdm/get_sdm/kd_sdm/"+row.kd_sdm,
-                dataType:"json",
-                success:function(rs){
-                    $.each(rs, function(i, row){
-                        $("#edit-kdsdm").val(row.kd_sdm);
-                        $("#edit-nip").val(row.nip);
-                        $("#edit-nama").val(row.nama);
-                        $("#pilih-edit-pangkat-gol").val(row.kd_pg);
-                        kode_jabatan = row.kd_jabatan;
-                        //$("#pilih-edit-pangkat-gol").val(row.kd_jabatan);
-                        //edit_select_jabatan.setValue(row.kode_jabatan);
-                        
-                    });
-                }
-            });
-            
-            $('#modal-edit-sdm').modal({
-                backdrop: 'static',
-                keyboard: false
-            });
-            select_jabatan1.clearOptions();
-            select_jabatan1.load(function(callback) {
+      var $select_skpd, select_skpd, xhr;
+      $select_skpd = $('#input-skpduser').selectize({
+          valueField: 'kode_skpd',
+          labelField: 'nama_skpd',
+          searchField: ['nama_skpd'],
+          dataAttr: 'data-data',
+      });
+      select_skpd  = $select_skpd[0].selectize;
+
+      var $select_skpd_update, select_skpd_update, xhr;
+      $select_skpd_update = $('#update-skpduser').selectize({
+          valueField: 'kode_skpd',
+          labelField: 'nama_skpd',
+          searchField: ['nama_skpd'],
+          dataAttr: 'data-data',
+      });
+      select_skpd_update  = $select_skpd_update[0].selectize;
+function load_skpd () {
+  select_skpd.clearOptions();
+            select_skpd.load(function(callback) {
                 xhr && xhr.abort();
                 xhr = $.ajax({
-                 url:"<?php echo base_url(); ?>sdm/get_jabatan",
+                 url:"<?php echo base_url(); ?>admin/skpd/get_all",
                 // url:"localhost/pkl4/jsonjabatan.php",
                   //data:{'par_input':'getJabatan'},
                   //:"POST",
@@ -58,7 +51,56 @@ window.operateEvents = {
                         //alert(results);
                       callback(results);
                       //alert(kode_jabatan);
-                      select_jabatan1.setValue(kode_jabatan);      
+                      //select_skpd.setValue(kode_jabatan);      
+                },
+                  error: function(rs) {
+                      //alert(rs);
+                      callback();
+                  }
+                });
+            });
+}
+window.operateEvents = {
+        'click .edit': function (e, value, row, index) {
+         // alert('KLK');
+            var val_skpd;            
+            $.ajax({
+                type:"POST",
+                url:"<?php echo base_url(); ?>admin/user/get_by_no",
+                data:{'par_nouser':row.no_user},
+                dataType:"json",
+                success:function(rs){
+                    $.each(rs, function(i, row){
+                        $("#update-username").val(row.username);
+                        $("#update-passworduser").val(row.password);
+                        $("#update-nouser").val(row.no);
+                        val_skpd = row.kode_skpd;                        
+                        //$("#pilih-edit-pangkat-gol").val(row.kd_jabatan);
+                        //edit_select_jabatan.setValue(row.kode_jabatan);
+                        
+                    });
+                }
+            });
+            
+            $('#modal-edit-user').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+
+            select_skpd_update.clearOptions();
+            select_skpd_update.load(function(callback) {
+                xhr && xhr.abort();
+                xhr = $.ajax({
+                 url:"<?php echo base_url(); ?>admin/skpd/get_all",
+                // url:"localhost/pkl4/jsonjabatan.php",
+                  //data:{'par_input':'getJabatan'},
+                  //:"POST",
+                  dataType:"json",
+                  success: function(results) {
+                        //alert(results);
+                      callback(results);
+                      //alert(kode_jabatan);
+                      select_skpd_update.setValue(val_skpd);      
                 },
                   error: function(rs) {
                       //alert(rs);
@@ -157,7 +199,7 @@ $('#table-user').bootstrapTable({
     $(function () {
         $('#btnDelete').click(function () {          
         var no_user = $('#modal_konfirm_user').data('no_user');
-           alert("deleteing"+no_user);
+           //alert("deleteing"+no_user);
             $.ajax({
                 type:"POST",
                 data:{'par_no_user':no_user},

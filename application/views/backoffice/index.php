@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Admin root SPPD Pemkab Malang</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -41,8 +41,10 @@
     <![endif]-->
     
     <link href="<?php echo base_url();?>assets/css/pnotify.custom.min.css" rel="stylesheet" />
-    <script src="<?php echo base_url();?>assets/jqueryui/external/jquery/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/selectize.css" />
     
+    <script src="<?php echo base_url();?>assets/jqueryui/external/jquery/jquery.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 
@@ -52,13 +54,31 @@
     <script src="<?php echo base_url();?>assets/js/bootstrap-table-export.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap-table-id-ID.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/pnotify.custom.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
     <!-- Morris Charts JavaScript 
-    <script src="<?php echo base_url(); ?>assets/js/raphael-min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/morris.min.js"></script>
+    
+    
     <script src="<?php echo base_url(); ?>assets/js/morris-data.js"></script>-->
 
     <!-- Custom Theme JavaScript -->
+    <script src="<?php echo base_url(); ?>assets/js/raphael-min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/morris.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/sb-admin-2.js"></script>
+    <style type="text/css">
+        .form-control,.btn{
+      border-radius: 0px;
+      
+      }
+      .panel{
+        border-radius: 0px;
+      }
+      .modal-content{
+        border-radius: 0px; 
+      }
+      .modal-header{
+        border:none;
+      }
+    </style>
 </head>
 
 <body>
@@ -74,7 +94,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SPPD & Surat Tugas Admin</a>
+                <a class="navbar-brand" href="index.html"><i class="fa fa-slack fa-lg"></i> SPPD & Surat Tugas Admin</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -86,12 +106,11 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        
+                        <li><a href="<?php echo base_url(); ?>admin/setting/"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="<?php echo base_url(); ?>admin/logout/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -115,13 +134,12 @@
                                 </button>
                             </span>
                             </div>
-                            <!-- /input-group -->
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>admin"><i class="fa fa-dashboard fa-fw"></i> Home</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="<?php echo base_url(); ?>admin/user">Data User</a>
@@ -129,25 +147,32 @@
                                 <li>
                                     <a href="<?php echo base_url(); ?>admin/skpd">SKPD</a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>admin/sdm">Pegawai</a>
+                                </li>
                             </ul>
-                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-area-chart fa-fw"></i> Transaksi Surat<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo base_url(); ?>admin/userk">Data User</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>admin/skpdkl">SKPD</a>
+                                </li>
+                            </ul>
                         </li>
                         
                     </ul>
                 </div>
-                <!-- /.sidebar-collapse -->
             </div>
-            <!-- /.navbar-static-side -->
         </nav>
-
         <div id="page-wrapper">
         <!-- content -->
             <?php echo $content ?>
             <!-- content -->
-
-        <!-- /#page-wrapper -->
-
-    </div>
+        </div>
     <!-- /#wrapper -->
 
     <!-- jQuery -->

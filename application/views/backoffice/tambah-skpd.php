@@ -62,7 +62,7 @@
 
 
   $("body").on("click","#btn-simpan-skpd",function(){
-    alert('click');
+//    alert('click');
           var kode_skpd = $("#input-kodeskpd").val();
           var nama_skpd = $("#input-namaskpd").val();
           var alamat_skpd = $("#input-alamatskpd").val();
