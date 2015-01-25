@@ -29,7 +29,7 @@ class Sdm extends CI_Controller {
 		if ($kode_skpd!="") {
 			$kode_skpd=" kode_skpd='".$kode_skpd."' and";
 		}
-		$data = $this->model_sdm->get_sdm("where ".$kode_skpd." nama_jabatan like '%".$jabatan."%'");
+		$data = $this->model_sdm->get_sdm_a("where ".$kode_skpd." nama_jabatan like '%".$jabatan."%'");
 		   //print_r($data);
 		    foreach ($data as $key) {
             	$kd_sdm = $key['kd_sdm'];
@@ -78,18 +78,18 @@ class Sdm extends CI_Controller {
 			//jika skpd bawahan sekretariat daerah
 			$kode_skpd=$data;
 			if($kode_skpd>'421.010' && $kode_skpd < '421.050' ){			
-				$data = $this->model_sdm->get_sdm("where kode_skpd='$kode_skpd'");//or nama_jabatan like'%asisten%'		
+				$data = $this->model_sdm->get_sdm_a("where kode_skpd='$kode_skpd'");//or nama_jabatan like'%asisten%'		
 				echo json_encode($data);	
 			}else{
-				$data = $this->model_sdm->get_sdm("where kode_skpd='$kode_skpd'");		
+				$data = $this->model_sdm->get_sdm_a("where kode_skpd='$kode_skpd'");		
 				echo json_encode($data);
 			}	
 		}else if ($filter=="kd_sdm") {
 			$kd_sdm = $data;
-			$data = $this->model_sdm->get_sdm(" where kd_sdm='$kd_sdm'");
+			$data = $this->model_sdm->get_sdm_a(" where kd_sdm='$kd_sdm'");
 			echo json_encode($data);
 		}else if ($filter=="all") {
-			$data = $this->model_sdm->get_sdm('order by d.nama_skpd asc');
+			$data = $this->model_sdm->get_sdm_a('order by d.nama_skpd asc');
 			echo json_encode($data);
 		}
 	}
@@ -130,7 +130,7 @@ class Sdm extends CI_Controller {
 
 	public function get_by_id($value='')
 	{
-		$data=$this->model_sdm->get_sdm(" where kd_sdm='$value'");
+		$data=$this->model_sdm->get_sdm_a(" where kd_sdm='$value'");
 		echo json_encode($data);
 	}
 	

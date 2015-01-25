@@ -77,7 +77,7 @@
 		      	<input align="right" type="text" class="form-control" id="nosurat1" value="094/" placeholder="" style="border-top-right-radius:0px;border-bottom-right-radius:0px;"readonly>
 		    </div>
 		    <div class="col-sm-1" style="margin-left:-30px;">
-		      	<input type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" id="nosurat2" name="nosurat2" placeholder="" style="border-top-right-radius:0px;border-bottom-right-radius:0px;border-left:none;border-top-left-radius:0px;border-bottom-left-radius:0px;">
+		      	<input type="number" min="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" id="nosurat2" name="nosurat2" placeholder="" style="border-top-right-radius:0px;border-bottom-right-radius:0px;border-left:none;border-top-left-radius:0px;border-bottom-left-radius:0px;">
 		    </div>
 		    <div class="col-sm-2" style="margin-left:-30px;">
 		      	<input type="text" class="form-control" id="nosurat3" value=<?php echo "/".$this->session->userdata('kode_skpd')."/".date('Y'); ?> placeholder="" style="border-left:none;border-top-left-radius:0px;border-bottom-left-radius:0px;"readonly>
@@ -434,7 +434,7 @@
 										         .attr("value",row.kd_sdm)
 										         .text(row.nama_jabatan+", "+row.nama)); 
 											});	             
-							                
+							                $("#inputPejabatPerintah").val("SEKRETARIS DAERAH");
 			                			}
 			                		});
 	                		}else{
