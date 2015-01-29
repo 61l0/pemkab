@@ -71,7 +71,7 @@
             });*/
         },
         'click .remove': function (e, value, row, index) {
-            alert(''+row.kode_skpd);
+           // alert(''+row.kode_skpd);
             $('#mod_no_skpd').html(row.kode_skpd+' ('+row.nama_skpd+')');
             $('#modal_konfirm_skpd').data('kode_skpd', row.kode_skpd).modal('show');
         }
@@ -95,7 +95,7 @@ $('#table-skpd').bootstrapTable({
                 showToggle:true,
                 //sidePagination: 'server',
                 onDblClickRow: function (row) {
-                    alert(row.kode_skpd);
+                   // alert(row.kode_skpd);
                     //alert('Event: onDblClickRow, data: ' + JSON.stringify(row));
                     window.location("<?php echo base_url(); ?>")
                 },

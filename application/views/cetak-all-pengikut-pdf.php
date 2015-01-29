@@ -1552,19 +1552,19 @@ if ($filter > 000 && $filter < 100) {
           <td><div align="center"></div></td>
         </tr>
         <tr>
-          <td><div align="center"><strong>LINDEN SURYAWAN, ST.,M.Eng</strong></div></td>
+          <td><div align="center"><strong><?php echo $nama_pptk; ?></strong></div></td>
           <td>&nbsp;</td>
-          <td><div align="center"><strong>TRIAS WAHYUNINGASTUTI, S.kom</strong></div></td>
+          <td><div align="center"><strong><?php echo $nama_bp; ?></strong></div></td>
         </tr>
         <tr>
-          <td><div align="center"><strong>Penata Muda TK. 1</strong></div></td>
+          <td><div align="center"><strong><?php echo $pangkat_pptk; ?></strong></div></td>
           <td>&nbsp;</td>
-          <td><div align="center"><strong>Penata Muda</strong></div></td>
+          <td><div align="center"><strong><?php echo $pangkat_bp; ?></strong></div></td>
         </tr>
         <tr>
-          <td><div align="center"><strong>NIP.197901012006041045</strong></div></td>
+          <td><div align="center"><strong><?php echo $nip_pptk; ?></strong></div></td>
           <td>&nbsp;</td>
-          <td><div align="center"><strong>NIP.198110232010012003</strong></div></td>
+          <td><div align="center"><strong><?php echo $nip_bp; ?></strong></div></td>
         </tr>
       </table>
       <p>&nbsp;</p>

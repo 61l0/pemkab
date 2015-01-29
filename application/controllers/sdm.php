@@ -85,11 +85,20 @@ class Sdm extends CI_Controller {
 				$data = $this->model_sdm->get_sdm("where kode_skpd='$kode_skpd'");		
 				echo json_encode($data);
 			}	
-		}else if ($filter="kd_sdm") {
+		}else if ($filter=="kd_sdm") {
 			$kd_sdm = $data;
 			$data = $this->model_sdm->get_sdm(" where kd_sdm='$kd_sdm'");
 			echo json_encode($data);
 		}
+	}
+
+	public function sel_sdm($kode_skpd)
+	{
+		$data = $this->model_sdm->get_sdm("where kode_skpd='$kode_skpd'");		
+		foreach ($data as $key) {
+			$dataa[]= array('kd_sdm'=>$key['kd_sdm'],'nama_nip'=>$key['nama'].' | '.$key['nip'],);
+		}
+		echo json_encode($dataa);
 	}
 	
 	public function get_jabatan()
@@ -152,5 +161,10 @@ class Sdm extends CI_Controller {
 		$respon=$this->model_sdm->insert_jabatan(array('nama_jabatan' => $jab));
 		echo $respon;
 
+	}
+	public function test($value='')
+	{
+		$data = $this->model_sdm->get_jabatan(" ");
+		print_r($data);
 	}
 }

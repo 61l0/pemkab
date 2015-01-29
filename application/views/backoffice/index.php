@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin root SPPD Pemkab Malang</title>
+    <title>Admin SPPD Pemkab Malang</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -138,11 +138,15 @@
                         <li>
                             <a href="<?php echo base_url(); ?>admin"><i class="fa fa-dashboard fa-fw"></i> Home</a>
                         </li>
+
+                        <li>
+                            <a href="<?php echo base_url(); ?>admin/surat/sppd"><i class="fa fa-file fa-fw"></i> Surat</a>
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?php echo base_url(); ?>admin/user">Data User</a>
+                                    <a href="<?php echo base_url(); ?>admin/user">User</a>
                                 </li>
                                 <li>
                                     <a href="<?php echo base_url(); ?>admin/skpd">SKPD</a>
@@ -153,14 +157,11 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-area-chart fa-fw"></i> Transaksi Surat<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-area-chart fa-fw"></i> Transaksi<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?php echo base_url(); ?>admin/userk">Data User</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url(); ?>admin/skpdkl">SKPD</a>
-                                </li>
+                                    <a href="<?php echo base_url(); ?>admin/surat/transaksi">Surat</a>
+                                </li>                                
                             </ul>
                         </li>
                         

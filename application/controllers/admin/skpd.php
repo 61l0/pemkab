@@ -5,6 +5,10 @@ class Skpd extends CI_Controller
   public function __construct()
   {
     parent::__construct();
+    if($session == FALSE)
+        {
+          redirect('admin/login');
+        }
     $this->load->model('m_login');
     $this->load->model('model_user');
     $this->load->model('model_skpd');
@@ -12,6 +16,7 @@ class Skpd extends CI_Controller
     $this->load->library(array('form_validation','session'));
     $this->load->database();
     $this->load->helper('url');
+
   }
   public function index()
   {

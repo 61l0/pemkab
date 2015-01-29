@@ -179,7 +179,7 @@ $('#table-sdm').bootstrapTable({
                 showToggle:true,
                 //sidePagination: 'server',
                 onDblClickRow: function (row) {
-                    alert(row.no_user);
+                    //alert(row.no_user);
                     //alert('Event: onDblClickRow, data: ' + JSON.stringify(row));
                     window.location("<?php echo base_url(); ?>")
                 },

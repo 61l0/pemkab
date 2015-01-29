@@ -99,7 +99,7 @@
     var jenis;
       if (i_nip.trim()=="") {
         jenis = "KON";
-        kd_pg = 1;
+        i_pangkat = 1;
       }else{
         jenis = "PNS";
       }

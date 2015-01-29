@@ -14,8 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/malangkab/';
-
+$config['base_url']	= 'http://185.27.134.10/sppd/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -26,6 +25,7 @@ $config['base_url']	= 'http://localhost/malangkab/';
 | variable so that it is blank.
 |
 */
+
 $config['index_page'] = '';
 
 /*

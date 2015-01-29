@@ -11,12 +11,13 @@ class Surat extends CI_Controller {
         	redirect('admin/login');
       	}
          $this->load->library('pdf');
+         $this->load->model('model_skpd');
 		//$this->mpdf->WriteHTML($html);
 	}
 
 	public function index()
 	{
-		redirect('admim/surat_tugas');
+		redirect('admin/surat/sppd');
 
 	}
 
@@ -43,8 +44,16 @@ class Surat extends CI_Controller {
 		$modal = array('del_confirm_surat'=>$this->load->view('modal_confirm_del_surat',array(),true) ,
 						'modal_view_surat'=>$this->load->view('modal_surat',array(),true),
 			);
-		$data =array('konten' => $this->load->view('sppd',$modal,true) ,);
-		$this->load->view('index',$data);
+		$data =array('content' => $this->load->view('backoffice/surat',$modal,true) ,);
+		$this->load->view('backoffice/index',$data);
+	}
+
+	public function transaksi($value='')
+	{
+		$title="Grafik transaksi surat tahun ".date('Y');
+		$data =array('content' => $this->load->view('backoffice/transaksi_surat',array('title_content'=>$title),true) ,);
+		$this->load->view('backoffice/index',$data);
+
 	}
 
 	//fungsi get pengikut
@@ -62,13 +71,24 @@ class Surat extends CI_Controller {
 					return $data="";
 				}
 		}
-	public function get_json($tipe,$skpd){
+	public function get_namaSKPD($value='')
+	{
+	    //$kode=$_POST['par_kodeskpd'];
+	    //echo $kode;
+	    $data = $this->model_skpd->get_by_kode($value);
+	    foreach ($data as $key) {
+	    	return $nama_skpd = $key['nama_skpd'];	    	
+	    }
+  	}
+	public function get_json($tipe){
 		if ($tipe=="sppd") {
-			$data = $this->model_surat->get_surat("sppd","where a.kode_skpd='$skpd'");
+			$data = $this->model_surat->get_surat("sppd");
 			if($data!=null){
 				foreach ($data as $key) {
 					$dataa[]=array(
 						'no_surat'=>$key['no_surat'],
+						'kode_skpd'=>$key['kode_skpd'],
+						'nama_skpd'=>$this->get_namaSKPD($key['kode_skpd']),
 						'pegawai'=>$key['nama'].'<br />'.$key['nip'].'&nbsp'.$key['nama_pangkat'].$key['golongan'].$key['ruang'],
 						'pengikut'=>$this->get_pengikut($key['pengikut1']).'<br />'.$this->get_pengikut($key['pengikut2']).'<br />'.$this->get_pengikut($key['pengikut3']),
 						'perjalanan'=>$key['dari'].' ke '.$key['ke'],
@@ -90,7 +110,7 @@ class Surat extends CI_Controller {
 			}
 
 		}else if($tipe=="surat_tugas"){
-			$data = $this->model_surat->get_surat("surat_tugas","where a.kode_skpd='$skpd'");
+			$data = $this->model_surat->get_surat("surat_tugas");
 			if($data!=null){
 				foreach ($data as $key) {
 					$dataa[]=array(
@@ -219,7 +239,21 @@ class Surat extends CI_Controller {
 			    'jabatan_pejabat' => $sppd[0]['jabatan_pejabat'],
 			    'pangkat_pejabat' => $sppd[0]['pangkat_pejabat'],
 			    'golongan_pejabat' => $sppd[0]['golongan_pejabat'],
-			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],			    
+			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],
+
+			    'nama_pptk' => $sppd[0]['nama_pptk'],
+			    'nip_pptk' => $sppd[0]['nip_pptk'],
+			    'jabatan_pptk' => $sppd[0]['jabatan_pptk'],
+			    'pangkat_pptk' => $sppd[0]['pangkat_pptk'],
+			    'golongan_pptk' => $sppd[0]['golongan_pptk'],
+			    'ruang_pptk' => $sppd[0]['ruang_pptk'],
+
+			    'nama_bp' => $sppd[0]['nama_bp'],
+			    'nip_bp' => $sppd[0]['nip_bp'],
+			    'jabatan_bp' => $sppd[0]['jabatan_bp'],
+			    'pangkat_bp' => $sppd[0]['pangkat_bp'],
+			    'golongan_bp' => $sppd[0]['golongan_bp'],
+			    'ruang_bp' => $sppd[0]['ruang_bp'],			    
 			);
 			if($sppd[0]['pengikut1']!=""){
 				$html = $this->load->view('cetak-sppd-pengikut-pdf',$data,true);
@@ -266,7 +300,21 @@ class Surat extends CI_Controller {
 			    'jabatan_pejabat' => $sppd[0]['jabatan_pejabat'],
 			    'pangkat_pejabat' => $sppd[0]['pangkat_pejabat'],
 			    'golongan_pejabat' => $sppd[0]['golongan_pejabat'],
-			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],			    
+			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],
+
+			    'nama_pptk' => $sppd[0]['nama_pptk'],
+			    'nip_pptk' => $sppd[0]['nip_pptk'],
+			    'jabatan_pptk' => $sppd[0]['jabatan_pptk'],
+			    'pangkat_pptk' => $sppd[0]['pangkat_pptk'],
+			    'golongan_pptk' => $sppd[0]['golongan_pptk'],
+			    'ruang_pptk' => $sppd[0]['ruang_pptk'],
+
+			    'nama_bp' => $sppd[0]['nama_bp'],
+			    'nip_bp' => $sppd[0]['nip_bp'],
+			    'jabatan_bp' => $sppd[0]['jabatan_bp'],
+			    'pangkat_bp' => $sppd[0]['pangkat_bp'],
+			    'golongan_bp' => $sppd[0]['golongan_bp'],
+			    'ruang_bp' => $sppd[0]['ruang_bp'],			    
 			);
 			if($sppd[0]['pengikut1']!=""){
 				$html = $this->load->view('cetak-all-pengikut-pdf',$data,true);
@@ -285,7 +333,7 @@ class Surat extends CI_Controller {
 		//$this->pdf->pdf_create($html,"Main Mining report",'F4','potrait');
 	}
 
-	public function view($tipe='',$ns1,$ns2,$ns3,$ns4){
+	public function view($ns1,$ns2,$ns3,$ns4,$tipe=''){
 		$no_surat=$ns1."/".$ns2."/".$ns3."/".$ns4;
 		echo "
 				<!-- 16:9 aspect ratio -->
@@ -297,6 +345,8 @@ class Surat extends CI_Controller {
 		//$modal = array('konten'=>$this->load->view('modal_surat',array(),true) ,);
 		//$this->load->view('index',$data);
 	}
+
+
 
 	public function getcountweek($value='')
 	{

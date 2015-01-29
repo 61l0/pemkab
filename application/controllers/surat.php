@@ -48,6 +48,7 @@ class Surat extends CI_Controller {
 			//$data = $this->db->query("select * from tbl_sdm where kd_sdm='$kd_sdm'");
 			$this->load->model('model_sdm');
 				if ($kd_sdm!="") {
+					
 					$data=$this->model_sdm->get_sdm("where kd_sdm='$kd_sdm'");
 					foreach ($data as $row)
 						{
@@ -57,7 +58,8 @@ class Surat extends CI_Controller {
 				}else{
 					return $data="";
 				}
-		}
+	}
+
 	public function get_json($tipe,$skpd){
 		if ($tipe=="sppd") {
 			$data = $this->model_surat->get_surat("sppd","where a.kode_skpd='$skpd'");
@@ -215,7 +217,21 @@ class Surat extends CI_Controller {
 			    'jabatan_pejabat' => $sppd[0]['jabatan_pejabat'],
 			    'pangkat_pejabat' => $sppd[0]['pangkat_pejabat'],
 			    'golongan_pejabat' => $sppd[0]['golongan_pejabat'],
-			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],			    
+			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],
+
+			    'nama_pptk' => $sppd[0]['nama_pptk'],
+			    'nip_pptk' => $sppd[0]['nip_pptk'],
+			    'jabatan_pptk' => $sppd[0]['jabatan_pptk'],
+			    'pangkat_pptk' => $sppd[0]['pangkat_pptk'],
+			    'golongan_pptk' => $sppd[0]['golongan_pptk'],
+			    'ruang_pptk' => $sppd[0]['ruang_pptk'],
+
+			    'nama_bp' => $sppd[0]['nama_bp'],
+			    'nip_bp' => $sppd[0]['nip_bp'],
+			    'jabatan_bp' => $sppd[0]['jabatan_bp'],
+			    'pangkat_bp' => $sppd[0]['pangkat_bp'],
+			    'golongan_bp' => $sppd[0]['golongan_bp'],
+			    'ruang_bp' => $sppd[0]['ruang_bp'],			    
 			);
 			if($sppd[0]['pengikut1']!=""){
 				$html = $this->load->view('cetak-sppd-pengikut-pdf',$data,true);
@@ -262,7 +278,21 @@ class Surat extends CI_Controller {
 			    'jabatan_pejabat' => $sppd[0]['jabatan_pejabat'],
 			    'pangkat_pejabat' => $sppd[0]['pangkat_pejabat'],
 			    'golongan_pejabat' => $sppd[0]['golongan_pejabat'],
-			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],			    
+			    'ruang_pejabat' => $sppd[0]['ruang_pejabat'],
+
+			    'nama_pptk' => $sppd[0]['nama_pptk'],
+			    'nip_pptk' => $sppd[0]['nip_pptk'],
+			    'jabatan_pptk' => $sppd[0]['jabatan_pptk'],
+			    'pangkat_pptk' => $sppd[0]['pangkat_pptk'],
+			    'golongan_pptk' => $sppd[0]['golongan_pptk'],
+			    'ruang_pptk' => $sppd[0]['ruang_pptk'],
+
+			    'nama_bp' => $sppd[0]['nama_bp'],
+			    'nip_bp' => $sppd[0]['nip_bp'],
+			    'jabatan_bp' => $sppd[0]['jabatan_bp'],
+			    'pangkat_bp' => $sppd[0]['pangkat_bp'],
+			    'golongan_bp' => $sppd[0]['golongan_bp'],
+			    'ruang_bp' => $sppd[0]['ruang_bp'],			    
 			);
 			if($sppd[0]['pengikut1']!=""){
 				$html = $this->load->view('cetak-all-pengikut-pdf',$data,true);
@@ -316,6 +346,8 @@ class Surat extends CI_Controller {
 		$atas_beban = $_POST['par_atasBeban'];
 		$pasal_anggaran = $_POST['par_pasalAnggaran'];
 		$ket = $_POST['par_keterangan'];
+		$pptk = $_POST['par_pptk'];
+		$bp =$_POST['par_bp'];
 		//tglsurat
 		$status = $_POST['par_status'];
 		$pejabat = $_POST['par_pejabat'];
@@ -354,10 +386,13 @@ class Surat extends CI_Controller {
 			'atas_beban'=>$atas_beban,
 			'pasal_anggaran'=>$pasal_anggaran,
 			'keterangan'=>$ket,
+			'pptk'=>$pptk,
+			'bendahara_pengeluaran'=>$bp,
 			'tanggal_surat'=>$tanggal_surat,
 			'status'=>$status,
 			'pejabat'=>$pejabat,
 			'kode_skpd'=>$kode_skpd,
+
 		);
 
 		//echo print_r($data_st).print_r($data_sppd) ;

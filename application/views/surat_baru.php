@@ -221,6 +221,18 @@
 		    <div class="col-sm-3" style="margin-left:-30px;">
 		    	<input id="uang-review" style="color:green;" class="form-control" value="Rp.0,00" readonly="" />		    	
 		    </div>
+	  	</div>
+	  	<div class="form-group">
+		    <label  class="col-sm-3 control-label">PPTK </label>
+		    <div class="col-sm-8">
+		      	<select id="pptk"></select>
+		    </div>
+	  	</div>
+	    <div class="form-group">
+		    <label  class="col-sm-3 control-label">Bendahara Pengeluaran </label>
+		    <div class="col-sm-8">
+		      	<select id="bendahara_pengeluaran"></select>
+		    </div>
 	  	</div>		
 		<div class="form-group">
 			<div class="col-sm-3"></div>
@@ -266,8 +278,71 @@
 	  	var kode_skpd = "<?php echo $this->session->userdata('kode_skpd'); ?>";
 	  	maxPengikut = maxPengikut+1;
 
+	  	var $select_pptk, select_pptk, xhr;
+	     $select_pptk = $('#pptk').selectize({
+	          valueField: 'kd_sdm',
+	          labelField: 'nama_nip',
+	          searchField: ['nama_nip'],
+	          dataAttr: 'data-data',			
+	      });
+	      select_pptk  = $select_pptk[0].selectize;
+
+
+	     var $select_bend_peng, select_bend_peng, xhr1;
+	     $select_bend_peng = $('#bendahara_pengeluaran').selectize({
+	          valueField: 'kd_sdm',
+	          labelField: 'nama_nip',
+	          searchField: ['nama_nip'],
+	          dataAttr: 'data-data',
+	      });
+	      select_bend_peng  = $select_bend_peng[0].selectize;
 	  	$(document).ready(function() {
 	  		/////////////
+			select_pptk.clearOptions();
+            select_pptk.load(function(callback) {
+                xhr && xhr.abort();
+                xhr = $.ajax({
+                 url:"<?php echo base_url(); ?>sdm/sel_sdm/"+kode_skpd,
+                // url:"localhost/pkl4/jsonjabatan.php",
+                  //data:{'par_input':'getJabatan'},
+                  //:"POST",
+                  dataType:"json",
+                  success: function(results) {
+                        //alert(results);
+                      callback(results);
+                      //alert(kode_jabatan);
+                      //select_skpd.setValue(kode_jabatan);      
+                },
+                  error: function(rs) {
+                      //alert(rs);
+                      callback();
+                  }
+                });
+            });
+
+            select_bend_peng.clearOptions();
+            select_bend_peng.load(function(callback) {
+                xhr1 && xhr1.abort();
+                xhr = $.ajax({
+                 url:"<?php echo base_url(); ?>sdm/sel_sdm/"+kode_skpd,
+                // url:"localhost/pkl4/jsonjabatan.php",
+                  //data:{'par_input':'getJabatan'},
+                  //:"POST",
+                  dataType:"json",
+                  success: function(results) {
+                        //alert(results);
+                      callback(results);
+                      //alert(kode_jabatan);
+                      //select_skpd.setValue(kode_jabatan);      
+                },
+                  error: function(rs) {
+                      //alert(rs);
+                      callback();
+                  }
+                });
+            });
+
+
 			$.datepicker.setDefaults( $.datepicker.regional[ "id" ] );
 			$.datepicker.setDefaults( {dateFormat:"dd MM yy",minDate: 0,dayNamesMin: [ "Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab" ]});
 			$( "#datepickerTglKembali").datepicker();
@@ -659,6 +734,8 @@
 		        }
 		        //var pejabatPerintah = $("#inputPejabatPerintah").val();
 		        try{
+		        var bp = $("#bendahara_pengeluaran").find('option:selected').val();	
+		        var pptk = $("#pptk").find('option:selected').val();	
 		        var pejabatPerintah = $("#selectPejabatPerintah").find('option:selected').val();
 		        var dariKota =$("#inputDariKota").val();
 		        var keKota =$("#inputKeKota").val();
@@ -697,7 +774,7 @@
 		             		'par_angkutan':angkutan,'par_tglBerangkat':tanggalBerangkat,'par_tglKembali':tanggalKembali,'par_lama':selisih,
 		             		'par_tujuan':maksudPerjalanan,'par_atasBeban':atasBeban,
 		             		'par_pasalAnggaran':pasalAnggaran,'par_keterangan':keterangan,'par_status':status,'par_kode_skpd':'<?php echo $this->session->userdata("kode_skpd");?>',
-		             		'par_uang_saku':uang_saku		
+		             		'par_uang_saku':uang_saku,'par_bp':bp,'par_pptk':pptk		
 		             	},
 		             beforeSend: function(rs){
 		             	$("#loader-btnsimpansuratbaru").show();

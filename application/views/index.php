@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
 	<title>SPPD & Surat Tugas || Pemkab Malang</title>
@@ -17,8 +16,7 @@
     <!--[if lt IE 9]>
       <script src="<?php echo base_url();?>assets/js/html5shiv.min.js" type="text/javascript"></script>
       <script src="<?php echo base_url();?>assets/js/respond.min.js" type="text/javascript"></script>
-    <![endif]-->
-   
+    <![endif]-->   
     <script src="<?php echo base_url();?>assets/js/bootbox.min.js"></script>
 
     <script src="<?php echo base_url();?>assets/js/pnotify.custom.min.js"></script>
@@ -186,9 +184,9 @@
         <li><a href="<?php echo base_url(); ?>surat/baru" id="btn-menu-surat-baru"><span class="glyphicon glyphicon-edit glyphicon-th-large"></span>&nbsp Surat Baru</a></li>
         
         <li  class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-book glyphicon-th-large"></span>&nbsp Master <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-book glyphicon-th-large"></span>&nbsp Data <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="<?php echo base_url(); ?>sdm" id="btn-menu-sdm">SDM</a></li>
+            <li><a href="<?php echo base_url(); ?>sdm" id="btn-menu-sdm">Pegawai / SDM</a></li>
             <li><a href="#">-</a></li>
           </ul>
         </li>
